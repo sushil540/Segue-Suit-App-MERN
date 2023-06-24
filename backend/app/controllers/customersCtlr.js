@@ -1,6 +1,6 @@
 const Customer=require("../models/Customer")
 
-customersCtlr={}
+const customersCtlr={}
 
 customersCtlr.create=async(req,res)=>{
     try{
