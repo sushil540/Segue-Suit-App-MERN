@@ -8,11 +8,12 @@ const customersCtlr=require('../app/controllers/customersCtlr')
 
 const productsCtlr = require('../app/controllers/productsCtlr')
 
-const serviceCtlr = require('../app/controllers/serviceCtlr')
+// const servicesCtlr = require('../app/controllers/serviceCtlr')
 
 const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 
 const authenticateUser = require('../app/middlewares/authenticateUser')
+const servicesCtlr = require('../app/controllers/servicesCtlr')
 
 router.post('/api/users/register', usersCtlr.register)
 router.post('/api/users/login', usersCtlr.login)
@@ -28,10 +29,10 @@ router.get('/api/products', authenticateUser,productsCtlr.list)
 router.put('/api/products/:id', authenticateUser,productsCtlr.update)
 router.delete('/api/products/:id', authenticateUser,productsCtlr.destroy)
 
-router.post('/api/services', authenticateUser,serviceCtlr.create)
-router.get('/api/services', authenticateUser,serviceCtlr.list)
-router.put('/api/services/:id', authenticateUser,serviceCtlr.update)
-router.delete('/api/services/:id', authenticateUser,serviceCtlr.destroy)
+router.post('/api/services', authenticateUser,servicesCtlr.create)
+router.get('/api/services', authenticateUser,servicesCtlr.list)
+router.put('/api/services/:id', authenticateUser,servicesCtlr.update)
+router.delete('/api/services/:id', authenticateUser,servicesCtlr.destroy)
 
 router.post('/api/enquiries', authenticateUser,enquiriesCtlr.create)
 router.get('/api/enquiries', authenticateUser,enquiriesCtlr.list)

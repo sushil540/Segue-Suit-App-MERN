@@ -1,8 +1,8 @@
 const Service = require("../models/Service")
 
-const serviceCtlr={}
+const servicesCtlr = {}
 
-serviceCtlr.create = async(req, res)=>{
+servicesCtlr.create = async(req, res)=>{
     try{
         const body = req.body
         const service = await Service.create(body)
@@ -11,7 +11,7 @@ serviceCtlr.create = async(req, res)=>{
         res.json(e)
     }
 }
-serviceCtlr.list = async (req, res) =>{
+servicesCtlr.list = async (req, res) =>{
     try{
         const service = await Service.find()
         res.json(service)
@@ -20,7 +20,7 @@ serviceCtlr.list = async (req, res) =>{
     }
 }
 
-serviceCtlr.update = async(req, res) =>{
+servicesCtlr.update = async(req, res) =>{
     try{
         const body = req.body
         const id = req.params.id
@@ -31,7 +31,7 @@ serviceCtlr.update = async(req, res) =>{
     }   
 }
 
-serviceCtlr.destroy = async(req, res) =>{
+servicesCtlr.destroy = async(req, res) =>{
     try{
         const id = req.params.id
         const service = await Service.findByIdAndRemove(id)
@@ -41,4 +41,4 @@ serviceCtlr.destroy = async(req, res) =>{
     }
 }
 
-module.exports = serviceCtlr
+module.exports = servicesCtlr
