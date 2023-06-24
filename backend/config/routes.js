@@ -3,15 +3,11 @@ const express = require('express')
 const router = express.Router()
 
 const usersCtlr = require('../app/controllers/usersCtlr')
-
 const customersCtlr=require('../app/controllers/customersCtlr')
 const productsCtlr = require('../app/controllers/productsCtlr')
-
 const servicesCtlr = require('../app/controllers/servicesCtlr')
 const ordersCtlr = require('../app/controllers/ordersCtlr')
-
 const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
-
 const authenticateUser = require('../app/middlewares/authenticateUser')
 
 router.post('/api/users/register', usersCtlr.register)
