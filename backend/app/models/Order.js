@@ -12,11 +12,11 @@ const orderSchema = new Schema({
         required:true
     },
     serviceId:{
-        type:Object.Types.Schema,
+        type:Schema.Types.ObjectId,
         ref:"Service"
     },
     customerId:{
-        type:Object.Types.Schema,
+        type:Schema.Types.ObjectId,
         ref:"User"
     },
     orderLineItems:{
