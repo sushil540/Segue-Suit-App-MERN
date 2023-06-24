@@ -9,7 +9,9 @@ const customerSchema=new Schema({
     },
     mobile:{
         type:String,
-        required:true
+        required:true,
+        minlength:10,
+        maxlength:10
     },
     address:{
         type:String,
