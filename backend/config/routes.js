@@ -12,7 +12,6 @@ router.post('/api/users/register', usersCtlr.account)
 router.post('/api/users/login', usersCtlr.login)
 router.get('/api/users/account', authenticateUser, usersCtlr.account)
 
-
 router.post('/api/customers',customersCtlr.create)
 router.get('/api/customers',customersCtlr.list)
 router.put('/api/customers:id',customersCtlr.update)
