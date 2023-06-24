@@ -20,8 +20,18 @@ const orderSchema = new Schema({
         ref:"User"
     },
     orderLineItems:{
-        type:Array,
-        required:true
+        type:[{
+            productId:{
+                type:Schema.Types.ObjectId,
+                required:true
+            },
+            amount:{
+                type:Number,
+            },
+            remarks:{
+                type:String
+            }
+        }],
     },
     total:{
         type:Number,
@@ -32,12 +42,13 @@ const orderSchema = new Schema({
         required:true
     },
     isFullyPaid:{
-        type:String,
-        required:true
+        type:Boolean,
+        default:false,
     },
     status:{
         type:Array,
         default:['created']
+
     },
     assignedTo:{
         type:Schema.Types.ObjectId,
