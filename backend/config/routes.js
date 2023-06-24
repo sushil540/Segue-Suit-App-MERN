@@ -7,14 +7,12 @@ const usersCtlr = require('../app/controllers/usersCtlr')
 const customersCtlr=require('../app/controllers/customersCtlr')
 const productsCtlr = require('../app/controllers/productsCtlr')
 
-const servicesCtlr = require('../app/controllers/serviceCtlr')
+const servicesCtlr = require('../app/controllers/servicesCtlr')
 const ordersCtlr = require('../app/controllers/ordersCtlr')
-
 
 const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 
 const authenticateUser = require('../app/middlewares/authenticateUser')
-const servicesCtlr = require('../app/controllers/servicesCtlr')
 
 router.post('/api/users/register', usersCtlr.register)
 router.post('/api/users/login', usersCtlr.login)
