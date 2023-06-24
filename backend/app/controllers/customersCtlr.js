@@ -43,5 +43,4 @@ customersCtlr.destroy=async(req,res)=>{
     }
 }
 
-customersCtlr
 module.exports=customersCtlr
