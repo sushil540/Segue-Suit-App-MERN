@@ -45,7 +45,7 @@ enquiriesCtlr.destroy = async(req, res) =>{
 enquiriesCtlr.search = async(req, res)=>{
     const { search } = req.query
     try{
-        const result = await Enquiry.find({name:{$regex:search,$options:'i'}})
+        const result = await Enquiry.find({$or:[{name:{$regex:search,$options:'i'}},{mobile:{$regex:search}}]})
         res.json(result)
     }catch(e){
         res.json(e)
