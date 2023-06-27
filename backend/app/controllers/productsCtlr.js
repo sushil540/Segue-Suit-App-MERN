@@ -42,5 +42,6 @@ productsCtlr.destroy = async(req, res) =>{
     }
 }
 
+
 module.exports = productsCtlr
 
