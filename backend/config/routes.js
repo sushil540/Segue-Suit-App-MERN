@@ -45,6 +45,7 @@ router.get('/api/orders', authenticateUser, ordersCtlr.list)
 router.put('/api/orders/:id', authenticateUser, ordersCtlr.update)
 router.delete('/api/orders/:id', authenticateUser, ordersCtlr.destroy)
 router.get('/api/orders/search',authenticateUser,ordersCtlr.search)
+router.put('/api/orders/:orderId/orderLineItems', authenticateUser, ordersCtlr.modifyOrdersLineItems)
 
 router.post('/api/enquiries', authenticateUser,enquiriesCtlr.create)
 router.get('/api/enquiries', authenticateUser,enquiriesCtlr.list)
