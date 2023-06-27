@@ -42,4 +42,14 @@ enquiriesCtlr.destroy = async(req, res) =>{
     }
 }
 
+enquiriesCtlr.search = async(req, res)=>{
+    const { search } = req.query
+    try{
+        const result = await Enquiry.find({name:{$regex:search,$options:'i'}})
+        res.json(result)
+    }catch(e){
+        res.json(e)
+    }
+}
+
 module.exports = enquiriesCtlr

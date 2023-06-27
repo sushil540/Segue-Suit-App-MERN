@@ -49,6 +49,7 @@ router.post('/api/enquiries', authenticateUser,enquiriesCtlr.create)
 router.get('/api/enquiries', authenticateUser,enquiriesCtlr.list)
 router.put('/api/enquiries/:id', authenticateUser,enquiriesCtlr.update)
 router.delete('/api/enquiries/:id', authenticateUser,enquiriesCtlr.destroy)
+router.get('/api/enquiries/search', authenticateUser,enquiriesCtlr.search)
 
 module.exports = router
 
