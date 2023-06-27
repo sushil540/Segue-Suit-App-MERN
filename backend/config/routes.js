@@ -42,6 +42,7 @@ router.delete('/api/services/:id', authenticateUser,servicesCtlr.destroy)
 
 router.post('/api/orders', authenticateUser, ordersCtlr.create)
 router.get('/api/orders', authenticateUser, ordersCtlr.list)
+router.get('/api/orders/search',authenticateUser,ordersCtlr.search)
 router.put('/api/orders/:id', authenticateUser, ordersCtlr.update)
 router.get('/api/orders', authenticateUser, ordersCtlr.destroy)
 
