@@ -47,8 +47,7 @@ const orderSchema = new Schema({
     },
     status:{
         type:Array,
-        default:['created']
-
+        default:['completed']
     },
     assignedTo:{
         type:Schema.Types.ObjectId,

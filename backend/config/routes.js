@@ -1,6 +1,7 @@
 const express = require('express')
-
 const router = express.Router()
+const cron = require('node-cron')
+const axios = require('axios')
 
 const usersCtlr = require('../app/controllers/usersCtlr')
 const customersCtlr=require('../app/controllers/customersCtlr')
@@ -13,11 +14,21 @@ const authenticateUser = require('../app/middlewares/authenticateUser')
 router.post('/api/users/register', usersCtlr.register)
 router.post('/api/users/login', usersCtlr.login)
 router.get('/api/users/account', authenticateUser, usersCtlr.account)
+router.get('/api/users/notify', usersCtlr.notify)
+
+cron.schedule('0 * * * * *', async() => {
+    try{
+        const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
+    }catch(e){
+        console.log("error")
+    }
+})
 
 router.post('/api/customers', authenticateUser,customersCtlr.create)
 router.get('/api/customers',authenticateUser,customersCtlr.list)
 router.put('/api/customers/:id',authenticateUser,customersCtlr.update)
 router.delete('/api/customers/:id',authenticateUser,customersCtlr.destroy)
+router.put('/api/customers/:custId/products', authenticateUser,customersCtlr.modifyCustomerProducts)
 
 router.post('/api/products', authenticateUser,productsCtlr.create)
 router.get('/api/products', authenticateUser,productsCtlr.list)

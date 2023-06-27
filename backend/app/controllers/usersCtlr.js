@@ -1,6 +1,8 @@
 const User = require("../models/User")
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Order = require("../models/Order")
+const Service = require("../models/Service")
 require('dotenv').config()
 
 const usersCtlr = {}
@@ -53,6 +55,35 @@ usersCtlr.login = async(req, res) =>{
 
 usersCtlr.account = (req, res)=>{
     res.json(req.user)
+}
+
+usersCtlr.notify = async(req, res) =>{
+    try{
+        const values = await Promise.all([Order.find(),Service.find()])
+        const [orders, services] = values
+
+        const findServiceName = (id)=>{
+            const service = services.find((ele)=>ele._id.valueOf() === id.valueOf())
+            if(service){
+                return service.name
+            }else{
+                return "anonymous"
+            }
+        }
+        const reports = []
+        orders.forEach((ele)=>{
+            const report = {}
+            if(!ele.status.includes('completed')){
+                report.title = ele.title,
+                report.service = findServiceName(ele.serviceId)
+                reports.push(report)
+            }
+        })
+        //send sms daily at 6 am
+        res.json(reports)
+    }catch(e){
+        res.json(e)
+    }
 }
 
 module.exports = usersCtlr
