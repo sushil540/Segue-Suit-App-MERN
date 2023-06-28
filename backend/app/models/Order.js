@@ -30,7 +30,7 @@ const orderSchema = new Schema({
             },
             remarks:{
                 type:String
-            }
+            }      
         }],
     },
     total:{
