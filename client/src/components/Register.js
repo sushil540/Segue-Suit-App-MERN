@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Label from './Label'
-import validator from 'validator'
 import { useDispatch } from 'react-redux'
+import validator from 'validator'
 import { startRegisterUser } from '../actions/userActions'
 
 const Register = (props) =>{
