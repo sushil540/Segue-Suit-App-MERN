@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Label from './Label'
 import validator from 'validator'
 import { useDispatch } from 'react-redux'
+import { startRegisterUser } from '../actions/userActions'
 
 const Register = (props) =>{
     const [username, setUsername] = useState('')
@@ -31,7 +32,7 @@ const Register = (props) =>{
         
         if(validator.isEmpty(mobile)){
             errors.mobile = "Mobile is required"
-        }else if(validator.isMobilePhone(mobile)){
+        }else if(!validator.isNumeric(mobile)){
             errors.mobile = "Invalid mobile number"
         }
 
@@ -50,35 +51,38 @@ const Register = (props) =>{
                 password:password,
                 mobile:mobile
             }
-            console.log("formData",formData)
-            // dispatch()
+            dispatch(startRegisterUser(formData))
         }       
     }
 
     return (
         <div> 
+            <h2> Register </h2>
             <form onSubmit={handleSubmit}>
                 <Label text="Username"/> <br/>
                 <input 
                     type="text"
                     value={username}
                     onChange={(e)=>setUsername(e.target.value)}
-                /><br/>
+                />
                 {formErrors?.username && <span>{formErrors?.username}</span>}
+                <br/>
                 <Label text="Email"/><br/>
                 <input 
                     type="text"
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
-                /><br/>
+                />
                 {formErrors?.email && <span>{formErrors?.email}</span>}
+                <br/>
                 <Label text="Password"/><br/>
                 <input 
                     type="password"
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
-                /><br/>  
+                />
                 {formErrors?.password && <span>{formErrors?.password}</span>}
+                <br/>  
                 <Label text="Mobile"/><br/>
                 <input 
                     type="text"
