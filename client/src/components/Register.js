@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Label from './Label'
+import validator from 'validator'
+import { useDispatch } from 'react-redux'
 
 const Register = (props) =>{
     const [username, setUsername] = useState('')
@@ -9,10 +11,31 @@ const Register = (props) =>{
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
 
+    const dispatch = useDispatch()
+
     const handleValidation = () =>{
-        if(username.length){
+
+        if(validator.isEmpty(username)){
             errors.username = "Username is required"
         }
+
+        if(validator.isEmpty(email)){
+            errors.email = "Email is required"
+        }else if(!validator.isEmail(email)){
+            errors.email = "Invalid email format"
+        }
+
+        if(validator.isEmpty(password)){
+            errors.password = "Password is required"
+        }
+        
+        if(validator.isEmpty(mobile)){
+            errors.mobile = "Mobile is required"
+        }else if(validator.isMobilePhone(mobile)){
+            errors.mobile = "Invalid mobile number"
+        }
+
+        setFormErrors(errors)
     }
 
     const handleSubmit =(e)=>{
@@ -20,13 +43,16 @@ const Register = (props) =>{
 
         handleValidation()
 
-        const formData = {
-            username:username,
-            email:email,
-            password:password,
-            mobile:mobile
-        }
-        console.log("formData",formData)
+        if(Object.keys(errors).length === 0){
+            const formData = {
+                username:username,
+                email:email,
+                password:password,
+                mobile:mobile
+            }
+            console.log("formData",formData)
+            // dispatch()
+        }       
     }
 
     return (
@@ -38,24 +64,29 @@ const Register = (props) =>{
                     value={username}
                     onChange={(e)=>setUsername(e.target.value)}
                 /><br/>
+                {formErrors?.username && <span>{formErrors?.username}</span>}
                 <Label text="Email"/><br/>
                 <input 
                     type="text"
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                 /><br/>
+                {formErrors?.email && <span>{formErrors?.email}</span>}
                 <Label text="Password"/><br/>
                 <input 
                     type="password"
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                 /><br/>  
+                {formErrors?.password && <span>{formErrors?.password}</span>}
                 <Label text="Mobile"/><br/>
                 <input 
                     type="text"
                     value={mobile}
                     onChange={(e)=>setMobile(e.target.value)}
-                /><br/> 
+                />
+                {formErrors?.mobile && <span>{formErrors?.mobile}</span>}
+                <br/> 
                 <input
                     type="submit"
                     value="Register"
