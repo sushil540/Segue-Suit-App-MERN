@@ -53,7 +53,7 @@ ordersCtlr.modifyOrdersLineItems = async(req, res)=>{
             ordersLineOrders = await Order.findByIdAndUpdate(orderId,{$pull:{orderLineItems:newOrderItems}},{new:true, runValidators:true})
         }
     }catch(e){
-        res.json(e)
+        res.json(e) 
     }
 }
 
