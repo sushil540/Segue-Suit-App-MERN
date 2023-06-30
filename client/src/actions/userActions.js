@@ -35,7 +35,6 @@ export const startLoginUser = (formData) =>{
                 if(!response.data?.error){
                     localStorage.setItem('token',response.data.token)
                 }else{
-                    console.log('check',response.data.error)
                     dispatch(setErrors(response.data.error))
                 }
             }catch(e){
