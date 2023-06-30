@@ -12,6 +12,12 @@ const Login = (props) =>{
 
     const dispatch = useDispatch()
 
+    useEffect(()=>{
+        return () =>{
+            dispatch(setErrors(''))
+        }
+    },[])
+
     
     const msg=useSelector((state)=>{
         return state.user.error
@@ -57,31 +63,40 @@ const Login = (props) =>{
     }
     
    
-    return (
-        <div>
-            <div>
-               {msg && <span>{msg}</span>} 
-            </div>
-        <div>
-           <h1>Please Login to access DashBoard!!!</h1>
+    return (    
+        <div className='container'>
+            {msg && <div className="w-50 m-auto my-3 alert alert-danger" >
+               <span>{msg}</span> 
+            </div>}
+        <div className="card shadow-lg p-4 w-50 my-4 m-auto">
+           <h1 className="text-center">Please Login to access DashBoard!!!</h1>
            
            <form onSubmit={handleSubmit}>
                  <Label text="Email"/> <br/>
-                 <input type="email" value={email} placeholder="enter your email" onChange={(e)=>setEmail(e.target.value)}/>
-                 {formErrors?.email && <span>{formErrors?.email}</span>}
+                 <input className="form-control" type="text" value={email} placeholder="enter your email" onChange={(e)=>setEmail(e.target.value)}/>
+                 {formErrors?.email && <span className="text-danger">{formErrors?.email}</span>}
                  <br/>
 
                  <Label text="Password"/> <br/>
-                 <input type = "password" value = {password} placeholder = "enter your password" onChange={(e)=>setPassword(e.target.value)}/>
-                 {formErrors?.password && <span>{formErrors?.password}</span>}
+                 <input className="form-control" type = "password" value = {password} placeholder = "enter your password" onChange={(e)=>setPassword(e.target.value)}/>
+                 {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
                  <br/>
                  <br/>
-                 <button>Submit</button>
+                 <input
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Login"
+                    />
                  <br/>
                  <br/>
-                 {msg && <div>
-                     <span>Sign Up</span>
-                     <button onClick={handleShift}>Register</button>
+                 {msg && <div className='d-flex justify-content-end align-items-center gap-2'>
+                     <span className='fw-bold'>Create an account?</span>
+                     <input
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Sign-Up"
+                        onClick={handleShift}
+                    />
                      </div>}
            </form>
         </div>

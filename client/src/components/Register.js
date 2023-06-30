@@ -59,7 +59,7 @@ const Register = (props) =>{
 
     setTimeout(()=>{
         dispatch(setErrors(''))
-    },4000)
+    },3000)
 
     return (
         <div>
