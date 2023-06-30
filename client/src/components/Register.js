@@ -3,11 +3,12 @@ import Label from './Label'
 import { useDispatch, useSelector } from 'react-redux'
 import validator from 'validator'
 import { startRegisterUser, setErrors } from '../actions/userActions'
+
 const Register = (props) =>{
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [mobile, setMobile] = useState('')
+    const [username, setUsername] = useState('abhishek')
+    const [email, setEmail] = useState('abhi@gmail.com')
+    const [password, setPassword] = useState('secret123')
+    const [mobile, setMobile] = useState('1234567895')
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
 
@@ -58,15 +59,15 @@ const Register = (props) =>{
     }
 
     setTimeout(()=>{
-        dispatch(setErrors(''))
-    },4000)
+        {registerErrors && dispatch(setErrors(''))}
+    },3000)
 
     return (
         <div>
-            {registerErrors && <div className="w-50 m-auto my-2 alert alert-danger">   
+            {registerErrors && <div className="w-50 m-auto alert alert-danger">   
                 {registerErrors}
             </div>}
-            <div className="card shadow-lg p-4 w-50 my my-5 m-auto">  
+            <div className="card shadow-lg p-4 w-50 my-4 m-auto">  
                 <h2 className="text-center"> Register </h2>
                 <form onSubmit={handleSubmit}>
                     <Label text="Username"/><br/>
@@ -86,7 +87,7 @@ const Register = (props) =>{
                             type="text"
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
-                            />
+                        />
                     {formErrors?.email && <span className="text-danger">{formErrors?.email}</span>}
                     <br/>
                     <Label text="Password"/><br/>
