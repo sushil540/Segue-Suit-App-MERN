@@ -27,7 +27,7 @@ export const startRegisterUser = (formData, props)=>{
     }
 }
 
-export const startLoginUser = (formData) =>{
+export const startLoginUser = (formData,props) =>{
     return (dispatch) =>{
         (async ()=>{
             try{
@@ -35,6 +35,8 @@ export const startLoginUser = (formData) =>{
                 console.log(response)
                 if(!response.data?.error){
                     localStorage.setItem('token',response.data.token)   
+                    console.log('token',response.data.token)
+                    props.history.push('/dashboard')
                 }else{
                     dispatch(setErrors(response.data.error))
                 }
