@@ -35,6 +35,7 @@ export const startLoginUser = (formData,props) =>{
                 console.log(response)
                 if(!response.data?.error){
                     localStorage.setItem('token',response.data.token)   
+                    console.log('token',response.data.token)
                     props.history.push('/dashboard')
                 }else{
                     dispatch(setErrors(response.data.error))
