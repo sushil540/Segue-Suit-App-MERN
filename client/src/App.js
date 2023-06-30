@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 
-function App() {
+function App(props) {
   return (
     <div className="mx-4">
       <Navbar/>

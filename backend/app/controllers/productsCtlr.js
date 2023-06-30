@@ -3,7 +3,7 @@ const Product = require('../models/Product')
 const productsCtlr = {}
 
 productsCtlr.create = async(req, res)=>{
-    try{
+    try{    
         const body = req.body
         const product = await Product.create(body)
         res.json(product)
