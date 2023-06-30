@@ -52,7 +52,8 @@ const Register = (props) =>{
                 mobile:mobile
             }
             dispatch(startRegisterUser(formData))
-        }       
+        }  
+        props.history.push('/login')     
     }
 
     return (
