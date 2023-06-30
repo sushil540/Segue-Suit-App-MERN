@@ -30,14 +30,14 @@ export const startLoginUser = (formData) =>{
     return (dispatch) =>{
         (async ()=>{
             try{
-            const response = await axios.post('/api/users/login',formData)
-            console.log(response)
-            if(!response.data?.error){
-                localStorage.setItem('token',response.data.token)
-               
-            }else{
-                dispatch(setErrors(response.data.error))
-            }
+                const response = await axios.post('/api/users/login',formData)
+                console.log(response)
+                if(!response.data?.error){
+                    localStorage.setItem('token',response.data.token)
+                }else{
+                    console.log('check',response.data.error)
+                    dispatch(setErrors(response.data.error))
+                }
             }catch(e){
               alert(e)
             }

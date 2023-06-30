@@ -53,7 +53,7 @@ const Register = (props) =>{
                 password:password,
                 mobile:mobile
             }
-            dispatch(startRegisterUser(formData,props))
+            dispatch(startRegisterUser(formData, props))
         }       
     }
 
