@@ -9,6 +9,19 @@ export const setErrors=(user)=>{
     }
 }
 
+export const startGetLoggedInUser = () =>{
+    return (dispatch)=>{
+        (async ()=>{
+            try{
+                const response = await axios.get('/api/users/account',{headers:{"Authorization":localStorage.getItem('token')}})
+                dispatch(setLoggedInUser(response.data))
+            }catch(e){
+                alert(e)
+            }
+        })()
+    }
+}
+
 export const startRegisterUser = (formData, props)=>{
     return (dispatch) =>{
         (async ()=>{
@@ -37,6 +50,7 @@ export const startLoginUser = (formData,props) =>{
                     localStorage.setItem('token',response.data.token)   
                     console.log('token',response.data.token)
                     props.history.push('/dashboard')
+                    dispatch(startGetLoggedInUser())
                 }else{
                     dispatch(setErrors(response.data.error))
                 }
@@ -54,15 +68,3 @@ export const setLoggedInUser = (user)=>{
     }
 }
 
-export const startGetLoggedInUser = () =>{
-    return (dispatch)=>{
-        (async ()=>{
-            try{
-                const response = await axios.get('/api/users/account',{headers:{"Authorization":localStorage.getItem('token')}})
-                dispatch(setLoggedInUser(response.data))
-            }catch(e){
-                alert(e)
-            }
-        })()
-    }
-}

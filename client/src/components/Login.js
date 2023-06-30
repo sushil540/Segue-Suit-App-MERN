@@ -56,7 +56,7 @@ const Login = (props) =>{
 
     const handleShift = () =>{      
         props.history.push('/register')
-
+        
         setTimeout(()=>{
             dispatch(setErrors(''))
         },4000)
