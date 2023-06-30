@@ -56,27 +56,33 @@ const Register = (props) =>{
     }
 
     return (
-        <div> 
-            <h2> Register </h2>
+        <div className="card p-4 w-50 m-auto">  
+            <h2 className="text-center"> Register </h2>
             <form onSubmit={handleSubmit}>
                 <Label text="Username"/> <br/>
                 <input 
+                    className="form-control"
+                    placeholder="Enter your name"
                     type="text"
                     value={username}
                     onChange={(e)=>setUsername(e.target.value)}
                 />
                 {formErrors?.username && <span>{formErrors?.username}</span>}
                 <br/>
-                <Label text="Email"/><br/>
-                <input 
-                    type="text"
-                    value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
-                />
+                    <Label text="Email"/><br/>
+                    <input 
+                        className="form-control"
+                        placeholder="Enter your email"
+                        type="text"
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
+                        />
                 {formErrors?.email && <span>{formErrors?.email}</span>}
                 <br/>
                 <Label text="Password"/><br/>
                 <input 
+                    className="form-control"
+                    placeholder="Enter your password"
                     type="password"
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
@@ -85,6 +91,8 @@ const Register = (props) =>{
                 <br/>  
                 <Label text="Mobile"/><br/>
                 <input 
+                    className="form-control"
+                    placeholder="Enter your mobile"
                     type="text"
                     value={mobile}
                     onChange={(e)=>setMobile(e.target.value)}
@@ -92,6 +100,7 @@ const Register = (props) =>{
                 {formErrors?.mobile && <span>{formErrors?.mobile}</span>}
                 <br/> 
                 <input
+                    className="btn btn-primary"
                     type="submit"
                     value="Register"
                 />

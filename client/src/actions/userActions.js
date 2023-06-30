@@ -6,6 +6,10 @@ export const startRegisterUser = (formData)=>{
             try{
                 const response = await axios.post('/api/users/register',formData)
                 console.log('response',response.data)
+                if(response.data.hasOwnProperty('errors')){
+                        // response.data.errors.message
+                    // dispatch()
+                }
             }catch(e){
                 alert(e)
             }

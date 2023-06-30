@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const Schema = mongoose.Schema
 
@@ -52,6 +53,7 @@ userSchema.pre('save', async function(){
     }
 })
 
+userSchema.plugin(uniqueValidator)
 const User = mongoose.model("User", userSchema)
 
 
