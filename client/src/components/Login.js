@@ -48,12 +48,12 @@ const Login = (props) =>{
            <form onSubmit={handleSubmit}>
                  <Label text="Email"/> <br/>
                  <input type="email" value={email} placeholder="enter your email" onChange={(e)=>setEmail(e.target.value)}/>
-                 {formErrors?.email && <span>{formErrors.email}</span>}
+                 {formErrors?.email && <span>{formErrors?.email}</span>}
                  <br/>
 
                  <Label text="Password"/> <br/>
                  <input type = "password" value = {password} placeholder = "enter your password" onChange={(e)=>setPassword(e.target.value)}/>
-                 {formErrors?.password && <span>{formErrors.password}</span>}
+                 {formErrors?.password && <span>{formErrors?.password}</span>}
                  <br/>
                  <br/>
                  <button>Submit</button>
