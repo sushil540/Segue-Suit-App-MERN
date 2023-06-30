@@ -50,7 +50,7 @@ const Login = (props) =>{
                 email,
                 password
             }
-         dispatch(startLoginUser(formData))
+         dispatch(startLoginUser(formData,props))
         }   
     }
 
