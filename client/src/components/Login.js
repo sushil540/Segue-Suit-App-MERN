@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
-import {useDispatch} from 'react-redux'
+import React,{useState,useEffect} from 'react'
+import {useDispatch,useSelector} from 'react-redux'
 import Label from './Label'
 import validator from 'validator'
-import { startLoginUser } from '../actions/userActions'
+import { setErrors, startLoginUser } from '../actions/userActions'
 
 const Login = (props) =>{
     const [email,setEmail] = useState('')
@@ -10,6 +10,13 @@ const Login = (props) =>{
     const [formErrors,setFormErrors] = useState({})
     const errors = {}
 
+    const dispatch = useDispatch()
+
+    
+    const msg=useSelector((state)=>{
+        return state.user.error
+     })
+    
     const handleValidation = () =>{
 
         if(validator.isEmpty(email)){
@@ -25,7 +32,7 @@ const Login = (props) =>{
         setFormErrors(errors)
     }
 
-    const dispatch = useDispatch()
+    
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -41,7 +48,20 @@ const Login = (props) =>{
         }   
     }
 
+    const handleShift = () =>{      
+        props.history.push('/register')
+
+        setTimeout(()=>{
+            dispatch(setErrors(''))
+        },4000)
+    }
+    
+   
     return (
+        <div>
+            <div>
+               {msg && <span>{msg}</span>} 
+            </div>
         <div>
            <h1>Please Login to access DashBoard!!!</h1>
            
@@ -57,7 +77,14 @@ const Login = (props) =>{
                  <br/>
                  <br/>
                  <button>Submit</button>
+                 <br/>
+                 <br/>
+                 {msg && <div>
+                     <span>Sign Up</span>
+                     <button onClick={handleShift}>Register</button>
+                     </div>}
            </form>
+        </div>
         </div>
     )
 }
