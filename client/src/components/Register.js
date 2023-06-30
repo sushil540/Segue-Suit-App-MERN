@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Label from './Label'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import validator from 'validator'
-import { startRegisterUser } from '../actions/userActions'
-
+import { startRegisterUser, setErrors } from '../actions/userActions'
 const Register = (props) =>{
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -13,6 +12,10 @@ const Register = (props) =>{
     const errors = {}
 
     const dispatch = useDispatch()
+
+    const registerErrors = useSelector((state)=>{
+        return state.user.error
+    })
 
     const handleValidation = () =>{
 
@@ -35,7 +38,6 @@ const Register = (props) =>{
         }else if(!validator.isNumeric(mobile)){
             errors.mobile = "Invalid mobile number"
         }
-
         setFormErrors(errors)
     }
 
@@ -51,60 +53,69 @@ const Register = (props) =>{
                 password:password,
                 mobile:mobile
             }
-            dispatch(startRegisterUser(formData))
+            dispatch(startRegisterUser(formData,props))
         }       
     }
 
+    setTimeout(()=>{
+        dispatch(setErrors(''))
+    },4000)
+
     return (
-        <div className="card p-4 w-50 m-auto">  
-            <h2 className="text-center"> Register </h2>
-            <form onSubmit={handleSubmit}>
-                <Label text="Username"/> <br/>
-                <input 
-                    className="form-control"
-                    placeholder="Enter your name"
-                    type="text"
-                    value={username}
-                    onChange={(e)=>setUsername(e.target.value)}
-                />
-                {formErrors?.username && <span>{formErrors?.username}</span>}
-                <br/>
-                    <Label text="Email"/><br/>
+        <div>
+            {registerErrors && <div className="w-50 m-auto my-2 alert alert-danger">   
+                {registerErrors}
+            </div>}
+            <div className="card shadow-lg p-4 w-50 my my-5 m-auto">  
+                <h2 className="text-center"> Register </h2>
+                <form onSubmit={handleSubmit}>
+                    <Label text="Username"/><br/>
                     <input 
                         className="form-control"
-                        placeholder="Enter your email"
+                        placeholder="Enter your name*"
                         type="text"
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)}
-                        />
-                {formErrors?.email && <span>{formErrors?.email}</span>}
-                <br/>
-                <Label text="Password"/><br/>
-                <input 
-                    className="form-control"
-                    placeholder="Enter your password"
-                    type="password"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
-                />
-                {formErrors?.password && <span>{formErrors?.password}</span>}
-                <br/>  
-                <Label text="Mobile"/><br/>
-                <input 
-                    className="form-control"
-                    placeholder="Enter your mobile"
-                    type="text"
-                    value={mobile}
-                    onChange={(e)=>setMobile(e.target.value)}
-                />
-                {formErrors?.mobile && <span>{formErrors?.mobile}</span>}
-                <br/> 
-                <input
-                    className="btn btn-primary"
-                    type="submit"
-                    value="Register"
-                />
-            </form>
+                        value={username}
+                        onChange={(e)=>setUsername(e.target.value)}
+                    />
+                    {formErrors?.username && <span className="text-danger">{formErrors?.username}</span>}
+                    <br/>
+                        <Label text="Email"/><br/>
+                        <input 
+                            className="form-control"
+                            placeholder="Enter your email*"
+                            type="text"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                            />
+                    {formErrors?.email && <span className="text-danger">{formErrors?.email}</span>}
+                    <br/>
+                    <Label text="Password"/><br/>
+                    <input 
+                        className="form-control"
+                        placeholder="Enter your password*"
+                        type="password"
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                    />
+                    {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
+                    <br/>  
+                    <Label text="Mobile"/><br/>
+                    <input 
+                        className="form-control"
+                        placeholder="Enter your mobile*"
+                        type="text"
+                        value={mobile}
+                        onChange={(e)=>setMobile(e.target.value)}
+                    />
+                    {formErrors?.mobile && <span className="text-danger">{formErrors?.mobile}</span>}
+                    <br/> 
+                    <input
+                        className="btn btn-primary"
+                        type="submit"
+                        value="Register"
+                    />
+                </form>
+            </div>
         </div>
     )
 }

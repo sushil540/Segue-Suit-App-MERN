@@ -1,4 +1,4 @@
-import { LOGIN_ERRORS } from "../actions/userActions"
+import { SET_ERRORS } from "../actions/userActions"
 
 const initialUserState = {
     data:[],
@@ -9,7 +9,7 @@ const initialUserState = {
 export const userReducer = (state = initialUserState, action)=>{
     switch(action.type){
 
-        case LOGIN_ERRORS :{
+        case SET_ERRORS :{
             return {...state,error:action.payload}
         }
         default:{

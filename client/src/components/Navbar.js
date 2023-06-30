@@ -5,7 +5,7 @@ import Login from './Login'
 
 const Navbar = (props) =>{
     return (
-        <div>   
+        <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary">
                 <Link className="navbar-brand" to="/">Segue Suit</Link>
                 <div className="navbar-nav">
