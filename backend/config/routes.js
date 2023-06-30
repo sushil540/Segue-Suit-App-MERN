@@ -11,10 +11,6 @@ const ordersCtlr = require('../app/controllers/ordersCtlr')
 const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 
-router.post('/api/users/register', usersCtlr.register)
-router.post('/api/users/login', usersCtlr.login)
-router.get('/api/users/account', authenticateUser, usersCtlr.account)
-router.get('/api/users/notify', usersCtlr.notify)
 
 cron.schedule('0 * * * * *', async() => {
     try{
@@ -23,6 +19,11 @@ cron.schedule('0 * * * * *', async() => {
         console.log("error")
     }
 })
+
+router.post('/api/users/register', usersCtlr.register)
+router.post('/api/users/login', usersCtlr.login)
+router.get('/api/users/account', authenticateUser, usersCtlr.account)
+router.get('/api/users/notify', usersCtlr.notify)
 
 router.post('/api/customers', authenticateUser,customersCtlr.create)
 router.get('/api/customers',authenticateUser,customersCtlr.list)

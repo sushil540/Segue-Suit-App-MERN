@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import Label from './Label'
 import validator from 'validator'
@@ -16,10 +16,10 @@ const Login = (props) =>{
         return () =>{
             dispatch(setErrors(''))
         }
-    },[])
+    },[dispatch])
 
     
-    const msg=useSelector((state)=>{
+    const msg = useSelector((state)=>{
         return state.user.error
      })
     

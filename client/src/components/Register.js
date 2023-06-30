@@ -5,10 +5,10 @@ import validator from 'validator'
 import { startRegisterUser, setErrors } from '../actions/userActions'
 
 const Register = (props) =>{
-    const [username, setUsername] = useState('abhishek')
-    const [email, setEmail] = useState('abhi@gmail.com')
-    const [password, setPassword] = useState('secret123')
-    const [mobile, setMobile] = useState('1234567895')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [mobile, setMobile] = useState('')
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
 
@@ -57,15 +57,18 @@ const Register = (props) =>{
             dispatch(startRegisterUser(formData, props))
         }       
     }
-
-    setTimeout(()=>{
-        {registerErrors && dispatch(setErrors(''))}
-    },3000)
+    
+    const closeNotification = ()=>{
+        setTimeout(()=>{
+            dispatch(setErrors(''))
+        },3000)
+    }
 
     return (
         <div>
             {registerErrors && <div className="w-50 m-auto alert alert-danger">   
                 {registerErrors}
+                {closeNotification()}
             </div>}
             <div className="card shadow-lg p-4 w-50 my-4 m-auto">  
                 <h2 className="text-center"> Register </h2>

@@ -5,21 +5,41 @@ import Login from './Login'
 import Products from './Products'
 import PrivateRoute from './helpers/PrivateRoute'
 import Dashboard from './Dashboard'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoggedInUser } from '../actions/userActions'
 
 const Navbar = (props) =>{
-    console.log("props",props)
+
+    const dispatch = useDispatch()
+
+    const user = useSelector((state)=>{
+        return state.user.data
+    })
+
+    const handleLogout = () =>{
+        localStorage.removeItem('token')
+        dispatch(setLoggedInUser({}))
+    }
+
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary">
                 <Link className="navbar-brand" to="/">Segue Suit</Link>
                 <div className="navbar-nav">
-                    {<>
-                        <Link className="nav-link" to="/register">Register</Link>
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </>}
-                    <Link className="nav-link" to="/products">Product</Link>
-                    <Link className="nav-link">Link</Link>
-                    <Link className="nav-link">Link</Link>
+                    {Object.keys(user).length > 0 ? (
+                        <>
+                            <Link className="nav-link" to="/products">Product</Link>
+                            <Link className="nav-link" onClick={handleLogout}>logout</Link>
+                            <Link className="nav-link">Link</Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link className="nav-link" to="/register">Register</Link>
+                            <Link className="nav-link" to="/login">Login</Link>
+                        </>
+                    ) }
+
+                    
                 </div>
             </div>     
 
