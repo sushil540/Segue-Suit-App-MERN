@@ -33,7 +33,6 @@ usersCtlr.login = async(req, res) =>{
                     id:user._id,
                     role:user.role
                 }
-                console.log("jwt",process.env.JWT_SECRET)
                 const token = jwt.sign(tokenData, process.env.JWT_SECRET)
                 res.json({
                    token:`Bearer ${token}`
@@ -70,6 +69,7 @@ usersCtlr.notify = async(req, res) =>{
                 return "anonymous"
             }
         }
+
         const reports = []
         orders.forEach((ele)=>{
             const report = {}
@@ -80,6 +80,7 @@ usersCtlr.notify = async(req, res) =>{
             }
         })
         //send sms daily at 6 am
+        console.log("notify",reports)
         res.json(reports)
     }catch(e){
         res.json(e)

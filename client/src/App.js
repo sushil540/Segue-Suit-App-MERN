@@ -9,9 +9,9 @@ function App(props) {
   
   useEffect(()=>{
     if(localStorage.getItem('token')){
-      dispatch(startGetLoggedInUser())
+        dispatch(startGetLoggedInUser())
     }
-  },[dispatch])
+  },[dispatch])   
 
   return (
     <div className="mx-4">
