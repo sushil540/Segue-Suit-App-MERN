@@ -28,24 +28,22 @@ const Navbar = (props) =>{
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
+                            <Link className="nav-link" to="/dashboard">Dashboard</Link>
                             <Link className="nav-link" to="/products">Product</Link>
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
-                            <Link className="nav-link">Link</Link>
                         </>
                     ) : (
                         <>
                             <Link className="nav-link" to="/register">Register</Link>
                             <Link className="nav-link" to="/login">Login</Link>
                         </>
-                    ) }
-
-                    
+                    ) }                    
                 </div>
             </div>     
 
             <Route path="/register" component={Register} exact={true}/>
             <Route path="/login" component={Login} exact={true}/>
-            <Route path="/products" component={Products}/>
+            <PrivateRoute path="/products" component={Products} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
         </div>
     )

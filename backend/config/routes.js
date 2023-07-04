@@ -11,8 +11,7 @@ const ordersCtlr = require('../app/controllers/ordersCtlr')
 const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 
-
-cron.schedule('0 * * * * *', async() => {
+cron.schedule('0 0 6 * * *', async() => {
     try{
         const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
     }catch(e){
