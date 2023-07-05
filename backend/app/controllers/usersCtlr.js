@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Order = require("../models/Order")
 const Service = require("../models/Service")
+const nodemailer = require('nodemailer')
 require('dotenv').config()
 
 const usersCtlr = {}
@@ -57,30 +58,77 @@ usersCtlr.account = (req, res)=>{
 }
 
 usersCtlr.notify = async(req, res) =>{
+    console.log({email:process.env.EMAIL,password:process.env.PASSWORD})
     try{
-        const values = await Promise.all([Order.find(),Service.find()])
-        const [orders, services] = values
+        // const values = await Promise.all([Order.find(),Service.find()])
+        // const [orders, services] = values
 
-        const findServiceName = (id)=>{
-            const service = services.find((ele)=>ele._id.valueOf() === id.valueOf())
-            if(service){
-                return service.name
-            }else{
-                return "anonymous"
-            }
-        }
+        // const findServiceName = (id)=>{
+        //     const service = services.find((ele)=>ele._id.valueOf() === id.valueOf())
+        //     if(service){
+        //         return service.name
+        //     }else{
+        //         return "anonymous"
+        //     }
+        // }
 
-        const reports = []
-        orders.forEach((ele)=>{
-            const report = {}
-            if(!ele.status.includes('completed')){
-                report.title = ele.title,
-                report.service = findServiceName(ele.serviceId)
-                reports.push(report)
+        const value = await Order.aggregate([
+            {
+                $match:{status:{$ne:"completed"}}
+            },
+            {
+                $group:{
+                   _id:
+                    {
+                        order_id:"$_id",
+                        title:"$title",
+                    }
+                }
+            }   
+        ])
+        //title  - project A
+        //service - intallation
+
+        console.log("value",value)
+
+        // const reports = []
+        // orders.forEach((ele)=>{
+        //     const report = {}
+        //     if(!ele.status.includes('completed')){
+        //         report.title = ele.title,
+        //         report.service = findServiceName(ele.serviceId)
+        //         reports.push(report)
+        //     }
+        // })
+
+        //send sms daily at 6 am
+        // console.log("notify",reports)
+
+       const transporter = nodemailer.createTransport({
+            port:587,
+            host: "smtp-mail.outlook.com",
+            auth: {
+              user: process.env.EMAIL,
+              pass: process.env.PASSWORD
+            },
+            secure:false,
+          })
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL,
+            subject: 'Sending Email using Node.js NEW ',
+            text: 'That was easy!'
+          }
+        
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error)  
+            } else {
+                console.log('Email sent: ' + info.response)
             }
         })
-        //send sms daily at 6 am
-        console.log("notify",reports)
+
         res.json(reports)
     }catch(e){
         res.json(e)
