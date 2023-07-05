@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 import configStore from './store/configStore'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 
 const store = configStore()
 
