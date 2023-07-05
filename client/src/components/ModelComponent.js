@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import EditProduct from './EditProduct'
 import { useDispatch, useSelector } from 'react-redux'

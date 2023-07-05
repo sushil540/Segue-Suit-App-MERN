@@ -8,7 +8,7 @@ import Dashboard from './Dashboard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoggedInUser } from '../actions/userActions'
 
-const Navbar = (props) =>{
+const Container = (props) =>{
 
     const dispatch = useDispatch()
 
@@ -49,4 +49,4 @@ const Navbar = (props) =>{
     )
 }
 
-export default Navbar
+export default Container
