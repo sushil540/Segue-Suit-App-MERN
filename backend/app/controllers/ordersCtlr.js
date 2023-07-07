@@ -5,6 +5,7 @@ const ordersCtlr = {}
 ordersCtlr.create = async (req, res) =>{
     try{
         const body = req.body
+        console.log("body",body)
         const order = await Order.create(body)
         res.json(order)
     }catch(e){
@@ -59,7 +60,7 @@ ordersCtlr.modifyOrdersLineItems = async(req, res)=>{
 
 ordersCtlr.search = async (req,res) =>{
     try{
-        const {text} = req.query
+        const { text } = req.query
         const searchItems = await Order.find({title :{$regex:text,$options:"i"}})
         res.json(searchItems)
     }catch(e){

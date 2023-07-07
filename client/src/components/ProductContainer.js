@@ -2,8 +2,9 @@ import React from 'react'
 import AddProduct from './AddProduct'
 import ProductsList from './ProductsList'
 import { useSelector } from 'react-redux'
+import ProductSearch from './ProductSearch'
 
-const Products = (props) =>{
+const ProductContainer = (props) =>{
 
     const editId = useSelector((state)=>{
         return state.product.editId
@@ -16,6 +17,8 @@ const Products = (props) =>{
     return (
         <div className="row" style={editId ? customStyle : {}}>
             <div className="col-md-4 border-end border-5">
+                <ProductSearch/>
+                <hr/>
                 <AddProduct/>
             </div>
             <div className="col-md-8">
@@ -25,4 +28,4 @@ const Products = (props) =>{
     )
 }
 
-export default Products
+export default ProductContainer
