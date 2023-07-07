@@ -2,10 +2,9 @@ import React from 'react'
 import AddProduct from './AddProduct'
 import ProductsList from './ProductsList'
 import { useSelector } from 'react-redux'
-import SearchComponent from './SearchComponent'
 import ProductSearch from './ProductSearch'
 
-const Products = (props) =>{
+const ProductContainer = (props) =>{
 
     const editId = useSelector((state)=>{
         return state.product.editId
@@ -29,4 +28,4 @@ const Products = (props) =>{
     )
 }
 
-export default Products
+export default ProductContainer
