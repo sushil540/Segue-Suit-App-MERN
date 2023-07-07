@@ -7,7 +7,7 @@ const ProductForm = (props) =>{
     const { formSubmission } = props
     
     const product = useSelector((state)=>{
-        return state.product.data.find((ele)=>ele._id === state.product?.editId)
+        return state?.product.data.find((ele)=>ele._id === state.product?.editId)
     })
 
     const [name, setName] = useState(product?.name ? product?.name : '')

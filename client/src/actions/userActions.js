@@ -9,6 +9,15 @@ export const setErrors=(user)=>{
     }
 }
 
+export const setLoggedInUser = (user)=>{
+    return  {
+        type:SET_USER,
+        payload:user
+    }
+}
+
+
+
 export const startGetLoggedInUser = () =>{
     return (dispatch)=>{
         (async ()=>{
@@ -58,13 +67,6 @@ export const startLoginUser = (formData,props) =>{
               alert(e)
             }
         })()
-    }
-}
-
-export const setLoggedInUser = (user)=>{
-    return  {
-        type:SET_USER,
-        payload:user
     }
 }
 

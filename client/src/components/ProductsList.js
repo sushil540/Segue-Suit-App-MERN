@@ -7,7 +7,7 @@ const ProductsList = (props) =>{
     const dispatch = useDispatch()
 
     const [modal,products] = useSelector((state)=>{
-        return [state.product.modal, state.product.data]
+        return [state.product?.modal, state.product?.data]
     })
 
     useEffect(()=>{
@@ -44,7 +44,7 @@ const ProductsList = (props) =>{
                             <td>{ele.name}</td>
                             <td>{ele.brand}</td>
                             <td>{ele.model}</td>
-                            <td>{ele.decription}</td>
+                            <td>{ele.description}</td>
                             <td>{ele.weightage}</td>
                             <td>
                                 <button 

@@ -12,13 +12,13 @@ const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 const authorizeUser  = require('../app/middlewares/authorizeUser')
 
-cron.schedule('0 * * * * *', async() => {
-    try{
-        const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
-    }catch(e){
-        console.log("error")
-    }
-})
+// cron.schedule('0 * * * * *', async() => {
+//     try{
+//         const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
+//     }catch(e){
+//         console.log("error")
+//     }
+// })
 
 //users
 router.post('/api/users/register', usersCtlr.register)

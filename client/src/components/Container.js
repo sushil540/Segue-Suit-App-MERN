@@ -2,11 +2,12 @@ import React from 'react'
 import { Link, Route } from 'react-router-dom/cjs/react-router-dom.min'
 import Register from './Register'
 import Login from './Login'
-import Products from './Products'
+import ProductContainer from './ProductContainer.js'
 import PrivateRoute from './helpers/PrivateRoute'
 import Dashboard from './Dashboard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoggedInUser } from '../actions/userActions'
+import CustomerContainer from './CustomerContainer'
 
 const Container = (props) =>{
 
@@ -30,6 +31,7 @@ const Container = (props) =>{
                         <>
                             <Link className="nav-link" to="/dashboard">Dashboard</Link>
                             <Link className="nav-link" to="/products">Product</Link>
+                            <Link className="nav-link" to="/customers">Customer</Link>
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
@@ -43,8 +45,9 @@ const Container = (props) =>{
 
             <Route path="/register" component={Register} exact={true}/>
             <Route path="/login" component={Login} exact={true}/>
-            <PrivateRoute path="/products" component={Products} exact={true}/>
+            <PrivateRoute path="/products" component={ProductContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
+            <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
         </div>
     )
 }
