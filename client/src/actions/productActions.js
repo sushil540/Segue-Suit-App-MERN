@@ -94,12 +94,24 @@ export const startEditProduct = (product) =>{
             try{    
                 const editId = getState().product.editId
                 const response = await axios.put(`/api/products/${editId}`,product,{headers:{"Authorization":localStorage.getItem('token')}})
-                console.log("response edit",response.data)
                 dispatch(updateProduct(response.data))
                 dispatch(setEditId(''))
             }catch(e){
                 alert(e)
             }
         })()    
+    }
+}
+
+export const startSearchProducts = (searchText) =>{
+    return (dispatch) =>{
+        (async()=>{
+            try{
+                const response = await axios.get(`/api/products/search?search=${searchText}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                dispatch(setProducts(response.data))
+            }catch(e){
+                alert(e)
+            }
+        })()
     }
 }

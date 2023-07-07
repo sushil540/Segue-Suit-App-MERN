@@ -43,5 +43,15 @@ productsCtlr.destroy = async(req, res) =>{
 }
 
 
+productsCtlr.search = async (req, res) =>{
+    try{
+        const { search } = req.query
+        const products = await Product.find({$or:[{brand:{$regex:search,$options:"i"}},{weightage:{$regex:search,$options:"i"}}]})
+        res.json(products)
+    }catch(e){
+        res.json(e)
+    }
+}
+
 module.exports = productsCtlr
 

@@ -1,8 +1,9 @@
-import { SET_ERRORS, SET_USER } from "../actions/userActions"
+import { SET_ERRORS, SET_USER, SET_SEARCH } from "../actions/userActions"
 
 const initialUserState = {
     data:{},
-    error:''
+    error:'',
+    search:''
 }
 
 export const userReducer = (state = initialUserState, action)=>{
@@ -12,6 +13,9 @@ export const userReducer = (state = initialUserState, action)=>{
         }
         case SET_ERRORS :{
             return {...state, error:action.payload}
+        }
+        case SET_SEARCH:{
+            return {...state, search:action.payload}
         }
         default:{
             return state

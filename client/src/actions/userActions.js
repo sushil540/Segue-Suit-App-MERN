@@ -1,6 +1,7 @@
 import axios from "../config/axios"
 export const SET_ERRORS = "LOGIN_ERRORS"
 export const SET_USER = "SET_USER"
+export const SET_SEARCH = "SET_SEARCH"
 
 export const setErrors=(user)=>{
     return{
@@ -67,6 +68,20 @@ export const startLoginUser = (formData,props) =>{
               alert(e)
             }
         })()
+    }
+}
+
+export const setLoggedInUser = (user)=>{
+    return  {
+        type:SET_USER,
+        payload:user
+    }
+}
+
+export const setSearch = (search) =>{
+    return {
+        type: SET_SEARCH,
+        payload:search
     }
 }
 

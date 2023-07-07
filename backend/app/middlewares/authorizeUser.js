@@ -1,5 +1,4 @@
 const authorizeUser = (req, res, next) =>{
-    console.log("role",req.user.role)
     if(req.permittedRole.includes(req.user.role)){
         next()
     }else{

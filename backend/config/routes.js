@@ -74,6 +74,10 @@ router.delete('/api/products/:id', authenticateUser, (req, res, next)=>{
     next()
 },authorizeUser, productsCtlr.destroy)
 
+router.get('/api/products/search', authenticateUser, (req, res, next)=>{
+    req.permittedRole = ['admin','staff']
+    next()
+}, authorizeUser, productsCtlr.search)
 
 //services
 router.post('/api/services', authenticateUser,(req, res, next)=>{
@@ -122,11 +126,6 @@ router.delete('/api/orders/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
 },authorizeUser, ordersCtlr.destroy)
-
-router.get('/api/orders/search',authenticateUser, (req, res, next)=>{
-    req.permittedRole = ['admin','staff']
-    next()
-},authorizeUser, ordersCtlr.search)
 
 router.put('/api/orders/:orderId/orderLineItems', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
