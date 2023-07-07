@@ -4,6 +4,7 @@ import EditProduct from './EditProduct'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from '../actions/productActions'
 
+
 const ModelComponent = (props) =>{
 
     const dispatch = useDispatch()

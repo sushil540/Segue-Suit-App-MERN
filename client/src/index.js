@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+
 import { Provider } from 'react-redux'
+
 import configStore from './store/configStore'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,13 +16,7 @@ store.subscribe(()=>{
   console.log("store",store.getState())
 })
 
-// const dispatch = useDispatch()
-// useEffect(()=>{
-//   if(localStorage.getItem('token')){
-//       dispatch(startGetLoggedInUser())
-//   }
-// },[dispatch])  
-
+ 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>

@@ -10,7 +10,7 @@ const ProductsList = (props) =>{
     const dispatch = useDispatch()
 
     const [modal,products] = useSelector((state)=>{
-        return [state.product.modal, state.product.data]
+        return [state.product?.modal, state.product?.data]
     })
 
     useEffect(()=>{
