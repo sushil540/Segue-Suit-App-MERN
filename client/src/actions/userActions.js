@@ -24,7 +24,6 @@ export const setSearch = (search) =>{
         payload:search
     }
 }
-
 export const startGetLoggedInUser = () =>{
     return (dispatch)=>{
         (async ()=>{
@@ -77,7 +76,10 @@ export const startLoginUser = (formData,props) =>{
     }
 }
 
-
+export const setSearch = (search) =>{
+    return {
+        type: SET_SEARCH,
+        payload:search
 
 export const setEnquiry = (user) =>{
     return{

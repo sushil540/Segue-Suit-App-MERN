@@ -1,123 +1,131 @@
-import React,{useState,useEffect} from "react"
-import Label from "./Label"
-import { useDispatch,useSelector } from "react-redux"
-import { startGetProducts } from "../actions/productActions"
-import Select from 'react-dropdown-select'
-import validator from "validator"
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Select from 'react-select'
+import Label from './Label'
+import validator from 'validator'
+import { setErrors, startAddCustomer } from '../actions/customerActions'
 
-const CustomerForm =(props)=>{
-    
-    const [nam,setNam] = useState('')
-    const [mobile,setMobile] = useState('')
-    const [address,setAddress] = useState('')
-    const [products,setProducts] = useState('')
-    const [name,setName] = useState([])
-    console.log('products',products)
-    const [formErrors,setFormErrors]=useState({})
-    const errors={}
-   
+const CustomerForm = () => {
+    const [name, setName] = useState('Rakshan')
+    const [mobile, setMobile] = useState('7894561235')
+    const [address, setAddress] = useState('')
+    const [selectedOptions, setSelectedOptions] = useState([{value:"64a507e7fa6e1c63d992c08e",label:"product 1"},{value:"6496b42fe4a185f9b84f47f5",label:"product 2"}]    )
+    const [formErrors, setFormErrors] = useState({})
+    const errors = {}
+
     const dispatch = useDispatch()
+ 
+    const [products, customerError] = useSelector((state)=>{
+        return [state.product.data.map((ele)=>{
+            return {value:ele._id,label:ele.name}
+        }), state.customer.errors]
+    })    
 
-    useEffect(()=>{
-        dispatch(startGetProducts())
-    },[dispatch])
-   
-    const material = useSelector((state)=>{
-        return state.product?.data.map((ele)=>{
-            return ele.name
-        })
-    })
-    console.log('material',material)
-
-    // let product=[]
-    // material.forEach((ele)=>{
-    //      return product.push(ele.name)
-    // })
-
-
-    const handleValidation=()=>{
+    const handleValidator = () =>{
         if(validator.isEmpty(name)){
-            errors.name = "customer name is required"
+            errors.name = "Customer name is required"
         }
 
         if(validator.isEmpty(mobile)){
-            errors.mobile = "mobile number is required"
+            errors.mobile = "Customer mobile is required"
+        }else if(!validator.isNumeric(mobile)){
+            errors.mobile = "Invalid mobile number"
         }
 
-        if(validator.isEmpty(address)){
-            errors.address = "address is required"
+        if(selectedOptions.length === 0){
+            errors.options = "Atleast select 1 product"
         }
-
-        // if(sort.length<=0){
-        //     errors.product = "product is required"
-        // }
-
         setFormErrors(errors)
     }
+ 
+    const handleMultiSelectChange = (selectedOptions) => {
+        setSelectedOptions(selectedOptions)
+    }
     
-    const handleSubmit=(e)=>{
+    const handleClose = ()=>{
+        dispatch(setErrors(''))
+    }
+
+    const handleSubmit = (e) =>{
         e.preventDefault()
-        
-        handleValidation()
+
+        handleValidator()
 
         if(Object.keys(errors).length === 0){
-            const formData ={
-                name,
-                mobile,
-                address,
-                productIds:products
+
+            const formData = {
+                name:name,
+                mobile:mobile,
+                address:address,
+                productIds:selectedOptions.map((ele=>ele.value))
             }
-          console.log('formData',formData)
-            const reset = () =>{
-                setName('')
-                setMobile('')
-                setAddress('')
-            }
-            console.log(formData, reset)
+            dispatch(startAddCustomer(formData))
+
+            setName('')
+            setMobile('')
+            setAddress('')
+            setSelectedOptions([])   
         }
     }
 
-    return(
-        <div className="card p-4">
-             <h1>Add Customers</h1>
-             <br/>
-             <form onSubmit={handleSubmit}>
-             <Label text = "Name"/>
-             <br/> 
-             <input className="form-control" type='text' value={nam} placeholder="Enter your name" onChange={(e)=>setNam(e.target.value)}/>
-             <br/>
-             <Label text = "mobile"/>
-             <input className="form-control" type='text' value={mobile} placeholder="Enter your number" onChange={(e)=>setMobile(e.target.value)}/>
-             <br/>
-             <Label text = "Address"/>
-             <textarea className="form-control"  value={address} placeholder="Enter your address" onChange={(e)=>setAddress(e.target.value)}/>
-             <br/>
-             <Label text = "Products"/>
-             <Select 
-                 name="select"
-                 options={material}
-                 labelField="id"
-                 valueField="name"
-                 multi
-                 onChange={name=>setName(name)} 
-            >
-            </Select>
-            
-             <br/>
-             <input 
-                  type="submit"
-                  value="Add Customer"
-                  className="btn btn-primary"
-             />
-             </form>
+  return (
+    <div className="card p-4">
+        {customerError && (
+        <div className="alert alert-danger d-flex justify-content-between align-items-center">
+            <p>{ customerError }</p>
+            <button
+                className="btn btn-transparent border-0"
+                onClick={handleClose}>&#10006;</button>
         </div>
-
-
-    )
+        )}
+        <h3 className="text-center"> Add Customer </h3>
+        <form onSubmit={handleSubmit}>
+            <Label text="Name"/> <br/>
+            <input
+                type="text"
+                value={name}
+                className="form-control"
+                placeholder="Enter customer name"
+                onChange={(e)=>setName(e.target.value)}
+            />
+            {formErrors?.name && <span className="text-danger">{formErrors?.name}</span>}
+            <br/>
+            <Label text="Mobile"/> <br/>
+            <input
+                type="text"
+                value={mobile}
+                className="form-control"
+                placeholder="Enter customer mobile"
+                onChange={(e)=>setMobile(e.target.value)}
+            />
+            {formErrors?.mobile && <span className="text-danger">{formErrors?.mobile}</span>}
+            <br/>
+            <Label text="Address (Optional)"/> <br/>
+            <input 
+                type="text"
+                value={address}
+                className="form-control"
+                placeholder="Enter customer address"
+                onChange={(e)=>setAddress(e.target.value)}
+            />
+            {formErrors?.address && <span className="text-danger">{formErrors?.address}</span>}
+            <br/>
+            <Label text="Products Select"/><br/>
+            <Select
+                options={products}
+                isMulti
+                onChange={handleMultiSelectChange}
+                value={selectedOptions}
+            />
+            {formErrors?.options && <span className="text-danger">{formErrors?.options}</span>}
+            <br/>
+            <input 
+                className="btn btn-primary"
+                type="submit"
+            />
+        </form>
+    </div>
+  )
 }
+ 
 export default CustomerForm
-
-
-
-///////////////
-
