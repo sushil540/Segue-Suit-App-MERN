@@ -59,6 +59,7 @@ const Register = (props) =>{
     }
     
     const closeNotification = ()=>{
+        console.log("called")
         setTimeout(()=>{
             dispatch(setErrors(''))
         },3000)

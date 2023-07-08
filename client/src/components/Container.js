@@ -12,6 +12,7 @@ import { setLoggedInUser } from '../actions/userActions'
 import CustomerContainer from './CustomerContainer'
 import OrderContainer from './OrderContainer'
 import { startGetProducts } from '../actions/productActions'
+import { startGetCustomers } from '../actions/customerActions'
 
 const Container = (props) =>{
 
@@ -19,6 +20,7 @@ const Container = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetProducts())
+        dispatch(startGetCustomers())
     },[dispatch])
 
     const user = useSelector((state)=>{

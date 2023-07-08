@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Label from './Label'
 import { useDispatch, useSelector } from 'react-redux'
 import validator from 'validator'
@@ -9,7 +9,7 @@ const OrderForm = (props) =>{
     const [title, setTitle] = useState('Project A1')
     const [serviceId, setServiceId] = useState('654544988651165Id')
     const [customerId, setCustomerId] = useState('654544988651165Id')
-    const [total, setTotal] = useState('9000')
+    const [total, setTotal] = useState('')
     const [paymentMode, setPaymentMode] = useState('RTGS')
     const [isFullyPaid, setIsFullyPaid] = useState(false)
     const [Note, setNote] = useState('simply')
@@ -133,6 +133,11 @@ const OrderForm = (props) =>{
             setToggle(!toggle)
         }
     } 
+
+    const calc = useMemo(()=>{
+        console.log("invoking")
+        return orderLineItems.reduce((pre,curr)=>pre + Number(curr.amount),0)
+    },[orderLineItems])
     
     return (
         <div className="card p-4 m-auto" style={{width:"50rem"}}>
@@ -199,8 +204,9 @@ const OrderForm = (props) =>{
                     {orderLineItems.length > 0 && 
                       orderLineItems.map((ele=>{
                         return <div key={ele.productId}
-                                    className="card p-2" style={{width:"10rem"}}>
+                                    className="card p-2 d-flex justify-content-between align-items-end" style={{width:"10rem"}}>
                                 <p>{findProduct(ele.productId)}</p>
+                                <button className="btn btn-transparent border-0">&#10006;</button>
                         </div>
                         })) 
                     }
@@ -298,7 +304,7 @@ const OrderForm = (props) =>{
                 <input
                     className="form-control"
                     type="text"
-                    value={total}
+                    value={calc}
                     onChange={(e)=>setTotal(e.target.value)}
                 />
                 {formErrors?.total && <span className="text-danger">{formErrors?.total}</span>}
