@@ -13,7 +13,11 @@ import CustomerContainer from './CustomerContainer'
 import OrderContainer from './OrderContainer'
 import { startGetProducts } from '../actions/productActions'
 import { startGetCustomers } from '../actions/customerActions'
+<<<<<<< HEAD
 import { toast } from 'react-hot-toast'
+=======
+import EnquiryContainer from './EnquiryContainer'
+>>>>>>> cc8cf67891b1e688c12ae5e7b0a327d8b74e4250
 
 const Container = (props) =>{
 
@@ -44,9 +48,9 @@ const Container = (props) =>{
                             <Link className="nav-link" to="/dashboard">Dashboard</Link>
                             <Link className="nav-link" to="/products">Product</Link>
                             <Link className="nav-link" to="/customers">Customer</Link>
-
+                            <Link className="nav-link" to="/enquiries">Enquiry</Link>
                             <Link className="nav-link" to="/orders">Order</Link>
-
+                             
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
@@ -64,6 +68,7 @@ const Container = (props) =>{
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
+            <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
         </div>
     )
 }

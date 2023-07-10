@@ -19,7 +19,7 @@ const enquirySchema = new Schema ({
     },
     status:{
         type:String,
-        enum:["hot","warm","cold"]
+        enum:["Hot","Warm","Cold"]
     }
 })
 

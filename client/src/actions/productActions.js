@@ -5,7 +5,10 @@ export const ADD_PRODUCT = "ADD_PRODUCT"
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT"
 export const SET_PRODUCT_EDITID = "SET_PRODUCT_EDITID"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc8cf67891b1e688c12ae5e7b0a327d8b74e4250
 
 const setProducts = (products) =>{
     return {
