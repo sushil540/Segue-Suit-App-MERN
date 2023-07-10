@@ -3,13 +3,20 @@ import Label from "./Label"
 import { useDispatch,useSelector } from "react-redux"
 import validator from "validator"
 import Select from 'react-select'
-import { startAddEnquiry } from "../actions/userActions"
+import { startAddEnquiry } from "../actions/enquiryAction"
+
 
 const EnquiryForm=(props)=>{
-   const [name,setName] = useState('')
-   const [mobile,setMobile] = useState('')
-   const [selectedOptions,setSelectedOptions] = useState([])
-   const [items,setItems] = useState('')
+    const {formSubmission} = props
+
+    const enquiry = useSelector((state)=>{
+        return state.enquiry.data.find((ele)=>ele?._id === state.enquiry?.editId)
+    })
+
+   const [name,setName] = useState(enquiry?.name ? enquiry?.name : '')
+   const [mobile,setMobile] = useState(enquiry?.mobile ? enquiry?.mobile : '')
+   const [selectedOptions,setSelectedOptions] = useState(enquiry?.selectedOptions ? enquiry?.selectedOptions : [])
+   const [items,setItems] = useState(enquiry?.items ? enquiry?.items : '')
    const [formErrors, setFormErrors] = useState({})
    const errors={}
 
@@ -59,12 +66,16 @@ const EnquiryForm=(props)=>{
                 productIds:selectedOptions.map((ele=>ele.value)),
                 status:items
             }
+            console.log("formdata",formData)
             dispatch(startAddEnquiry(formData))
-
+            
+            const reset = () =>{
             setName('')
             setMobile('')
             setSelectedOptions([])
             setItems('')
+            }
+            formSubmission(formData,reset)
         }
     }
 
@@ -99,7 +110,11 @@ const EnquiryForm=(props)=>{
             </select>
             {formErrors?.items && <span className="text-danger">{formErrors?.items}</span>}
             <br/>
-            <input className="btn btn-primary" type='submit' />
+            <input 
+                        type="submit"
+                        value={enquiry?.name ? "Edit Product" : "Add Product"}
+                        className="btn btn-primary"
+                    />
             </form>     
         </div>
     )

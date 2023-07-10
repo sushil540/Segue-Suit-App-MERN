@@ -1,7 +1,7 @@
 import React from 'react'
-import ProductsList from './ProductsList'
 import { useSelector } from 'react-redux'
 import CustomerForm from './CustomerForm'
+import CustomerList from './CustomerList'
 
 const CustomerContainer = (props) =>{
 
@@ -19,7 +19,7 @@ const CustomerContainer = (props) =>{
                 <CustomerForm/>
             </div>
             <div className="col-md-8">
-                <ProductsList/>
+                <CustomerList/>
             </div>
         </div>
     )

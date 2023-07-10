@@ -1,9 +1,10 @@
 const mongoose=require('mongoose')
 const validator = require('validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
-const Schema=mongoose.Schema
+const Schema = mongoose.Schema
 
-const customerSchema=new Schema({
+const customerSchema = new Schema({
     name:{
         type:String,
         required:true,
@@ -25,13 +26,14 @@ const customerSchema=new Schema({
     },
     address:{
         type:String,
-        required:true
     },
     productIds:{
         type:[Schema.Types.ObjectId],
         ref:'Product'
     }
 },{timestamps:true})
+
+customerSchema.plugin(uniqueValidator)
 
 const Customer = mongoose.model("Customer",customerSchema)
 
