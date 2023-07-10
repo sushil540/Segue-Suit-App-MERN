@@ -1,9 +1,10 @@
-import { SET_ERRORS, SET_USER, SET_SEARCH } from "../actions/userActions"
+import { SET_ERRORS, SET_USER, SET_SEARCH,SET_MODAL } from "../actions/userActions"
 
 const initialUserState = {
     data:{},
     error:'',
-    search:''
+    search:'',
+    modal:false
 }
 
 export const userReducer = (state = initialUserState, action)=>{
@@ -16,6 +17,9 @@ export const userReducer = (state = initialUserState, action)=>{
         }
         case SET_SEARCH:{
             return {...state, search:action.payload}
+        }
+        case SET_MODAL :{
+            return {...state, modal:action.payload}
         }
         default:{
             return state

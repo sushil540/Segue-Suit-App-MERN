@@ -9,7 +9,7 @@ const configStore = () =>{
     const store = createStore(combineReducers({
         user:userReducer,
         customer:customerReducer,
-        product:productReducer
+        product:productReducer,
         enquiry:enquiryReducer
     }),applyMiddleware(thunk))
     return store
