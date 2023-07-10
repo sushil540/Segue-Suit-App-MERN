@@ -22,17 +22,14 @@ const OrderForm = (props) =>{
     const [toggle, setToggle] = useState(false)
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
+    const dispatch = useDispatch()
 
-    useEffect(()=>dispatch(startGetStaff()),[])
+    useEffect(()=>dispatch(startGetStaff()),[dispatch])
 
     const [user, staffs, customers] = useSelector((state)=>{
         return [state.user.data, state.staff.data, state.customer.data]
     })
-   
-    console.log("staff",staffs)
-
-    const dispatch = useDispatch()
-    
+       
     const services = [{id:1,title:'Installation'},{id:2,title:'Complaint'},{id:3,title:'Maintenance'}]
 
     const calc = useMemo(()=>{
@@ -95,6 +92,7 @@ const OrderForm = (props) =>{
                 total,
                 paymentMode,
                 isFullyPaid,
+                assignedTo : user.role !== "admin" ? user.id : staffId,
                 Note
             }
             
@@ -182,8 +180,8 @@ const OrderForm = (props) =>{
                 <br/>
                 <select
                     className="form-select"
-                    value={staffId} 
-                    onChange={(e)=>setStaffId(e.target.value)}>
+                    value={customerId} 
+                    onChange={(e)=>setCustomerId(e.target.value)}>
                     <option value="">Select Customer</option> 
                     {customers.map((ele)=>{
                         return (
@@ -230,8 +228,8 @@ const OrderForm = (props) =>{
                     <br/>   
                     <select
                         className="form-select"
-                        value={customerId} 
-                        onChange={(e)=>setCustomerId(e.target.value)}>
+                        value={staffId} 
+                        onChange={(e)=>setStaffId(e.target.value)}>
                         <option value="">Select Staff</option> 
                         {staffs.map((ele)=>{
                             return (

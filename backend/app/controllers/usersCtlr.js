@@ -4,9 +4,31 @@ const jwt = require('jsonwebtoken')
 const Order = require("../models/Order")
 const Service = require("../models/Service")
 const nodemailer = require('nodemailer')
+const { faker } = require("@faker-js/faker")
 require('dotenv').config()
 
 const usersCtlr = {}
+
+usersCtlr.insertManyUsers = async(req, res) =>{
+    try{
+        console.log("hi")
+        const body = []
+        for(let i=0;i<5;i++){
+            const obj = {
+                username:faker.person.fullName(),
+                email:faker.internet.email(),
+                password:faker.internet.password(),
+                mobile:faker.phone.number('##########'),
+            }
+            body.push(obj)
+            console.log("obj",obj)
+        }
+        const users = await User.insertMany(body)
+        res.json(users)
+    }catch(e){
+        res.json(e)
+    }
+}
 
 usersCtlr.register = async(req, res) =>{
     try{

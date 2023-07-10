@@ -6,7 +6,7 @@ ordersCtlr.create = async (req, res) =>{
     try{
         const body = req.body
         console.log("req.user",req.user)
-        // const data = body.assignedTo = 
+        // const data = body.assignedTo = req.user.role !== "admin" ? req.user.id : 
         console.log("body",body)
         const order = await Order.create(body)
         res.json(order)

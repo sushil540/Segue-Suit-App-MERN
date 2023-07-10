@@ -21,6 +21,9 @@ const authorizeUser  = require('../app/middlewares/authorizeUser')
 // })
 
 //users
+
+router.get('/api/bulk', usersCtlr.insertManyUsers)
+
 router.post('/api/users/register', usersCtlr.register)
 router.post('/api/users/login', usersCtlr.login)
 router.get('/api/users/notify', usersCtlr.notify)
@@ -32,6 +35,8 @@ router.get('/api/users',authenticateUser, (req, res, next)=>{
 
 
 //customers
+router.get('/api/customers/bulk', customersCtlr.insertBulkCustomer)
+
 router.post('/api/customers',authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()
@@ -64,6 +69,8 @@ router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=
 
 
 //products
+router.get('/api/products/bulk', productsCtlr.insertBulkProducts)
+
 router.post('/api/products', authenticateUser,(req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()
@@ -144,6 +151,8 @@ router.put('/api/orders/:orderId/orderLineItems', authenticateUser, (req, res, n
 
 
 //enquiries
+router.get('/api/enquiries/bulk', enquiriesCtlr.insertManyEnquiry)
+
 router.post('/api/enquiries', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()

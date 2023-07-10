@@ -1,6 +1,26 @@
+const { faker } = require("@faker-js/faker")
 const Enquiry = require("../models/Enquiry")
 
 const enquiriesCtlr={}
+
+enquiriesCtlr.insertManyEnquiry = async(req, res)=>{
+    try{
+        const body = []
+        for(let i=0;i<5;i++){
+            const obj = {
+                name:faker.person.fullName(),
+                mobile:faker.phone.number('##########'),
+                productIds:[faker.database.mongodbObjectId(),faker.database.mongodbObjectId()],
+                status:"Hot"
+            }
+            body.push(obj)
+        }
+        const enquiries = await Enquiry.insertMany(body)
+        res.json(enquiries)
+    }catch(e){
+        res.json(e)
+    }
+}
 
 enquiriesCtlr.create = async (req,res) => {
     try{
