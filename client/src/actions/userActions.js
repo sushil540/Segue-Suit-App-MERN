@@ -2,7 +2,14 @@ import axios from "../config/axios"
 export const SET_ERRORS = "LOGIN_ERRORS"
 export const SET_USER = "SET_USER"
 export const SET_SEARCH = "SET_SEARCH"
-export const SET_ENQUIRY = "SET_ENQUIRY"
+export const SET_MODAL = "SET_MODAL"
+
+export const setModal = (modal) =>{
+    return {
+        type:SET_MODAL,
+        payload:modal
+    }
+}
 
 export const setErrors=(user)=>{
     return{
@@ -76,29 +83,5 @@ export const startLoginUser = (formData,props) =>{
     }
 }
 
-export const setSearch = (search) =>{
-    return {
-        type: SET_SEARCH,
-        payload:search
-
-export const setEnquiry = (user) =>{
-    return{
-        type : SET_ENQUIRY,
-        payload : user
-    }
-}
 
 
-export const startAddEnquiry=(formData)=>{
-    return(dispatch)=>{
-        (async()=>{
-          try{
-              const response = await axios.post('/api/enquiries',formData,{headers:{"Authorization":localStorage.getItem('token')}})
-              console.log('response',response.data)
-              dispatch(setEnquiry(response.data))
-          }catch(e){
-            alert(e)
-          }
-        })()
-    }
-}

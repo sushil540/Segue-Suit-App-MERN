@@ -4,14 +4,6 @@ export const ADD_PRODUCT = "ADD_PRODUCT"
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT"
 export const SET_PRODUCT_EDITID = "SET_PRODUCT_EDITID"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
-export const SET_MODAL = "SET_MODAL"
-
-export const setModal = (modal) =>{
-    return {
-        type:SET_MODAL,
-        payload:modal
-    }
-}
 
 const setProducts = (products) =>{
     return {

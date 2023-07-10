@@ -1,10 +1,9 @@
-import { SET_PRODUCTS, ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_PRODUCT, SET_MODAL, SET_PRODUCT_EDITID } from '../actions/productActions'
+import { SET_PRODUCTS, ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_PRODUCT,  SET_PRODUCT_EDITID } from '../actions/productActions'
 
 const initialProductstate = {
     data:[],
     erros:'',
-    editId:'',
-    modal:false
+    editId:''
 }
 
 export const productReducer = (state = initialProductstate, action) =>{
@@ -30,9 +29,7 @@ export const productReducer = (state = initialProductstate, action) =>{
         case SET_PRODUCT_EDITID : {
             return {...state, editId:action.payload}
         }
-        case SET_MODAL :{
-            return {...state, modal:action.payload}
-        }
+
         default:{
             return {...state}
         }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SearchComponent = (props)=>{  
-    const { search, handleSearch } = props
+    const { search, handleSearch ,text} = props
 
     const handleChange = (e) =>{
         handleSearch(e.target.value)
@@ -17,7 +17,7 @@ const SearchComponent = (props)=>{
                     onChange={handleChange}
                     value={search}
                 /> 
-                <span className="text-secondary">Search by brand and weightage</span>
+                <span className="text-secondary">{text}</span>
             </form>
         </div>
     )
