@@ -135,4 +135,13 @@ usersCtlr.notify = async(req, res) =>{
     }
 }
 
-module.exports = usersCtlr
+usersCtlr.getStaffs  = async(req, res, next)=>{
+    try{
+        const staffs = await User.aggregate([{$match:{role:{$ne:"admin"}}}])
+        res.json(staffs)        
+    }catch(e){
+        res.json(e)
+    }
+}   
+
+module.exports = usersCtlr  

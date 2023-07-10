@@ -1,10 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import SearchComponent from './SearchComponent'
 import { setSearch } from '../actions/userActions'
-import { startGetProducts, startSearchProducts } from '../actions/productActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { startCustomerSearch, startGetCustomers } from '../actions/customerActions'
+import SearchComponent from './SearchComponent'
 
-const ProductSearch = (props) =>{
+const CustomerSearch = (props) =>{
 
     const dispatch = useDispatch()
 
@@ -15,9 +15,9 @@ const ProductSearch = (props) =>{
     const handleSearch = (data) =>{
         dispatch(setSearch(data))
         if(data){
-            dispatch(startSearchProducts(data))   
+            dispatch(startCustomerSearch(data))   
         }else{
-            dispatch(startGetProducts())
+            dispatch(startGetCustomers())
         }
     }
 
@@ -25,10 +25,10 @@ const ProductSearch = (props) =>{
         <div>
             <SearchComponent 
                 search={search}
-                text="Search by brand and weightage"
+                text="Search by name"
                 handleSearch={handleSearch}/>
         </div>
     )
 }
 
-export default ProductSearch
+export default CustomerSearch

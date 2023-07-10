@@ -1,17 +1,11 @@
+import { toast } from "react-hot-toast"
 import axios from "../config/axios"
 export const SET_PRODUCTS = "SET_PRODUCTS"
 export const ADD_PRODUCT = "ADD_PRODUCT"
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT"
 export const SET_PRODUCT_EDITID = "SET_PRODUCT_EDITID"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
-export const SET_MODAL = "SET_MODAL"
 
-export const setModal = (modal) =>{
-    return {
-        type:SET_MODAL,
-        payload:modal
-    }
-}
 
 const setProducts = (products) =>{
     return {
@@ -46,6 +40,7 @@ export const startAddProduct = (formData) =>{
             try{
                 const response = await axios.post('/api/products',formData,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(addProduct(response.data))
+                toast.success("Product Added Successfully")
             }catch(e){  
                 alert(e)
             }
@@ -66,6 +61,17 @@ export const startRemoveProduct = (id) =>{
             try{
                 const response = await axios.delete(`/api/products/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(removeProduct(response.data))
+                toast.success('Product Removed Successfully.',{
+                    style: {
+                      border: '1px solid #713200',
+                      padding: '16px',
+                      color: '#713200',
+                    },
+                    iconTheme: {
+                      primary: '#EF6262',
+                      secondary: '#FFFAEE',
+                    },
+                  })
             }catch(e){
                 alert(e)
             }
@@ -79,7 +85,6 @@ export const setEditId = (id) =>{
         payload:id
     }
 }
-
 
 export const updateProduct = (product) =>{
     return {
@@ -95,6 +100,17 @@ export const startEditProduct = (product) =>{
                 const editId = getState().product.editId
                 const response = await axios.put(`/api/products/${editId}`,product,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(updateProduct(response.data))
+                toast.success('Product Edited Successfully.',{
+                    style: {
+                      border: '1px solid #1D5B79',
+                      padding: '16px',
+                      color: '#4D455D',
+                    },
+                    iconTheme: {
+                      primary: '#1D5B79',
+                      secondary: '#FFFAEE',
+                    },
+                  })
                 dispatch(setEditId(''))
             }catch(e){
                 alert(e)

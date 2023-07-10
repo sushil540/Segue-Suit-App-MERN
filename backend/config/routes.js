@@ -25,6 +25,11 @@ router.post('/api/users/register', usersCtlr.register)
 router.post('/api/users/login', usersCtlr.login)
 router.get('/api/users/notify', usersCtlr.notify)
 router.get('/api/users/account', authenticateUser, usersCtlr.account)
+router.get('/api/users',authenticateUser, (req, res, next)=>{
+    req.permittedRole = ['admin']
+    next()
+},authorizeUser, usersCtlr.getStaffs)
+
 
 //customers
 router.post('/api/customers',authenticateUser, (req, res, next)=>{
@@ -46,6 +51,11 @@ router.delete('/api/customers/:id',authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
 },authorizeUser, customersCtlr.destroy)
+
+router.get('/api/customers/search',authenticateUser, (req, res, next)=>{
+    req.permittedRole = ['admin','staff']
+    next()
+},authorizeUser, customersCtlr.search)
 
 router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']

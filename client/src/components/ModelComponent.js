@@ -1,18 +1,16 @@
 import React from 'react'
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
-import EditProduct from './EditProduct'
 import { useDispatch, useSelector } from 'react-redux'
-import { setModal } from '../actions/productActions'
+import { setModal } from '../actions/userActions'
 
-
-const ModelComponent = (props) =>{
-
+const ModelComponent = ({Component}) =>{
+    
     const dispatch = useDispatch()
 
     const modal = useSelector((state)=>{
-        return state.product.modal
+        return state.user.modal
     })
-
+    
     const toggle = () =>dispatch(setModal(!modal))
   
     return(
@@ -20,7 +18,7 @@ const ModelComponent = (props) =>{
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle} className="bg-primary-subtle"></ModalHeader>
                 <ModalBody>
-                    <EditProduct/>
+                    <Component/>
                 </ModalBody>
             </Modal>
         </div>

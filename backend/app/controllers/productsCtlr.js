@@ -42,7 +42,6 @@ productsCtlr.destroy = async(req, res) =>{
     }
 }
 
-
 productsCtlr.search = async (req, res) =>{
     try{
         const { search } = req.query

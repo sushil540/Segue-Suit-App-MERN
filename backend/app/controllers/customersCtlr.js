@@ -35,9 +35,19 @@ customersCtlr.update = async(req,res)=>{
 
 customersCtlr.destroy = async(req,res)=>{
     try{
-         const id = req.params.id
-         const obj = await Customer.findByIdAndDelete(id)
-         res.json(obj)
+        const id = req.params.id
+        const obj = await Customer.findByIdAndDelete(id)
+        res.json(obj)
+    }catch(e){
+        res.json(e)
+    }
+}
+
+customersCtlr.search = async(req, res) =>{
+    try{
+        const { search } = req.query 
+        const customers = await Customer.find({$or:[{name:{$regex:search,$options:"i"}},{mobile:{$regex:search,$options:"i"}}]})
+        res.json(customers)
     }catch(e){
         res.json(e)
     }
