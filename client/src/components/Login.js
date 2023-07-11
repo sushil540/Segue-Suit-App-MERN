@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {useDispatch,useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import Label from './Label'
 import validator from 'validator'
 import { setErrors, startLoginUser } from '../actions/userActions'
@@ -37,8 +37,6 @@ const Login = (props) =>{
 
         setFormErrors(errors)
     }
-
-    
 
     const handleSubmit = (e) =>{
         e.preventDefault()

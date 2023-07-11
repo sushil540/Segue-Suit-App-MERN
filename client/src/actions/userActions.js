@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast"
 import axios from "../config/axios"
 export const SET_ERRORS = "LOGIN_ERRORS"
 export const SET_USER = "SET_USER"
@@ -73,6 +74,7 @@ export const startLoginUser = (formData,props) =>{
                     console.log('token',response.data.token)
                     props.history.push('/dashboard')
                     dispatch(startGetLoggedInUser())
+                    toast.success("Successfully LoggedIn")
                 }else{
                     dispatch(setErrors(response.data.error))
                 }

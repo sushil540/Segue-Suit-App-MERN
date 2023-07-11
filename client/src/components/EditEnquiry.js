@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import EnquiryForm from './EnquiryForm'
-import { setEnquiriesEdit, setEnquiryEditId, setModal } from '../actions/enquiryAction'
+import { setEnquiriesEdit, setEnquiryEditId } from '../actions/enquiryAction'
+import { setModal } from '../actions/userActions'
 
 const EditEnquiry = (props) =>{
 

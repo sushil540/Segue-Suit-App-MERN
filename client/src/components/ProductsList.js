@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEditId,startGetProducts, startRemoveProduct } from '../actions/productActions'
+import EditProduct from './EditProduct'
+import { setEditId, startGetProducts, startRemoveProduct } from '../actions/productActions'
 import ModelComponent from './ModelComponent'
 import { setModal } from '../actions/userActions'
 
@@ -10,8 +11,8 @@ const ProductsList = (props) =>{
 
     const dispatch = useDispatch()
 
-    const [modal,products] = useSelector((state)=>{
-        return [state.product?.modal, state.product?.data]
+    const [modal, products] = useSelector((state)=>{
+        return [state.user?.modal, state.product?.data]
     })
 
     useEffect(()=>{
@@ -94,7 +95,7 @@ const ProductsList = (props) =>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component ={ProductsList}/>
+            <ModelComponent Component={EditProduct}/>
         </div>
     )
 }

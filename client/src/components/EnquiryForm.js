@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React,{useState} from "react"
 import Label from "./Label"
 import { useDispatch,useSelector } from "react-redux"
 import validator from "validator"
@@ -85,11 +85,20 @@ const EnquiryForm=(props)=>{
             <br/>
             <form onSubmit={handleSubmit}>
             <Label text="Name"/> <br/>
-            <input className="form-control" type="text" value={name} placeholder="Enter your name" onChange={(e)=>setName(e.target.value)}/>
+            <input 
+                className="form-control" 
+                type="text" value={name} 
+                placeholder="Enter your name" 
+                onChange={(e)=>setName(e.target.value)}/>
             {formErrors?.name && <span className="text-danger">{formErrors?.name}</span>}
             <br/>
             <Label text="mobile"/><br/>
-            <input className="form-control" type="text" value={mobile} placeholder="Enter your mobile number" onChange={(e)=>setMobile(e.target.value)}/>
+            <input 
+                className="form-control" 
+                type="text" 
+                value={mobile}
+                placeholder="Enter your mobile number" 
+                onChange={(e)=>setMobile(e.target.value)}/>
             {formErrors?.mobile && <span className="text-danger">{formErrors?.mobile}</span>}
             <br/>
             <Label text = "Products"/><br/>

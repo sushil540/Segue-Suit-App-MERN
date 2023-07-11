@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react'
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setEnquiryEditId, setGetEnquiryItems, startRemoveEnquiry } from '../actions/enquiryAction'
 import { toast } from 'react-hot-toast'
 import ModelComponent from './ModelComponent'
+import EditEnquiry from './EditEnquiry'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
 
 const EnquiryList=(props)=>{
@@ -113,7 +114,7 @@ const handleEdit=(id)=>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component={EnquiryList}/>
+            <ModelComponent Component={EditEnquiry}/>
         </div>
     )
 }

@@ -3,13 +3,31 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import Label from './Label'
 import validator from 'validator'
-import { setErrors, startAddCustomer } from '../actions/customerActions'
+import { setErrors } from '../actions/customerActions'
 
-const CustomerForm = () => {
-    const [name, setName] = useState('Rakshan')
-    const [mobile, setMobile] = useState('7894561235')
-    const [address, setAddress] = useState('')
-    const [selectedOptions, setSelectedOptions] = useState([{value:"64a507e7fa6e1c63d992c08e",label:"product 1"},{value:"6496b42fe4a185f9b84f47f5",label:"product 2"}]    )
+const CustomerForm = (props) => {
+    const { formSubmittion }  = props
+
+    const [customer, product] = useSelector((state)=>{
+        return [state.customer.data.find((ele)=>ele._id === state.customer.editId), state.product.data]
+    })
+    
+    const findProducts = (ids) =>{
+        const products = ids.map((ele)=>{
+            const data = product.find((e)=>{
+                return ele === e._id
+            })
+            if(data) return {value:data._id,label:data.name}
+        })
+        return products 
+    }
+
+    // console.log(customer.productIds)//find products
+
+    const [name, setName] = useState(customer?.name ? customer?.name : '')
+    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '')
+    const [address, setAddress] = useState(customer?.address ? customer?.address : '')
+    const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : [])
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
 
@@ -41,7 +59,7 @@ const CustomerForm = () => {
     const handleMultiSelectChange = (selectedOptions) => {
         setSelectedOptions(selectedOptions)
     }
-    
+
     const handleClose = ()=>{
         dispatch(setErrors(''))
     }
@@ -59,8 +77,9 @@ const CustomerForm = () => {
                 address:address,
                 productIds:selectedOptions.map((ele=>ele.value))
             }
-            dispatch(startAddCustomer(formData))
 
+            formSubmittion(formData)
+            
             setName('')
             setMobile('')
             setAddress('')
@@ -78,7 +97,6 @@ const CustomerForm = () => {
                 onClick={handleClose}>&#10006;</button>
         </div>
         )}
-        <h3 className="text-center"> Add Customer </h3>
         <form onSubmit={handleSubmit}>
             <Label text="Name"/> <br/>
             <input
