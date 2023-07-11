@@ -216,7 +216,7 @@ const OrderForm = (props) =>{
                     <input
                         type="radio"
                         name="isFullyPaid"
-                        value={isFullyPaid}
+                        value={isFullyPaid} 
                         className="form-check-input"
                         onChange={(e)=>setIsFullyPaid(e.target.value)}
                     />
