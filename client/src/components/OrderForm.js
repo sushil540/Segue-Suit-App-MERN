@@ -1,45 +1,43 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Label from './Label'
 import { useDispatch, useSelector } from 'react-redux'
 import validator from 'validator'
 import { startAddOrder } from '../actions/orderActions'
+import OrderLineItems from './OrderLineItems'
+import OrderItemsDisplay from './OrderItemsDisplay'
+import { startGetStaff } from '../actions/staffActions'
 
 const OrderForm = (props) =>{
-    const [orderDate, setOrderDate] = useState('02-04-2022')
+    const [orderDate, setOrderDate] = useState('')
     const [title, setTitle] = useState('Project A1')
-    const [serviceId, setServiceId] = useState('654544988651165Id')
-    const [customerId, setCustomerId] = useState('654544988651165Id')
+    const [serviceId, setServiceId] = useState('')
+    const [customerId, setCustomerId] = useState('')
+    const [staffId, setStaffId] = useState('')
     const [total, setTotal] = useState('')
-    const [paymentMode, setPaymentMode] = useState('RTGS')
+    const [paymentMode, setPaymentMode] = useState('')
     const [isFullyPaid, setIsFullyPaid] = useState(false)
-    const [Note, setNote] = useState('simply')
-    const [toggle, setToggle] = useState(false)
-    
-    //addProducts
-    const [productId, setProductId] = useState('')
-    const [amount, setAmount] = useState('')
-    const [remarks, setRemarks] = useState('')
-    
+    const [Note, setNote] = useState('')
     const [orderLineItems, setOrderLineItems] = useState([])
+
+    const [toggle, setToggle] = useState(false)
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
-
     const dispatch = useDispatch()
-    
-    const products = useSelector((state)=>{
-        return state.product.data
+
+    useEffect(()=>dispatch(startGetStaff()),[dispatch])
+
+    const [user, staffs, customers] = useSelector((state)=>{
+        return [state.user.data, state.staff.data, state.customer.data]
     })
-
-    const findProduct = (id) =>{
-        return products.find((ele)=>ele._id === id)?.name
-    } 
-
-
-    // Use from redux store
+       
     const services = [{id:1,title:'Installation'},{id:2,title:'Complaint'},{id:3,title:'Maintenance'}]
-    const customers =  [{id:1,name:'Sharanu'},{id:2,name:'Rakshan'},{id:3,name:'Srajan'}]
 
-
+    const calc = useMemo(()=>{
+        const data = orderLineItems.reduce((pre,curr)=>pre + Number(curr.amount),0)
+        setTotal(String(data))
+        return data
+    },[orderLineItems])
+    
     const runFormValidation = () =>{
         if(validator.isEmpty(orderDate)){
             errors.orderDate = "Date is required"
@@ -60,7 +58,7 @@ const OrderForm = (props) =>{
         if(validator.isEmpty(total)){
             errors.total = "Total is required"
         }
-
+        
         if(orderLineItems.length === 0){
             errors.orderLineItems = "Atleast 1 product must be added"
         }
@@ -68,13 +66,23 @@ const OrderForm = (props) =>{
         setFormErrors(errors)
     }
 
+    const handleToggle = () =>setToggle(!toggle)
+
+    const handleRemoveProduct = (id) =>{
+        const orderItems = orderLineItems.filter((ele)=>ele.productId !== id) 
+        setOrderLineItems(orderItems)
+    }
+
+    const submitProductForm = (obj) =>{
+        setOrderLineItems([...orderLineItems, obj])
+    }
+
     const handleSubmit = (e)=>{
         e.preventDefault()
 
         runFormValidation()
         
-        if(Object.keys(errors).length === 0 && !toggle){
-
+        if(Object.keys(errors).length === 0){
             const formData = {
                 orderDate,
                 title,
@@ -84,12 +92,12 @@ const OrderForm = (props) =>{
                 total,
                 paymentMode,
                 isFullyPaid,
+                assignedTo : user.role !== "admin" ? user.id : staffId,
                 Note
             }
-
+            
             dispatch(startAddOrder(formData))
 
-            const reset = () =>{
                 setOrderDate('')
                 setTitle('')
                 setServiceId('')
@@ -99,49 +107,35 @@ const OrderForm = (props) =>{
                 setIsFullyPaid(!isFullyPaid)
                 setNote('')
                 setOrderLineItems([])
-            }
-                reset()
         }
     }
 
-    const handleToggle = ()=>{
-        setToggle(!toggle)
-    }
-
-    const addProductValidation = () =>{
-        if(validator.isEmpty(productId)){
-            errors.productId = "Product is required"
-        }
-
-        if(validator.isEmpty(amount)){
-            errors.amount = "Amount is required"
-        }else if(!validator.isNumeric(amount)){
-            errors.amount = "Amount must be number" 
-        }
-
-        setFormErrors(errors)
-    }
-
-    const handleAddProduct = () =>{
-        addProductValidation()
-
-        if(Object.keys(errors).length === 0){
-            setOrderLineItems([...orderLineItems,{productId,amount,remarks}])
-            setProductId('')
-            setAmount('')   
-            setRemarks('')
-            setToggle(!toggle)
-        }
-    } 
-
-    const calc = useMemo(()=>{
-        console.log("invoking")
-        return orderLineItems.reduce((pre,curr)=>pre + Number(curr.amount),0)
-    },[orderLineItems])
-    
     return (
         <div className="card p-4 m-auto" style={{width:"50rem"}}>
             <h2 className="m-auto">Add Orders</h2>
+            <OrderItemsDisplay orderLineItems={orderLineItems} handleRemoveProduct={handleRemoveProduct} />
+            <div className="p-4 gap-2" style={{border:"5px dotted rgba(230,230,230,4)"}}> 
+            {toggle && <OrderLineItems 
+                submitProductForm={submitProductForm}
+                orderLineItems={orderLineItems}
+                handleToggle={handleToggle} />}
+            {!toggle &&  
+                <span className="d-flex align-items-center gap-2">
+                    <Label text="Products"/>
+                    <button 
+                        type="button"
+                        className="btn btn-primary" 
+                        onClick={handleToggle}>+</button>
+                </span>
+            }
+            {formErrors?.orderLineItems && <span className="text-danger">{formErrors?.orderLineItems}</span>}
+            {toggle && <div className="d-flex flex-row">
+                <button 
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={handleToggle}>Cancel</button>
+                    </div>}
+            </div>
             <form onSubmit={handleSubmit}>
                 <Label text="Order Date"/><br/>
                 <input
@@ -191,85 +185,14 @@ const OrderForm = (props) =>{
                     <option value="">Select Customer</option> 
                     {customers.map((ele)=>{
                         return (
-                        <option 
-                        key={ele.id}
-                        value={ele.id}>{ele.name}
-                        </option> 
+                            <option 
+                            key={ele._id}
+                            value={ele._id}>{ele.name}
+                            </option> 
                         )
                     })}
                 </select>
                 {formErrors?.customerId && <span className="text-danger">{formErrors?.customerId}</span>}
-                <br/>
-                <div className="row p-4 gap-2" style={{border:"5px dotted rgba(230,230,230,4)"}}>
-                    {orderLineItems.length > 0 && 
-                      orderLineItems.map((ele=>{
-                        return <div key={ele.productId}
-                                    className="card p-2 d-flex justify-content-between align-items-end" style={{width:"10rem"}}>
-                                <p>{findProduct(ele.productId)}</p>
-                                <button className="btn btn-transparent border-0">&#10006;</button>
-                        </div>
-                        })) 
-                    }
-                    {!toggle &&  
-                        <span className="d-flex align-items-center gap-2">
-                            <Label text="Products"/>
-                            <button 
-                                type="button"
-                                className="btn btn-primary" 
-                                onClick={handleToggle}>+</button>
-                        </span>
-                    }
-                    {toggle &&  
-                        <div>
-                            <h3 className="text-center"> Add Product </h3>
-                            <Label text="Products"/> <br/>
-                            <select 
-                                className="form-select"
-                                value={productId} 
-                                onChange={(e)=>setProductId(e.target.value)}>
-                                <option value="">Select Product</option> 
-                                {products.map((ele)=>{
-                                    return (
-                                        <option 
-                                            key={ele._id}
-                                            value={ele._id}>{ele.name}
-                                        </option> 
-                                    )
-                                })}
-                            </select> 
-                            {formErrors?.productId && <span className="text-danger">{formErrors?.productId}</span>}
-                            <br/>
-                            <Label text="Amount"/>
-                            <input 
-                                className="form-control"
-                                type="text"
-                                value={amount}
-                                placeholder="Enter amount"
-                                onChange={(e)=>setAmount(e.target.value)}
-                            /> 
-                            {formErrors?.amount && <span className="text-danger">{formErrors?.amount}</span>}
-                            <br/>
-                            <Label text="Remarks (Optional)"/>
-                            <input 
-                                className="form-control"
-                                type="text"
-                                value={remarks}
-                                placeholder="Enter remarks"
-                                onChange={(e)=>setRemarks(e.target.value)}
-                            /><br/>
-                            <div className="d-flex align-items-center gap-2">
-                                <button 
-                                    type="button"
-                                    className="btn btn-primary"
-                                    onClick={handleAddProduct}>Add</button>
-                                <button 
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={handleToggle}>Cancel</button>
-                            </div>
-                        </div>}
-                </div> 
-                {formErrors?.orderLineItems && <span className="text-danger">{formErrors?.orderLineItems}</span>}
                 <br/>
                 <Label text="Payment Mode (Optional)"/><br/>
                 <input
@@ -293,14 +216,33 @@ const OrderForm = (props) =>{
                     <input
                         type="radio"
                         name="isFullyPaid"
-                        value={isFullyPaid}
+                        value={isFullyPaid} 
                         className="form-check-input"
                         onChange={(e)=>setIsFullyPaid(e.target.value)}
                     />
                     <Label text="No"/>
                 </div>
                 <br/>
-                <Label text="Total Amount"/><br/>
+                {user.role === "admin" && <div>
+                    <Label text="Assign To"/>
+                    <br/>   
+                    <select
+                        className="form-select"
+                        value={staffId} 
+                        onChange={(e)=>setStaffId(e.target.value)}>
+                        <option value="">Select Staff</option> 
+                        {staffs.map((ele)=>{
+                            return (
+                                <option 
+                                    key={ele._id}
+                                    value={ele._id}>{ele.username}
+                                </option> 
+                            )
+                        })}
+                    </select>
+                </div>}
+                <br/>
+                <Label text="Total Amount"/><br/>   
                 <input
                     className="form-control"
                     type="text"

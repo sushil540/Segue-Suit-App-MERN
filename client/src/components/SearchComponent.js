@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setSearch } from '../actions/userActions'
 
 const SearchComponent = (props)=>{  
-    const { search, handleSearch ,text} = props
+    const { search, handleSearch , text} = props
 
     const dispatch=useDispatch()
 

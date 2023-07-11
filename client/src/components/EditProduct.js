@@ -7,6 +7,7 @@ import { setModal } from '../actions/userActions'
 const EditProduct = (props) =>{
 
     const dispatch = useDispatch()
+   
 
     useEffect(()=>{
         return ()=>{

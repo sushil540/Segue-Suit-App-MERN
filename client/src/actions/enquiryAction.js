@@ -6,7 +6,6 @@ export const REMOVE_ENQUIRY = "REMOVE_ENQUIRY"
 export const SET_ENQUIRY_EDITID = "SET_ENQUIRY_EDITID"
 export const UPDATE_ENQUIRY="UPDATE-ENQUIRY"
 
-
 export const setEnquiry = (user) =>{
     return{
         type : SET_ENQUIRY,
