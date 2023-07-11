@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast'
 import ModelComponent from './ModelComponent'
 import EditEnquiry from './EditEnquiry'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
+import EditEnquiry from './EditEnquiry'
 
 const EnquiryList=(props)=>{
   
