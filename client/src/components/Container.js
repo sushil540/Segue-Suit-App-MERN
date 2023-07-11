@@ -13,6 +13,7 @@ import CustomerContainer from './CustomerContainer'
 import OrderContainer from './OrderContainer'
 import { startGetProducts } from '../actions/productActions'
 import { startGetCustomers } from '../actions/customerActions'
+import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 
 const Container = (props) =>{
@@ -31,6 +32,7 @@ const Container = (props) =>{
     const handleLogout = () =>{
         localStorage.removeItem('token')
         dispatch(setLoggedInUser({}))
+        toast.success("Successfully LoggedOut")
     }
 
     return (

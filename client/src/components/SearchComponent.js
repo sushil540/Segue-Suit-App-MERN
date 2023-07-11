@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SearchComponent = (props)=>{  
-    const { search, handleSearch ,text} = props
+    const { search, handleSearch , text} = props
 
     const handleChange = (e) =>{
         handleSearch(e.target.value)

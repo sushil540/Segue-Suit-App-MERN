@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setEditId, startRemoveCustomer } from '../actions/customerActions'
+import ModelComponent from './ModelComponent'
+import EditCustomer from './EditCustomer'
+import { setModal } from '../actions/userActions'
 
 const DataTable = (props) =>{
   const [count, setCount] = useState(5)
   const [prevCount, setPrevCount] = useState(0)
-  const [toggle, setToggle] = useState(false)
+
+  const modal = useSelector((state)=>{
+    return state.user.modal
+  })
+
+  // const [toggle, setToggle] = useState(false)
+
+  const dispatch = useDispatch()
 
   const { data } = props
     
@@ -17,9 +29,18 @@ const DataTable = (props) =>{
       setPrevCount(prevCount + count)
   }
 
-  const handleToggle = () =>{
-    setToggle(!toggle)
+  const handleEdit = (id) =>{
+     dispatch(setEditId(id))
+     dispatch(setModal(!modal))
   }
+
+  const handleRemove =(id) =>{
+    dispatch(startRemoveCustomer(id))
+  }
+
+  // const handleToggle = () =>{
+  //   setToggle(!toggle)
+  // }
 
   // // const calculate = (data) =>{
   //     for(let i=0;data.length - 1;i++){
@@ -33,9 +54,8 @@ const DataTable = (props) =>{
   //     }
   //   // }
     
-    // console.log("sorted",data)
+  // console.log("sorted",data)
   
-
   // const computedVAlues = (data) =>{
   //   return toggle ? calculate(data) : data.sort((a, b)=> a - b)
   // }
@@ -48,11 +68,7 @@ const DataTable = (props) =>{
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Address</th>
-                <th>Products 
-                  <button onClick={handleToggle}>
-                    up
-                  </button>
-                </th>
+                <th>Products</th>
                 <th>Edit</th>
                 <th>Remove</th>
               </tr>
@@ -65,27 +81,28 @@ const DataTable = (props) =>{
                     <td>{ele.mobile}</td>
                     <td>{ele.address}</td>  
                     <td>{ele.productIds.length}</td>
-                    <td><button>Edit</button></td>
-                    <td><button>Remove</button></td>
+                    <td><button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>Edit</button></td>
+                    <td><button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>Remove</button></td>
                 </tr>
                 )    
             })}
         </tbody>
       </table>
       {data.length >= 5 && <div className="d-flex justify-content-between">
-                <button 
-                    disabled={data.length > count} 
-                    onClick={preCount}
-                    className="btn btn-secondary">
-                    prev
-                </button>
-                <button 
-                    disabled={data.length < count} 
-                    onClick={handleCount}
-                    className="btn btn-primary">
-                    next
-                </button>
-            </div>}
+            <button 
+                disabled={data.length > count} 
+                onClick={preCount}
+                className="btn btn-secondary">
+                prev
+            </button>
+            <button 
+                disabled={data.length < count} 
+                onClick={handleCount}
+                className="btn btn-primary">
+                next
+            </button>
+        </div>}
+        <ModelComponent Component={EditCustomer} />
     </div>
   )
 }

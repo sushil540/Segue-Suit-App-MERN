@@ -1,6 +1,27 @@
+const { faker } = require('@faker-js/faker')
 const Product = require('../models/Product')
 
 const productsCtlr = {}
+
+productsCtlr.insertBulkProducts = async( req, res)=>{
+    try{
+        const body = []
+        for(let i=0;i<5;i++){
+            const obj = {
+                name:faker.commerce.product(),
+                brand:faker.company.name(),
+                model:faker.location.city(),
+                description:faker.commerce.productDescription(),
+                weightage:faker.string.numeric()
+            }
+            body.push(obj)
+        }
+    const products = await Product.insertMany(body)
+    res.json(products)
+    }catch(e){
+        res.json(e)
+    }
+}
 
 productsCtlr.create = async(req, res)=>{
     try{    
@@ -41,7 +62,6 @@ productsCtlr.destroy = async(req, res) =>{
         res.json(e)
     }
 }
-
 
 productsCtlr.search = async (req, res) =>{
     try{
