@@ -11,19 +11,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLoggedInUser } from '../actions/userActions'
 import CustomerContainer from './CustomerContainer'
 import OrderContainer from './OrderContainer'
-import { startGetProducts } from '../actions/productActions'
-import { startGetCustomers } from '../actions/customerActions'
 import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 
 const Container = (props) =>{
 
     const dispatch = useDispatch()
-
-    useEffect(()=>{
-        dispatch(startGetProducts())
-        dispatch(startGetCustomers())
-    },[dispatch])
 
     const user = useSelector((state)=>{
         return state.user.data
