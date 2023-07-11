@@ -4,7 +4,6 @@ import EditProduct from './EditProduct'
 import { setEditId, startGetProducts, startRemoveProduct } from '../actions/productActions'
 import ModelComponent from './ModelComponent'
 import { setModal } from '../actions/userActions'
-import EditProduct from './EditProduct'
 
 const ProductsList = (props) =>{
     const [count, setCount] = useState(5)

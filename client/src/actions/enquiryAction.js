@@ -54,7 +54,7 @@ export const startAddEnquiry=(formData)=>{
     }
 }
 
-export const setGetEnquiryItems=()=>{
+export const startGetEnquiries=()=>{
     return (dispatch)=>{
         (async()=>{ 
             try{

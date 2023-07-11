@@ -1,11 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { setEnquiryEditId, setGetEnquiryItems, startRemoveEnquiry } from '../actions/enquiryAction'
+import { setEnquiryEditId, startGetEnquiries, startRemoveEnquiry } from '../actions/enquiryAction'
 import { toast } from 'react-hot-toast'
 import ModelComponent from './ModelComponent'
 import EditEnquiry from './EditEnquiry'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
-import EditEnquiry from './EditEnquiry'
 
 const EnquiryList=(props)=>{
   
@@ -15,7 +14,7 @@ const EnquiryList=(props)=>{
   const dispatch = useDispatch()
   
   useEffect(()=>{
-     dispatch(setGetEnquiryItems())
+     dispatch(startGetEnquiries())
      dispatch(startGetLoggedInUser())
   },[dispatch])
 

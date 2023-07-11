@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchComponent from './SearchComponent'
 import { setSearch } from '../actions/userActions'
-import { setGetEnquiryItems, startSearchEnquiry } from '../actions/enquiryAction'
+import { startGetEnquiries, startSearchEnquiry } from '../actions/enquiryAction'
 
 
 const EnquirySearch = (props) =>{
@@ -18,7 +18,7 @@ const EnquirySearch = (props) =>{
         if(data){
             dispatch(startSearchEnquiry(data))   
         }else{
-            dispatch(setGetEnquiryItems())
+            dispatch(startGetEnquiries())
         }
     }
 
