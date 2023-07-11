@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React,{useState} from "react"
 import Label from "./Label"
 import { useDispatch,useSelector } from "react-redux"
 import validator from "validator"
@@ -15,7 +15,7 @@ const EnquiryForm=(props)=>{
 
    const [name,setName] = useState(enquiry?.name ? enquiry?.name : '')
    const [mobile,setMobile] = useState(enquiry?.mobile ? enquiry?.mobile : '')
-   const [selectedOptions,setSelectedOptions] = useState(enquiry?.selectedOptions ? enquiry?.selectedOptions : [])
+   const [selectedOptions,setSelectedOptions] = useState(enquiry?.selectedOptions?.label ? enquiry?.selectedOptions?.label : [])
    const [items,setItems] = useState(enquiry?.items ? enquiry?.items : '')
    const [formErrors, setFormErrors] = useState({})
    const errors={}
@@ -31,7 +31,7 @@ const EnquiryForm=(props)=>{
    const handleMultiSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions)
     }
-
+   
     const handleValidator=()=>{
         if(validator.isEmpty(name)){
             errors.name = "Customer name is required"
@@ -81,8 +81,6 @@ const EnquiryForm=(props)=>{
 
     return(
         <div>
-            <h3 className="text-center">Enquiries</h3>
-            <br/>
             <form onSubmit={handleSubmit}>
             <Label text="Name"/> <br/>
             <input className="form-control" type="text" value={name} placeholder="Enter your name" onChange={(e)=>setName(e.target.value)}/>

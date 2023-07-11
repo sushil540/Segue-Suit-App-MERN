@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setEditId, setModal, startEditProduct } from '../actions/productActions'
+import { setEditId, startEditProduct } from '../actions/productActions'
 import ProductForm from './ProductForm'
+import { setModal } from '../actions/userActions'
 
 const EditProduct = (props) =>{
 

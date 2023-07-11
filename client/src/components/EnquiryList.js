@@ -4,6 +4,7 @@ import { setEnquiryEditId, setGetEnquiryItems, startRemoveEnquiry } from '../act
 import { toast } from 'react-hot-toast'
 import ModelComponent from './ModelComponent'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
+import EditEnquiry from './EditEnquiry'
 
 const EnquiryList=(props)=>{
   
@@ -113,7 +114,7 @@ const handleEdit=(id)=>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component={EnquiryList}/>
+            <ModelComponent Component={EditEnquiry}/>
         </div>
     )
 }

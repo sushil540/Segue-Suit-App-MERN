@@ -14,7 +14,7 @@ const AddEnquiry = (props) =>{
    
     return (
         <div>  
-            <h2 className="text-center"> Add Products </h2>
+            <h2 className="text-center"> Add Enquiries </h2>
             <EnquiryForm formSubmission={formSubmission}/>
         </div>
     )

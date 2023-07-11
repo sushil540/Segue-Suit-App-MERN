@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setEditId,startGetProducts, startRemoveProduct } from '../actions/productActions'
 import ModelComponent from './ModelComponent'
 import { setModal } from '../actions/userActions'
+import EditProduct from './EditProduct'
 
 const ProductsList = (props) =>{
     const [count, setCount] = useState(5)
@@ -94,7 +95,7 @@ const ProductsList = (props) =>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component ={ProductsList}/>
+            <ModelComponent Component ={EditProduct}/>
         </div>
     )
 }
