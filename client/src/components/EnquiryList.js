@@ -88,7 +88,7 @@ const handleEdit=(id)=>{
                 </thead>
                 <tbody>
                      {enquiry.slice(prevCount,count).map((ele)=>{
-                        return <tr>
+                        return <tr key={ele._id}>
                             <td>{ele.name}</td>
                             <td>{ele.mobile}</td>
                             <td onClick = {()=>{productDetails(ele.productIds)}}>{ele.productIds.length}</td>
