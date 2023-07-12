@@ -6,6 +6,7 @@ import { startAddOrder } from '../actions/orderActions'
 import OrderLineItems from './OrderLineItems'
 import OrderItemsDisplay from './OrderItemsDisplay'
 import { startGetStaff } from '../actions/staffActions'
+import { startGetCustomers } from '../actions/customerActions'
 
 const OrderForm = (props) =>{
     const [orderDate, setOrderDate] = useState('')
@@ -24,7 +25,10 @@ const OrderForm = (props) =>{
     const errors = {}
     const dispatch = useDispatch()
 
-    useEffect(()=>dispatch(startGetStaff()),[dispatch])
+    useEffect(()=>{
+        dispatch(startGetStaff())
+        dispatch(startGetCustomers())
+    },[dispatch])
 
     const [user, staffs, customers] = useSelector((state)=>{
         return [state.user.data, state.staff.data, state.customer.data]
@@ -77,6 +81,8 @@ const OrderForm = (props) =>{
         setOrderLineItems([...orderLineItems, obj])
     }
 
+    console.log("customers",customers)
+    
     const handleSubmit = (e)=>{
         e.preventDefault()
 
@@ -106,12 +112,13 @@ const OrderForm = (props) =>{
                 setPaymentMode('')
                 setIsFullyPaid(!isFullyPaid)
                 setNote('')
+                setStaffId('')
                 setOrderLineItems([])
         }
     }
 
     return (
-        <div className="card p-4 m-auto" style={{width:"50rem"}}>
+        <div className="card p-4" style={{width:"40rem"}}>
             <h2 className="m-auto">Add Orders</h2>
             <OrderItemsDisplay orderLineItems={orderLineItems} handleRemoveProduct={handleRemoveProduct} />
             <div className="p-4 gap-2" style={{border:"5px dotted rgba(230,230,230,4)"}}> 

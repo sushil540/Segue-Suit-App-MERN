@@ -21,9 +21,10 @@ const OrderItemsDisplay = (props) =>{
                     <h4> List of Selected Product(s) - {products.length} </h4>
                    {orderLineItems.map((ele=>{
                     return <div key={ele.productId}
-                                className="card p-2 d-flex justify-content-between align-items-end" style={{width:"10rem"}}>
-                            <p>{findProduct(ele.productId)}</p>
-                            <button className="btn btn-transparent border-0" onClick={()=>removeProduct(ele.productId)}>&#10006;</button>
+                                className="card p-2 d-flex justify-content-between align-items-end" 
+                                style={{width:"10rem"}}>
+                            <p className="text-center">{findProduct(ele.productId)}</p>
+                            <button className="btn btn-transparent border-0 m-2" onClick={()=>removeProduct(ele.productId)}>&#10006;</button>
                     </div>
                     }))}
                 </div>)

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import validator from 'validator'
 import Label from './Label'
+import { startGetProducts } from '../actions/productActions'
 
 const OrderLineItems = (props) =>{
     const { submitProductForm , handleToggle} = props
@@ -11,6 +12,12 @@ const OrderLineItems = (props) =>{
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
     
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(startGetProducts()) 
+    },[])
+
     const products = useSelector((state)=>{
         return state.product.data
     })
@@ -82,7 +89,7 @@ const OrderLineItems = (props) =>{
                         onChange={(e)=>setRemarks(e.target.value)}
                 /><br/> 
                     <input 
-                        className="btn btn-primary"
+                        className="btn btn-primary my-2" 
                         type="submit"
                         value="Add"/>
                 </form>

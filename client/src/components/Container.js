@@ -31,7 +31,7 @@ const Container = (props) =>{
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary">
-                <Link className="navbar-brand" to="/">Segue Suit</Link>
+                <h2 className="navbar-brand">Segue Suit</h2>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
@@ -39,8 +39,7 @@ const Container = (props) =>{
                             <Link className="nav-link" to="/products">Product</Link>
                             <Link className="nav-link" to="/customers">Customer</Link>
                             <Link className="nav-link" to="/enquiries">Enquiry</Link>
-                            <Link className="nav-link" to="/orders">Order</Link>
-                             
+                            <Link className="nav-link" to="/orders">Order</Link> 
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
