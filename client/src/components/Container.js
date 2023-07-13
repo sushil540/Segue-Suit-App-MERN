@@ -60,7 +60,7 @@ const Container = (props) =>{
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
-            <ProtectedRoute path='/staffs' component={StaffContainer} exact={true} />
+            <ProtectedRoute path='/staffs' permitted={user?.role} component={StaffContainer} exact={true} />
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
         </div>
     )

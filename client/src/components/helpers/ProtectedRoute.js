@@ -1,22 +1,25 @@
-import React, { Component } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { Redirect, Route } from 'react-router-dom/cjs/react-router-dom.min'
 
-const ProtectedRoute = ({Component:component, ...rest}) =>{
-    const user = useSelector((state)=>{
-        return state.user.data
-    })
-    console.log("user?.role",user?.role)
-
+const ProtectedRoute = ({component:Component, ...rest}) =>{
+    const { permitted, path} = rest
     return (
         <Route 
             {...rest}
-            render={(props)=>{
-                return localStorage.getItem('token') && user?.role === 'admin' ? (
-                    <Component/>
-                ) : (
-                    <Redirect to={{pathname:"/dashboard"}}/>
-                )
+            render = {(props)=>{
+                if(path === "/staffs"){
+                    return (
+                        localStorage.getItem("token") && permitted === "admin" ? ( 
+                            <Component {...props}/>
+                        ) : (
+                            <Redirect
+                                to = {{
+                                    pathname:"/dashboard"
+                                }}
+                            />
+                        )
+                    )
+                }
         }}/> 
     )
 }
