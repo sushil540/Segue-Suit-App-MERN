@@ -8,6 +8,7 @@ const Register = (props) =>{
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [mobile, setMobile] = useState('')
     const [formErrors, setFormErrors] = useState({})
     const errors = {}
@@ -32,6 +33,12 @@ const Register = (props) =>{
 
         if(validator.isEmpty(password)){
             errors.password = "Password is required"
+        }
+        
+        if(validator.isEmpty(confirmPassword)){
+            errors.confirmPassword = "Confirm password is required"
+        }else if(password !== confirmPassword){
+            errors.confirmPassword = "Password must match"
         }
         
         if(validator.isEmpty(mobile)){
@@ -104,6 +111,16 @@ const Register = (props) =>{
                     />
                     {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
                     <br/>  
+                    <Label text="Confirm Password"/><br/>
+                    <input 
+                        className="form-control"
+                        placeholder="Confirm password*"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e)=>setConfirmPassword(e.target.value)}
+                    />
+                    {formErrors?.confirmPassword && <span className="text-danger">{formErrors?.confirmPassword}</span>}
+                    <br/>
                     <Label text="Mobile"/><br/>
                     <input 
                         className="form-control"
