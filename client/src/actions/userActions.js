@@ -55,6 +55,7 @@ export const startRegisterUser = (formData, props)=>{
                     dispatch(setErrors(response.data.errors.email.message.split(". ")[0]))
                 }else{
                     props.history.push('/login')
+                    toast.success("Registered Successfully")
                 }
             }catch(e){
                 alert(e)

@@ -76,7 +76,7 @@ export const startEditCustomer = (formData) =>{
         (async ()=>{
             try{
                 const id = getState().customer.editId
-                const response = await axios.put(`/api/customers/${id}`, formData, {headers:{"Authorization":localStorage.getItem('token')}})
+                const response = await axios.put(`/api/customers/${id}`, formData,{headers:{"Authorization":localStorage.getItem('token')}})
                 console.log("edit cust actioin",response.data)
                 if(!response.data.hasOwnProperty('errors')){
                     dispatch(editCustomers(response.data))
