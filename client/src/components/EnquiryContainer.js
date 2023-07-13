@@ -15,14 +15,14 @@ const EnquiryContainer = (props) =>{
     }
 
     return (
-        <div className="row" style={editId ? customStyle : {}}>
+        <div className="row " style={editId ? customStyle : {}}>
             <div className="col-md-4 border-end border-5">
-                <EnquirySearch/>
-                <hr/>
                 <AddEnquiry/>
             </div>
             <div className="col-md-8">
-               <EnquiryList/>
+              <EnquirySearch/>
+              <hr/>
+              <EnquiryList/>
             </div>
         </div>
     )
