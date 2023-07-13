@@ -1,4 +1,5 @@
 import axios from "../config/axios"
+import { toast } from 'react-hot-toast'
 
 export const SET_ENQUIRY = "SET_ENQUIRY"
 export const GET_ENQUIRY = "GET_ENQUIRY"
@@ -100,7 +101,7 @@ export const setEnquiriesEdit= (enquiry) =>{
                 const editId = getState().enquiry.editId
                 const response = await axios.put(`/api/enquiries/${editId}`,enquiry,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(updateEnquiries(response.data))
-                dispatch(setEnquiryEditId(''))
+                toast.success("Successfully Edited")
             }catch(e){
                 alert(e)
             }

@@ -1,26 +1,50 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import Label from "./Label"
 import { useDispatch,useSelector } from "react-redux"
 import validator from "validator"
 import Select from 'react-select'
 import { startAddEnquiry } from "../actions/enquiryAction"
+import { startGetProducts } from "../actions/productActions"
 
 
 const EnquiryForm=(props)=>{
     const {formSubmission} = props
 
+    const dispatch= useDispatch()
+
+    useEffect(()=>{
+        dispatch(startGetProducts())
+    },[dispatch])
+
     const enquiry = useSelector((state)=>{
         return state.enquiry.data.find((ele)=>ele?._id === state.enquiry?.editId)
     })
+    console.log('enquiry',enquiry)
+    const productList = useSelector((state)=>{
+        return state.product.data
+    })
+    console.log('productList',productList)
+
+      const findProducts = (ids) =>{
+        const productData = ids.map((ele)=>{
+            const data = productList.find((e)=>{
+                return ele === e._id
+            })
+            if(data) return {value:data._id,label:data.name}
+        })
+        return productData
+    }
+
+  
 
    const [name,setName] = useState(enquiry?.name ? enquiry?.name : '')
    const [mobile,setMobile] = useState(enquiry?.mobile ? enquiry?.mobile : '')
-   const [selectedOptions,setSelectedOptions] = useState(enquiry?.selectedOptions?.label ? enquiry?.selectedOptions?.label : [])
-   const [items,setItems] = useState(enquiry?.items ? enquiry?.items : '')
+   const [selectedOptions,setSelectedOptions] = useState(enquiry?.productIds.length > 0 ? findProducts(enquiry?.productIds) : [])
+   const [items,setItems] = useState(enquiry?.status ? enquiry?.status : '')
    const [formErrors, setFormErrors] = useState({})
    const errors={}
 
-   const dispatch=useDispatch()
+//    const dispatch=useDispatch()
 
    const products = useSelector((state)=>{
     return state.product.data.map((ele)=>{
