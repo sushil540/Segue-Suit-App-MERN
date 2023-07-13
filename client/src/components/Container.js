@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, Route } from 'react-router-dom/cjs/react-router-dom.min'
 import Register from './Register'
 import Login from './Login'
@@ -13,6 +13,7 @@ import CustomerContainer from './CustomerContainer'
 import OrderContainer from './OrderContainer'
 import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
+import StaffContainer from './StaffContainer'
 
 const Container = (props) =>{
 
@@ -39,7 +40,8 @@ const Container = (props) =>{
                             <Link className="nav-link" to="/products">Product</Link>
                             <Link className="nav-link" to="/customers">Customer</Link>
                             <Link className="nav-link" to="/enquiries">Enquiry</Link>
-                            <Link className="nav-link" to="/orders">Order</Link> 
+                            <Link className="nav-link" to="/orders">Order</Link>
+                            <Link className="nav-link" to="/staffs">Staff</Link> 
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
@@ -50,13 +52,14 @@ const Container = (props) =>{
                     ) }                    
                 </div>
             </div>     
-
+                        
             <Route path="/register" component={Register} exact={true}/>
             <Route path="/login" component={Login} exact={true}/>
             <PrivateRoute path="/products" component={ProductContainer} exact={true}/>
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
+            <PrivateRoute path='/staffs' component={StaffContainer} exact={true} />
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
         </div>
     )
