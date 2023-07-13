@@ -8,7 +8,7 @@ const OrdersList = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetOrders())
-    },[])
+    },[dispatch])
 
     const orders = useSelector((state)=>{
         return state.order.data
