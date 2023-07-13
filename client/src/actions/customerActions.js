@@ -50,7 +50,7 @@ export const startGetCustomers = () =>{
     return (dispatch) =>{
         (async ()=>{
             try{
-                const response = await axios.get('/api/customers',{headers:{"Authorization":localStorage.getItem('token')}})
+                const response = await axios.get('/api/customers', {headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(setCustomer(response.data))
             }catch(e){  
                 alert(e)
@@ -76,7 +76,7 @@ export const startEditCustomer = (formData) =>{
         (async ()=>{
             try{
                 const id = getState().customer.editId
-                const response = await axios.put(`/api/customers/${id}`, formData,{headers:{"Authorization":localStorage.getItem('token')}})
+                const response = await axios.put(`/api/customers/${id}`, formData, {headers:{"Authorization":localStorage.getItem('token')}})
                 console.log("edit cust actioin",response.data)
                 if(!response.data.hasOwnProperty('errors')){
                     dispatch(editCustomers(response.data))
@@ -102,7 +102,7 @@ export const startRemoveCustomer = (id) =>{
     return (dispatch) =>{
         (async ()=>{
             try{
-                const response = await axios.delete(`/api/customers/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                const response = await axios.delete(`/api/customers/${id}`, {headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(removeCustomer(response.data))
                 toast.success('Customer Removed Successfully.',{
                     style: {
@@ -126,7 +126,7 @@ export const startCustomerSearch = (search) =>{
     return (dispatch) =>{
         (async () =>{
             try{
-                const response = await axios.get(`/api/customers/search?search=${search}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                const response = await axios.get(`/api/customers/search?search=${search}`, {headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(setCustomer(response.data))
             }catch(e){
                 console.log(e)

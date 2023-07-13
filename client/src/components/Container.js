@@ -14,6 +14,7 @@ import OrderContainer from './OrderContainer'
 import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 import StaffContainer from './StaffContainer'
+import ProtectedRoute from './helpers/ProtectedRoute'
 
 const Container = (props) =>{
 
@@ -41,7 +42,7 @@ const Container = (props) =>{
                             <Link className="nav-link" to="/customers">Customer</Link>
                             <Link className="nav-link" to="/enquiries">Enquiry</Link>
                             <Link className="nav-link" to="/orders">Order</Link>
-                            <Link className="nav-link" to="/staffs">Staff</Link> 
+                            {user?.role === "admin" && <Link className="nav-link" to="/staffs">Staff</Link> }
                             <Link className="nav-link" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
@@ -59,7 +60,7 @@ const Container = (props) =>{
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
-            <PrivateRoute path='/staffs' component={StaffContainer} exact={true} />
+            <ProtectedRoute path='/staffs' component={StaffContainer} exact={true} />
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
         </div>
     )
