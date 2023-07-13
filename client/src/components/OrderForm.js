@@ -25,14 +25,14 @@ const OrderForm = (props) =>{
     const errors = {}
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        dispatch(startGetStaff())
-        dispatch(startGetCustomers())
-    },[dispatch])
-
     const [user, staffs, customers] = useSelector((state)=>{
         return [state.user.data, state.staff.data, state.customer.data]
     })
+
+    useEffect(()=>{
+        user?.role === "admin" && dispatch(startGetStaff())
+        dispatch(startGetCustomers())
+    },[dispatch])
        
     const services = [{id:1,title:'Installation'},{id:2,title:'Complaint'},{id:3,title:'Maintenance'}]
 

@@ -63,7 +63,7 @@ ordersCtlr.modifyOrdersLineItems = async(req, res)=>{
 ordersCtlr.search = async (req,res) =>{
     try{
         const { text } = req.query
-        const searchItems = await Order.find({title :{$regex:text,$options:"i"}})
+        const searchItems = await Order.find({title:{$regex:text,$options:"i"}})
         res.json(searchItems)
     }catch(e){
         res.json(e)

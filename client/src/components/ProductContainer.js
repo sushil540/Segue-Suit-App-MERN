@@ -18,11 +18,11 @@ const ProductContainer = (props) =>{
     return (
         <div className="row" style={editId ? customStyle : {}}>
             <div className="col-md-4 border-end border-5">
-                <ProductSearch/>
-                <hr/>
                 <AddProduct/>
             </div>
             <div className="col-md-8">
+                <ProductSearch/>
+                <hr/>
                 <ProductsList/>
             </div>
         </div>
