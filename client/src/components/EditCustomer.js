@@ -16,7 +16,7 @@ const EditCustomer = (props) =>{
        return ()=>{
             dispatch(setEditId(''))
        } 
-    },[])
+    },[dispatch])
 
     const formSubmittion = (formData) =>{
         dispatch(startEditCustomer(formData))

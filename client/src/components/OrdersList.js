@@ -15,17 +15,20 @@ const OrdersList = (props) =>{
         return state.order.data
     })
 
+    const data = orders.map((ele)=>{
+        return {
+            Title:ele.title,
+            OrderDate:ele.orderDate.split('T')[0],
+            IsFullyPaid:ele.isFullyPaid ? "✅" : "❌",
+            Total:ele.total,
+            Edit:<button className="btn btn-secondary">Edit</button>,
+            Remove:<button className="btn btn-danger">Remove</button>
+        }
+    })
+
     return (
         <div> 
-           {orders.length > 0  && <CustomTable 
-                data={orders.map((ele)=>{
-                    return {
-                        title:ele.title,
-                        orderDate:ele.orderDate.split('T')[0],
-                        isFullyPaid:ele.isFullyPaid ? "✅" : "❌",
-                        total:ele.total
-                    }
-                })} />}
+           {orders.length > 0  && <CustomTable data={data} />}
         </div>
     )
 }
