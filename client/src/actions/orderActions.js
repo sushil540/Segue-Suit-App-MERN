@@ -43,3 +43,16 @@ export const startGetOrders = () =>{
         })()
     }
 }
+
+export const startSearchOrders = (search) =>{
+    return (dispatch) =>{
+        (async ()=>{
+            try{
+                const response = await axios.get(`/api/orders/search?search=${search}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                dispatch(setOrders(response.data))
+            }catch(e){
+                alert(e)
+            }
+        })()
+    }
+}

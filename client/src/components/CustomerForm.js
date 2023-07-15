@@ -34,7 +34,7 @@ const CustomerForm = (props) => {
     const dispatch = useDispatch()
  
     const [products, customerError] = useSelector((state)=>{
-        return [state.product.data.map((ele)=>{
+        return [state.product?.data.map((ele)=>{
             return {value:ele._id,label:ele.name}
         }), state.customer.errors]
     })    
