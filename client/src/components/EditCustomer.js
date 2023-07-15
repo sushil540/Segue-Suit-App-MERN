@@ -14,9 +14,9 @@ const EditCustomer = (props) =>{
 
     useEffect(()=>{
        return ()=>{
-        dispatch(setEditId(''))
+            dispatch(setEditId(''))
        } 
-    },[])
+    },[dispatch])
 
     const formSubmittion = (formData) =>{
         dispatch(startEditCustomer(formData))

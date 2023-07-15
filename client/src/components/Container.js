@@ -33,29 +33,30 @@ const Container = (props) =>{
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary">
-                <h2 className="navbar-brand">Segue Suit</h2>
+                <Link className="navbar-brand nav-link">Segue Suit</Link>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
-                            <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                            <Link className="nav-link" to="/products">Product</Link>
-                            <Link className="nav-link" to="/customers">Customer</Link>
-                            <Link className="nav-link" to="/enquiries">Enquiry</Link>
-                            <Link className="nav-link" to="/orders">Order</Link>
-                            {user?.role === "admin" && <Link className="nav-link" to="/staffs">Staff</Link> }
-                            <Link className="nav-link" onClick={handleLogout}>logout</Link>
+                            <Link className="nav-link fw-bold" to="/dashboard">Dashboard</Link>
+                            <Link className="nav-link fw-bold" to="/products">Product</Link>
+                            <Link className="nav-link fw-bold" to="/customers">Customer</Link>
+                            <Link className="nav-link fw-bold" to="/enquiries">Enquiry</Link>
+                            <Link className="nav-link fw-bold" to="/orders">Order</Link>
+                            {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs">Staff</Link> }
+                            <Link className="nav-link fw-bold" to="/" onClick={handleLogout}>logout</Link>
                         </>
                     ) : (
                         <>
-                            <Link className="nav-link" to="/register">Register</Link>
-                            <Link className="nav-link" to="/login">Login</Link>
+                            <Link className="nav-link fw-bold" to="/register">Register</Link>
+                            <Link className="nav-link fw-bold" to="/">Login</Link>
                         </>
                     ) }                    
                 </div>
             </div>     
-                        
+
+            {/* <Route path="/" component={} exact={true}/>     HOME       */}
+            <Route path="/" component={Login} exact={true}/>
             <Route path="/register" component={Register} exact={true}/>
-            <Route path="/login" component={Login} exact={true}/>
             <PrivateRoute path="/products" component={ProductContainer} exact={true}/>
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
