@@ -1,7 +1,8 @@
-import { ADD_ORDERS, SET_ORDERS } from "../actions/orderActions"
+import { ADD_ORDERS, GET_ORDERSDATE, SET_ORDERS } from "../actions/orderActions"
 
 const initialOrderState = {
-    data:[]
+    data:[],
+    monthData:[]
 }
 
 export const orderReducer = (state = initialOrderState, action) =>{
@@ -11,6 +12,9 @@ export const orderReducer = (state = initialOrderState, action) =>{
         }
         case SET_ORDERS : {
             return {...state, data:action.payload}
+        }
+        case GET_ORDERSDATE : {
+            return {...state,monthData:action.payload}
         }
         default:{
             return {...state}
