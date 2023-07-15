@@ -70,4 +70,37 @@ ordersCtlr.search = async (req,res) =>{
     }
 }
 
+ordersCtlr.detailsByDate = async (req,res)=>{
+    try{
+        const result = await Order.aggregate([
+            {
+              $group: {
+                _id: {
+                  year: { $year: "$orderDate" },
+                  month: { $month: "$orderDate" }
+                },
+                orderCount: { $sum: 1 }
+              }
+            },
+            {
+              $sort: {
+                "_id.year": 1,
+                "_id.month": 1
+              }
+            },
+            {
+              $project: {
+                _id: 0,
+                year: "$_id.year",
+                month: "$_id.month",
+                orderCount: 1
+              }
+            }
+          ])
+        res.json(result)
+    }catch(e){
+        res.json(e)
+    }
+}
+
 module.exports = ordersCtlr

@@ -134,6 +134,11 @@ router.get('/api/orders/search',authenticateUser, (req, res, next)=>{
     next()
 },authorizeUser, ordersCtlr.search)
 
+router.get('/api/ordersDate', authenticateUser, (req, res, next)=>{
+    req.permittedRole = ['admin','staff']
+    next()
+},authorizeUser, ordersCtlr.detailsByDate)
+
 router.put('/api/orders/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()

@@ -4,6 +4,7 @@ import { startGetCustomers } from '../actions/customerActions'
 import { startGetEnquiries } from '../actions/enquiryAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import LineChart from './LineChart'
 
 const Dashboard = (props) =>{
 
@@ -66,8 +67,10 @@ const Dashboard = (props) =>{
                     </div>
                 </div>    
             </div>
+            <LineChart/>
         </div>
     )
+    
 }
 
 export default withRouter(Dashboard)
