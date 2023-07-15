@@ -14,7 +14,7 @@ const EditCustomer = (props) =>{
 
     useEffect(()=>{
        return ()=>{
-        dispatch(setEditId(''))
+            dispatch(setEditId(''))
        } 
     },[])
 

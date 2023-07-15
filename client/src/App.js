@@ -12,7 +12,7 @@ const App = (props) => {
     if(localStorage.getItem('token')){
         dispatch(startGetLoggedInUser())
     }else{
-        <Redirect to={{pathname:"/login"}}/>
+        <Redirect to={{pathname:"/"}}/>
     }
   },[dispatch]) 
 
