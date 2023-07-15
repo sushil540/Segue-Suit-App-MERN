@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startGetOrders } from '../actions/orderActions'
+import CustomTable from './CustomTable'
 
 const OrdersList = (props) =>{
 
@@ -14,11 +15,17 @@ const OrdersList = (props) =>{
         return state.order.data
     })
 
-    console.log("orders",orders)
-
     return (
-        <div>
-            {/* finish table thing */}
+        <div> 
+           {orders.length > 0  && <CustomTable 
+                data={orders.map((ele)=>{
+                    return {
+                        title:ele.title,
+                        orderDate:ele.orderDate.split('T')[0],
+                        isFullyPaid:ele.isFullyPaid ? "✅" : "❌",
+                        total:ele.total
+                    }
+                })} />}
         </div>
     )
 }

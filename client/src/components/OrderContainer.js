@@ -5,10 +5,10 @@ import OrdersList from './OrdersList'
 const OrderContainer = (props) =>{
     return (
         <div className="row">
-            <div>
+            <div className="col-md-6">
                 <OrderForm/>
             </div>
-            <div>
+            <div className="col-md-6">
                 <OrdersList/>
             </div>
         </div>
