@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import CustomerForm from './CustomerForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEditId, startEditCustomer } from '../actions/customerActions'
+import { setCustomerEditId, startEditCustomer } from '../actions/customerActions'
 import { setModal } from '../actions/userActions'
 
 const EditCustomer = (props) =>{
@@ -14,19 +14,19 @@ const EditCustomer = (props) =>{
 
     useEffect(()=>{
        return ()=>{
-            dispatch(setEditId(''))
+            dispatch(setCustomerEditId(''))
        } 
     },[dispatch])
 
     const formSubmission = (formData) =>{
         dispatch(startEditCustomer(formData))
-        dispatch(setEditId(''))
+        dispatch(setCustomerEditId(''))
         dispatch(setModal(!modal))
     }
 
     return (
         <div>  
-            <h2> Edit Customer </h2>
+            <h2 className="text-center"> Edit Customer </h2>
             <CustomerForm formSubmission={formSubmission}/>
         </div>
     )

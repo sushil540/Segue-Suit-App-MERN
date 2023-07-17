@@ -1,29 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import Label from './Label'
 import validator from 'validator'
 import { setErrors } from '../actions/customerActions'
+import { startGetProducts } from '../actions/productActions'
 
 const CustomerForm = (props) => {
     const { formSubmission }  = props
 
-    const [customer, product] = useSelector((state)=>{
-        return [state.customer?.data.find((ele)=>ele._id === state.customer?.editId), state.product?.data]
-    })
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(startGetProducts())
+    },[dispatch])
+
+    
+    const [customer, products, customerError] = useSelector((state)=>{
+        return [state.customer?.data.find((ele)=>ele?._id === state.customer?.editId), state.product.data.map((ele)=>{
+            return {value:ele._id,label:ele.name}
+        }), state.customer?.errors]
+    })    
     
     const findProducts = (ids) =>{
-        console.log("ids",ids)
-        const products = ids.map((ele)=>{
-            const data = product.find((e)=>{
-                return ele === e._id
+        const productNames = ids.map((ele)=>{
+            const data = products.find((e)=> {
+                return ele === e.value
             })
-            if(data) return {value:data._id,label:data.name}
+            return data
         })
-        return products 
+        return productNames 
     }
-
-    // console.log(customer.productIds)//find products
 
     const [name, setName] = useState(customer?.name ? customer?.name : '')
     const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '')
@@ -31,14 +38,6 @@ const CustomerForm = (props) => {
     const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : [])
     const [formErrors, setFormErrors] = useState({})
     const errors = {}   
-
-    const dispatch = useDispatch()
- 
-    const [products, customerError] = useSelector((state)=>{
-        return [state.product?.data.map((ele)=>{
-            return {value:ele._id,label:ele.name}
-        }), state.customer.errors]
-    })    
 
     const handleValidator = () =>{
         if(validator.isEmpty(name)){
