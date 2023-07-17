@@ -59,7 +59,7 @@ export const startGetCustomers = () =>{
     }
 }
 
-export const setEditId = (id) =>{
+export const setCustomerEditId = (id) =>{
     return {
         type:SET_CUSTOMER_EDITID,
         payload:id

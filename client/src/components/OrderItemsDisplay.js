@@ -1,16 +1,21 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { startGetProducts } from '../actions/productActions'
 
 const OrderItemsDisplay = (props) =>{
     const { orderLineItems , handleRemoveProduct} = props
 
-    console.log("orderLineItems",orderLineItems)
- 
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(startGetProducts())
+    },[])
+    
     const products = useSelector((state)=>{
         return state.product.data
     })
 
-    const findProduct = (id)=>products?.find((ele)=>ele?._id === id)
+    const findProduct = (id)=>products?.find((ele)=>ele?._id === id)?.name
 
     const removeProduct = (id) =>{
         handleRemoveProduct(id)
@@ -24,7 +29,7 @@ const OrderItemsDisplay = (props) =>{
                 return <div key={ele?.productId}
                             className="card p-2 d-flex justify-content-between align-items-end" 
                             style={{width:"8rem"}}>
-                        <h4 className="text-center">{findProduct(ele?.productId)?.name }</h4>
+                        <h4 className="text-center">{findProduct(ele?.productId)}</h4>
                         <button className="btn btn-transparent border-0 m-2" onClick={()=>removeProduct(ele.productId)}>&#10006;</button>
                 </div>
                 }))}

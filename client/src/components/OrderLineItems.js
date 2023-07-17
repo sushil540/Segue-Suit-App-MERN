@@ -37,6 +37,7 @@ const OrderLineItems = (props) =>{
 
     const handleProductSubmit = (e) =>{
         e.preventDefault()
+        
         addProductValidation()
 
         if(Object.keys(errors).length === 0){

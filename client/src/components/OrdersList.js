@@ -14,8 +14,8 @@ const OrdersList = (props) =>{
         dispatch(startGetOrders())
     },[dispatch])
 
-    const [orders, modal] = useSelector((state)=>{
-        return [state.order.data, state.user.modal]
+    const [user, orders, modal] = useSelector((state)=>{
+        return [state.user.data, state.order.data, state.user.modal]
     })
     
     const handleEdit = (id) =>{
@@ -34,7 +34,7 @@ const OrdersList = (props) =>{
             IsFullyPaid:ele.isFullyPaid ? "✅" : "❌",
             Total:ele.total,
             Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>Edit</button>,
-            Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>Remove</button>
+            Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>Remove</button>
         }
     })
 

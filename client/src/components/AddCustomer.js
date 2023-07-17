@@ -7,14 +7,14 @@ const AddCustomer = (props) =>{
 
     const dispatch = useDispatch()
 
-    const formSubmittion = (formData) =>{
+    const formSubmission = (formData) =>{
         dispatch(startAddCustomer(formData))        
     }
     
     return (
         <div>
             <h2 className="text-center">Add Customer</h2>
-            <CustomerForm formSubmittion={formSubmittion}/>
+            <CustomerForm formSubmission={formSubmission}/>
         </div>
     )
 }
