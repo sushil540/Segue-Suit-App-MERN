@@ -6,7 +6,7 @@ import validator from 'validator'
 import { setErrors } from '../actions/customerActions'
 
 const CustomerForm = (props) => {
-    const { formSubmittion }  = props
+    const { formSubmission }  = props
 
     const [customer, product] = useSelector((state)=>{
         return [state.customer?.data.find((ele)=>ele._id === state.customer?.editId), state.product?.data]
@@ -79,7 +79,7 @@ const CustomerForm = (props) => {
                 productIds:selectedOptions.map((ele=>ele.value))
             }
 
-            formSubmittion(formData)
+            formSubmission(formData)
             
             setName('')
             setMobile('')

@@ -18,7 +18,7 @@ const EditCustomer = (props) =>{
        } 
     },[dispatch])
 
-    const formSubmittion = (formData) =>{
+    const formSubmission = (formData) =>{
         dispatch(startEditCustomer(formData))
         dispatch(setEditId(''))
         dispatch(setModal(!modal))
@@ -27,7 +27,7 @@ const EditCustomer = (props) =>{
     return (
         <div>  
             <h2> Edit Customer </h2>
-            <CustomerForm formSubmittion={formSubmittion}/>
+            <CustomerForm formSubmission={formSubmission}/>
         </div>
     )
 }
