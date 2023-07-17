@@ -77,10 +77,19 @@ export const startEditCustomer = (formData) =>{
             try{
                 const id = getState().customer.editId
                 const response = await axios.put(`/api/customers/${id}`, formData, {headers:{"Authorization":localStorage.getItem('token')}})
-                console.log("edit cust actioin",response.data)
                 if(!response.data.hasOwnProperty('errors')){
                     dispatch(editCustomers(response.data))
-                    toast.success("Customer Edit Successfully")
+                    toast.success('Customer Edited Successfully.',{
+                        style: {
+                          border: '1px solid #1D5B79',
+                          padding: '16px',
+                          color: '#4D455D',
+                        },
+                        iconTheme: {
+                          primary: '#1D5B79',
+                          secondary: '#FFFAEE',
+                        },
+                      })
                 }else{
                     toast.error(response.data.errors.mobile.message)
                 }

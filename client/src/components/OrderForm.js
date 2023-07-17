@@ -131,12 +131,16 @@ const OrderForm = (props) =>{
                     orderLineItems={orderLineItems}
                     handleToggle={handleToggle} />}
                 {!toggle &&  
-                    <span className="d-flex align-items-center gap-2">
+                    <span className="d-flex align-items-center gap-2 my-2">
                         <Label text="Products"/>
                         <button 
                             type="button"
-                            className="btn btn-primary" 
-                            onClick={handleToggle}>+</button>
+                            className="btn btn-light" 
+                            onClick={handleToggle}>
+                                <span className="material-symbols-outlined">
+                                    add
+                                </span>
+                            </button>
                     </span>
                 }
                 {formErrors?.orderLineItems && <span className="text-danger">{formErrors?.orderLineItems}</span>}

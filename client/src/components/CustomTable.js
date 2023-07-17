@@ -32,18 +32,22 @@ const CustomTable = (props) =>{
                         tableData={tableData}
                         tableHead={tableHead}/>
             </table>
-            {data?.length > 5 && <div className="d-flex gap-2"> 
+            {data?.length > 5 && <div className="d-flex gap-1"> 
                 <button 
                     disabled={prevCount <= 0} 
                     onClick={preCount}
-                    className="btn btn-secondary">
-                    prev
+                    className="btn btn-light">
+                    <span className="material-symbols-outlined">
+                        arrow_back_ios
+                    </span>
                 </button>
                 <button 
                     disabled={data.length <= count} 
                     onClick={handleCount}
-                    className="btn btn-primary">
-                    next
+                    className="btn btn-light">
+                    <span className="material-symbols-outlined">
+                        arrow_forward_ios
+                    </span>
                 </button>
              </div>}
         </div>
