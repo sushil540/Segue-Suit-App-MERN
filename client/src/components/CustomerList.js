@@ -27,7 +27,7 @@ const CustomerList = (props) =>{
         dispatch(startRemoveCustomer(id))
     }
 
-    const tableData = customers.map((ele)=>{
+    const data = customers.map((ele)=>{
         return {
             Name:ele.name,
             Mobile:ele.mobile,
@@ -39,7 +39,8 @@ const CustomerList = (props) =>{
 
     return (    
         <div>
-            {tableData.length > 0 && <CustomTable data={tableData}/>}
+            <h2 className="text-center"> Listing Customer - {data.length}</h2>
+            {data.length > 0 && <CustomTable data={data}/>}
             <ModelComponent component={EditCustomer} />
         </div>
     )

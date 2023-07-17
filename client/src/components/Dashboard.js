@@ -22,20 +22,19 @@ const Dashboard = (props) =>{
         return [state.customer.data, state.product.data, state.enquiry.data, state.order.data]
     })
 
-    const handleClickOrders = (e) =>{
-        console.log(e.target.name)
+    const handleClickOrders = () =>{
         props.history.push('/orders')
     }
 
-    const handleClickEnquiries = (e) =>{
+    const handleClickEnquiries = () =>{
         props.history.push('/enquiries')
     }
 
-    const handleClickCustomers = (e) =>{
+    const handleClickCustomers = () =>{
         props.history.push('/customers')
     }
     
-    const handleClickProducts = (e) =>{
+    const handleClickProducts = () =>{
         props.history.push('/products')
     }
     return (

@@ -40,6 +40,7 @@ const OrdersList = (props) =>{
 
     return (
         <div> 
+            <h2 className="text-center"> Listing Orders - {data.length}</h2>
            {orders.length > 0  && <CustomTable data={data} />}
            <ModelComponent component={EditOrders}/>
         </div>

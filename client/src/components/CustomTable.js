@@ -11,17 +11,18 @@ const CustomTable = (props) =>{
     const tableHead = Object.keys(data[0])
 
     const preCount = () =>{
+        setPrevCount(prevCount - 5)
         setCount(count - 5)
-        setPrevCount(count - count)
     }
     
     const handleCount = () =>{
+        setPrevCount(prevCount + 5)
         setCount(count + 5)
-        setPrevCount(prevCount + count)
     }
 
     const tableData = data?.slice(prevCount, count) 
     
+    console.log("prevCount, count",prevCount, count)
     return (
         <div>
             <table className="table">
@@ -34,7 +35,7 @@ const CustomTable = (props) =>{
             </table>
             {data?.length >= 5 && <div className="d-flex gap-2"> 
                 <button 
-                    disabled={data?.length >= count} 
+                    disabled={prevCount <= 0} 
                     onClick={preCount}
                     className="btn btn-secondary">
                     prev
