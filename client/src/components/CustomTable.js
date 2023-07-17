@@ -5,14 +5,10 @@ import TableBody from './TableBody'
 
 const CustomTable = (props) =>{
     const { data } = props
-    const [count, setCount] = useState(5)
     const [prevCount, setPrevCount] = useState(0)
+    const [count, setCount] = useState(5)
 
     const tableHead = Object.keys(data[0])
-
-    const headData = data.map((ele)=>{
-        
-    })
 
     const preCount = () =>{
         setCount(count - 5)
@@ -24,7 +20,7 @@ const CustomTable = (props) =>{
         setPrevCount(prevCount + count)
     }
 
-    const tableData = data?.slice(prevCount,count) 
+    const tableData = data?.slice(prevCount, count) 
     
     return (
         <div>
@@ -36,15 +32,15 @@ const CustomTable = (props) =>{
                         tableData={tableData}
                         tableHead={tableHead}/>
             </table>
-            {tableData?.length >= 5 && <div className="d-flex gap-2"> 
+            {data?.length >= 5 && <div className="d-flex gap-2"> 
                 <button 
-                    disabled={tableData?.length >= count} 
+                    disabled={data?.length >= count} 
                     onClick={preCount}
                     className="btn btn-secondary">
                     prev
                 </button>
                 <button 
-                    disabled={tableData.length < count} 
+                    disabled={data.length < count} 
                     onClick={handleCount}
                     className="btn btn-primary">
                     next
