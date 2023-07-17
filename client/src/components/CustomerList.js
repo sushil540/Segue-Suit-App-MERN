@@ -33,7 +33,7 @@ const CustomerList = (props) =>{
             Mobile:ele.mobile,
             Address:ele.address,
             Products:ele.productIds.length,
-            Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}><FontAwesomeIcon icon={faPenToSquare} bounce style={{"--fa-primary-color": "#195e6b", "--fa-secondary-color": "#303fab",}} /></button>,
+            Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>Edit</button>,
             Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>Remove</button>
         }})
 
