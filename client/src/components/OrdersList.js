@@ -17,12 +17,12 @@ const OrdersList = (props) =>{
     const [orders, modal] = useSelector((state)=>{
         return [state.order.data, state.user.modal]
     })
-
+    
     const handleEdit = (id) =>{
         dispatch(setOrderEditId(id))
         dispatch(setModal(!modal))
     }
-
+    
     const handleRemove = (id) =>{
         dispatch(startRemoveOrder(id))
     }
