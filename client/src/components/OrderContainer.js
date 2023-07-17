@@ -6,7 +6,7 @@ import AddOrders from './AddOrders'
 const OrderContainer = (props) =>{
     return (
         <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 border-end border-5">
                 <AddOrders/>
             </div>
             <div className="col-md-6">

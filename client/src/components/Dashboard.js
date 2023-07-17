@@ -39,6 +39,11 @@ const Dashboard = (props) =>{
     const handleClickProducts = () =>{
         props.history.push('/products')
     }
+
+    const handleClickStaff = () =>{
+        props.history.push('/staffs')
+    }
+
     return (
         <div className="container card my-5 shadow p-3 mb-5 bg-body-tertiary rounded">   
             <div className="row p-4">
@@ -91,14 +96,14 @@ const Dashboard = (props) =>{
            {user?.role === "admin" && <div className="col-md-3">
                     <div className="card text-bg-primary mb-3"
                      style={{maxWidth:"18rem",cursor:"pointer"}}
-                     onClick={handleClickCustomers}>
+                     onClick={handleClickStaff}>
                     <h2 className="card-header">Staffs</h2>
                     <div className="card-body">
                         <h5 className="card-title">Total Staffs</h5>
                         <h4>{staff.length}</h4>
                     </div>
                     </div>
-                </div> }
+                </div>}
         </div>
     )
     
