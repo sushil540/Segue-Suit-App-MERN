@@ -42,7 +42,7 @@ const Container = (props) =>{
                             <Link className="nav-link fw-bold" to="/customers">Customer</Link>
                             <Link className="nav-link fw-bold" to="/enquiries">Enquiry</Link>
                             <Link className="nav-link fw-bold" to="/orders">Order</Link>
-                            {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs">Staff</Link> }
+                            {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs">Staff</Link>}
                             <Link className="nav-link fw-bold" to="/" onClick={handleLogout}>Logout</Link>
                         </>
                     ) : (
@@ -61,8 +61,8 @@ const Container = (props) =>{
             <PrivateRoute path="/orders" component={OrderContainer} exact={true}/>
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
-            <ProtectedRoute path='/staffs' permitted={user?.role} component={StaffContainer} exact={true} />
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
+            <ProtectedRoute path='/staffs' permitted={user?.role} component={StaffContainer} exact={true} />
         </div>
     )
 }

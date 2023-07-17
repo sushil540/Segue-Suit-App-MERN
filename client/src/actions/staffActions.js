@@ -21,3 +21,16 @@ export const startGetStaff = () =>{
         })()
     }
 }
+
+export const startRemoveStaff = (id) =>{
+    return (dispatch) =>{
+        (async ()=>{
+            try{
+                const response = await axios.delete(`/api/users/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                console.log('response',response.data)
+            }catch(e){
+                alert(e)
+            }
+        })()
+    }
+}
