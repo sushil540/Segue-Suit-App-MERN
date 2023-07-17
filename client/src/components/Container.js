@@ -32,7 +32,7 @@ const Container = (props) =>{
 
     return (
         <div className="mb-2">     
-            <div className="navbar navbar-expand-lg bg-body-tertiary">
+            <div className="navbar navbar-expand-lg bg-body-tertiary p-3 mb-2 bg-info text-dark">
                 <Link className="navbar-brand nav-link">Segue Suit</Link>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
@@ -43,7 +43,7 @@ const Container = (props) =>{
                             <Link className="nav-link fw-bold" to="/enquiries">Enquiry</Link>
                             <Link className="nav-link fw-bold" to="/orders">Order</Link>
                             {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs">Staff</Link> }
-                            <Link className="nav-link fw-bold" to="/" onClick={handleLogout}>logout</Link>
+                            <Link className="nav-link fw-bold" to="/" onClick={handleLogout}>Logout</Link>
                         </>
                     ) : (
                         <>
