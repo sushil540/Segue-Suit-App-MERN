@@ -3,7 +3,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from '../actions/userActions'
 
-const ModelComponent = ({Component}) =>{
+const ModelComponent = ({component:Component}) =>{
     
     const dispatch = useDispatch()
 
@@ -11,11 +11,11 @@ const ModelComponent = ({Component}) =>{
         return state.user.modal
     })
     
-    const toggle = () =>dispatch(setModal(!modal))
+    const toggle = ()=>dispatch(setModal(!modal))
   
     return(
         <div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle}> 
                 <ModalHeader toggle={toggle} className="bg-primary-subtle"></ModalHeader>
                 <ModalBody>
                     <Component/>

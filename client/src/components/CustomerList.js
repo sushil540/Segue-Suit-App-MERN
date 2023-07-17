@@ -40,7 +40,7 @@ const CustomerList = (props) =>{
     return (    
         <div>
             {tableData.length > 0 && <CustomTable data={tableData}/>}
-            <ModelComponent Component={EditCustomer} />
+            <ModelComponent component={EditCustomer} />
         </div>
     )
 }

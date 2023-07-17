@@ -10,6 +10,10 @@ const CustomTable = (props) =>{
 
     const tableHead = Object.keys(data[0])
 
+    const headData = data.map((ele)=>{
+        
+    })
+
     const preCount = () =>{
         setCount(count - 5)
         setPrevCount(count - count)
