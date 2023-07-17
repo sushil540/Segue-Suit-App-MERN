@@ -9,7 +9,7 @@ const StaffList = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetStaff())
-    },[])
+    },[dispatch])
 
     const staff = useSelector((state)=>{
         return state.staff?.data
