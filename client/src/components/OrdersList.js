@@ -14,7 +14,7 @@ const OrdersList = (props) =>{
     const orders = useSelector((state)=>{
         return state.order.data
     })
-
+    console.log('orders',orders)
     const data = orders.map((ele)=>{
         return {
             Title:ele.title,
