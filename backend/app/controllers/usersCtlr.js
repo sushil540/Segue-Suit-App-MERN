@@ -159,7 +159,18 @@ usersCtlr.notify = async(req, res) =>{
 
 usersCtlr.getStaffs  = async(req, res, next)=>{
     try{
-        const staffs = await User.aggregate([{$match:{role:{$ne:"admin"}}}])
+        const staffs = await User.aggregate([
+            { 
+                $match:{role:{$ne:"admin"}}
+            },
+            {
+                $project:{
+                    username:"$username",
+                    email:"$email",
+                    mobile:"$mobile"
+                }
+            }
+        ])
         res.json(staffs)        
     }catch(e){
         res.json(e)

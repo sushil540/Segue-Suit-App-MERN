@@ -1,33 +1,36 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { startGetStaff, startRemoveStaff } from '../actions/staffActions'
+import CustomTable from './CustomTable'
 
 const StaffList = (props) =>{
 
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(startGetStaff())
+    },[])
+
     const staff = useSelector((state)=>{
-        return state.staff.data
+        return state.staff?.data
     })
 
-    console.log("staff",staff)
+    const handleRemove = (id) =>{
+        dispatch(startRemoveStaff(id))
+    }
+
+    const data = staff.map((ele)=>{
+        return {
+            Name:ele.username,
+            Email:ele.email,
+            Mobile:ele.mobile,
+            Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>Remove</button> 
+        }
+    })
 
     return (    
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Mobile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {staff.map((ele)=>{
-                        return (
-                            <tr>
-                                <td>{ele.}</td>
-                            </tr>
-                        )
-                    })} */}
-                </tbody>
-            </table>
+           {data.length > 0 && <CustomTable data={data}/>}
         </div>
     )
 }
