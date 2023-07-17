@@ -3,6 +3,10 @@ import axios from "../config/axios"
 export const SET_ORDERS = "SET_ORDERS"
 export const ADD_ORDERS = "ADD_ORDERS"
 export const GET_ORDERSDATE = "GET_ORDERSDATE"
+export const REMOVE_ORDER = "REMOVE_ORDER"
+export const SET_ORDER_EDIT_ID = "SET_ORDER_EDIT_ID"
+export const EDIT_ORDER = "EDIT_ORDER"
+
 export const addOrders =(order) =>{
     return {
         type:ADD_ORDERS,
@@ -70,6 +74,55 @@ export const startSearchOrders = (search) =>{
             try{
                 const response = await axios.get(`/api/orders/search?search=${search}`,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(setOrders(response.data))
+            }catch(e){
+                alert(e)
+            }
+        })()
+    }
+}
+
+const removeOrder = (id) =>{
+    return {
+        type:REMOVE_ORDER,
+        payload:id
+    }
+}
+
+export const startRemoveOrder = (id) =>{
+    return (dispatch) =>{
+        (async ()=>{
+           try{
+                const response = await axios.delete(`/api/orders/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
+                dispatch(removeOrder(response.data._id))
+            }catch(e){
+                alert(e)
+           } 
+        })()
+    }
+}
+
+export const setOrderEditId = (id) =>{
+    return {
+        type:SET_ORDER_EDIT_ID,
+        payload:id
+    }
+}
+
+const editOrder = (order) =>{
+    return {
+        type:EDIT_ORDER,
+        payload:order
+    }
+}
+
+export const startEditOrder = (order) =>{
+    return (dispatch, getState) =>{
+        (async ()=>{
+            try{
+                const orderId = getState().order.editId
+                const response = await axios.put(`/api/orders/${orderId}`,order,{headers:{"Authorization":localStorage.getItem('token')}})
+                dispatch(editOrder(response.data))
+                toast.success('Order Edited Successfully')
             }catch(e){
                 alert(e)
             }

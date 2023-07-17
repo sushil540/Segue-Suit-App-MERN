@@ -95,7 +95,7 @@ const ProductsList = (props) =>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component={EditProduct}/>
+            <ModelComponent component={EditProduct}/>
         </div>
     )
 }

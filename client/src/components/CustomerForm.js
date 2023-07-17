@@ -9,10 +9,11 @@ const CustomerForm = (props) => {
     const { formSubmittion }  = props
 
     const [customer, product] = useSelector((state)=>{
-        return [state.customer.data.find((ele)=>ele._id === state.customer.editId), state.product.data]
+        return [state.customer?.data.find((ele)=>ele._id === state.customer?.editId), state.product?.data]
     })
     
     const findProducts = (ids) =>{
+        console.log("ids",ids)
         const products = ids.map((ele)=>{
             const data = product.find((e)=>{
                 return ele === e._id
@@ -29,7 +30,7 @@ const CustomerForm = (props) => {
     const [address, setAddress] = useState(customer?.address ? customer?.address : '')
     const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : [])
     const [formErrors, setFormErrors] = useState({})
-    const errors = {}
+    const errors = {}   
 
     const dispatch = useDispatch()
  

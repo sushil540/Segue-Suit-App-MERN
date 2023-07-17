@@ -6,13 +6,12 @@ import Select from 'react-select'
 import { startAddEnquiry } from "../actions/enquiryAction"
 import { startGetProducts } from "../actions/productActions"
 
-
 const EnquiryForm=(props)=>{
     const {formSubmission} = props
 
     const dispatch= useDispatch()
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         dispatch(startGetProducts())
     },[dispatch])
 

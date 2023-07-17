@@ -114,7 +114,7 @@ const handleEdit=(id)=>{
                     next
                 </button>
             </div>}
-            <ModelComponent Component={EditEnquiry}/>
+            <ModelComponent component={EditEnquiry}/>
         </div>
     )
 }

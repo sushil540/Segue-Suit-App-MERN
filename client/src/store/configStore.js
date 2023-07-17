@@ -6,6 +6,7 @@ import { customerReducer } from "../reducers/customer-reducer"
 import { staffReducer } from "../reducers/staff-reducer"
 import { enquiryReducer } from "../reducers/enquiry-reducer"
 import { orderReducer } from "../reducers/order-reducer"
+import { ServiceREducer } from "../reducers/service-reducer"
 
 const configStore = () =>{
     const store = createStore(combineReducers({
@@ -14,7 +15,8 @@ const configStore = () =>{
         customer:customerReducer,
         product:productReducer,
         staff:staffReducer,
-        enquiry:enquiryReducer
+        enquiry:enquiryReducer,
+        service:ServiceREducer
     }),applyMiddleware(thunk))
     return store
 }
