@@ -24,6 +24,8 @@ const Dashboard = (props) =>{
         user?.role === "admin" && dispatch(startGetStaff())
     },[dispatch])
 
+    console.log("staff",staff.length)
+
     const handleClickOrders = () =>{
         props.history.push('/orders')
     }

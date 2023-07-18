@@ -32,8 +32,16 @@ const ProductsList = (props) =>{
             Brand:ele.brand,
             Model:ele.model,
             Description:ele.description,
-            Edit:<button onClick={()=>{handleEdit(ele._id)}} className="btn btn-secondary">Edit</button>,
-            Remove:<button onClick={()=>{handleRemove(ele._id)}} disabled={user?.role !== "admin"} className="btn btn-danger">Remove</button>
+            Edit:<button onClick={()=>{handleEdit(ele._id)}} className="btn btn-secondary">
+                <span className="material-symbols-outlined">
+                    edit_square
+                </span>
+            </button>,
+            Remove:<button onClick={()=>{handleRemove(ele._id)}} disabled={user?.role !== "admin"} className="btn btn-danger">
+                <span className="material-symbols-outlined">
+                    delete
+                </span>
+            </button>
         }
     })
 

@@ -33,8 +33,16 @@ const CustomerList = (props) =>{
             Mobile:ele.mobile,
             Address:ele.address,
             Products:ele.productIds.length,
-            Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>Edit</button>,
-            Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>Remove</button>
+            Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
+                <span className="material-symbols-outlined">
+                    edit_square
+                </span>
+        </button>,
+            Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>
+                <span className="material-symbols-outlined">
+                    delete
+                </span>
+            </button>
         }})
 
     return (    

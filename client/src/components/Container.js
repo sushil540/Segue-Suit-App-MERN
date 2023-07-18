@@ -15,6 +15,7 @@ import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 import StaffContainer from './StaffContainer'
 import ProtectedRoute from './helpers/ProtectedRoute'
+import OrderInfo from './OrderInfo'
 
 const Container = (props) =>{
 
@@ -62,6 +63,7 @@ const Container = (props) =>{
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
+            <PrivateRoute path="/orders/:id" component={OrderInfo} exact={true}/>
             <ProtectedRoute path='/staffs' permitted={user?.role} component={StaffContainer} exact={true} />
         </div>
     )

@@ -157,7 +157,17 @@ usersCtlr.notify = async(req, res) =>{
     }
 }
 
-usersCtlr.getStaffs  = async(req, res, next)=>{
+usersCtlr.destroy = async(req, res) =>{
+    try{    
+        const id = req.params.id
+        const user = await User.findByIdAndDelete(id)
+        res.json(user)
+    }catch(e){
+        res.json(e)
+    }
+}
+
+usersCtlr.getStaffs  = async(req, res)=>{
     try{
         const staffs = await User.aggregate([
             { 
