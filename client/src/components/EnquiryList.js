@@ -51,7 +51,7 @@ const EnquiryList=(props)=>{
         <div>
              <h2 className="text-center"> Listing Enquiries - {enquiry.length} </h2>
              {enquiryData.length > 0 && <CustomTable data={enquiryData}/>}
-            <ModelComponent Componen1t={EditEnquiry}/>
+            <ModelComponent component={EditEnquiry}/>
         </div>
     )
 }

@@ -90,7 +90,7 @@ const EnquiryForm=(props)=>{
                 status:items
             }
             console.log("formdata",formData)
-            dispatch(startAddEnquiry(formData))
+            // dispatch(startAddEnquiry(formData))
             
             const reset = () =>{
             setName('')
