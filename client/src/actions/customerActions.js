@@ -6,6 +6,7 @@ export const SET_ERRORS = "SET_ERRORS"
 export const EDIT_CUSTMERS = "EDIT_CUSTMERS"
 export const SET_CUSTOMER_EDITID = "SET_CUSTOMER_EDITID"
 export const REMOVE_CUSTOMER = "REMOVE_CUSTOMER"
+export const SET_MAKE_CUSTOMER = "SET_MAKE_CUSTOMER"
 
 const setCustomer = (customer) =>{
     return {
@@ -141,5 +142,12 @@ export const startCustomerSearch = (search) =>{
                 console.log(e)
             }
         })()
+    }
+}
+
+export const setMakeCustomer = (id) =>{
+    return {
+        type:SET_MAKE_CUSTOMER,
+        payload:id
     }
 }

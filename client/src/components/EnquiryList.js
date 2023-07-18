@@ -1,10 +1,12 @@
 import React,{useEffect} from 'react'
+import { withRouter } from'react-router-dom' 
 import { useDispatch, useSelector } from "react-redux"
 import { setEnquiryEditId, startGetEnquiries, startRemoveEnquiry } from '../actions/enquiryAction'
 import ModelComponent from './ModelComponent'
 import EditEnquiry from './EditEnquiry'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
 import CustomTable from './CustomTable'
+import { setMakeCustomer } from '../actions/customerActions'
 
 const EnquiryList=(props)=>{
   
@@ -28,6 +30,11 @@ const EnquiryList=(props)=>{
     dispatch(setModal(!modal))
   }
 
+  const handleCreateCustomer = (equiryId) =>{
+      dispatch(setMakeCustomer(equiryId))
+      props.history.push('/customers')
+  }
+
   const enquiryData = enquiry.map((ele)=>{
     return {
         Name:ele.name,
@@ -44,6 +51,11 @@ const EnquiryList=(props)=>{
           <span className="material-symbols-outlined">
               delete
           </span>
+        </button>,
+        Make_As_Customer: <button className="btn btn-outline-success w-50" onClick={()=>handleCreateCustomer(ele._id)}>
+          <span className="material-symbols-rounded">
+            person_add
+          </span>
         </button>
     }})
 
@@ -56,4 +68,4 @@ const EnquiryList=(props)=>{
     )
 }
 
-export default EnquiryList
+export default withRouter(EnquiryList)

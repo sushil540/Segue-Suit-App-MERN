@@ -21,10 +21,10 @@ export const getEnquiry =(enquiry) =>{
     }
 }
 
-export const removeEnquiry = (enquiry) =>{
+export const removeEnquiry = (id) =>{
     return {
         type:REMOVE_ENQUIRY,
-        payload:enquiry
+        payload:id
     }
 }
 
@@ -73,7 +73,7 @@ export const startRemoveEnquiry = (id) =>{
         (async ()=>{
             try{
                 const response = await axios.delete(`/api/enquiries/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
-                dispatch(removeEnquiry(response.data))
+                dispatch(removeEnquiry(response.data._id))
             }catch(e){
                 alert(e)
             }

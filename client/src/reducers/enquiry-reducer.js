@@ -17,7 +17,7 @@ export const enquiryReducer = (state = initialEnquiryState,action)=>{
     }
 
     case REMOVE_ENQUIRY :{
-        return {...state,data:state.data.filter((ele)=> ele._id !== action.payload._id)}
+        return {...state,data:state.data.filter((ele)=> ele._id !== action.payload)}
     }
 
     case UPDATE_ENQUIRY : {
