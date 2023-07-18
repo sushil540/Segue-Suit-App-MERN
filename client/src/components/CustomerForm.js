@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import Label from './Label'
 import validator from 'validator'
-import { setErrors } from '../actions/customerActions'
+import { setErrors, setMakeCustomer } from '../actions/customerActions'
 import { startGetProducts } from '../actions/productActions'
 
 const CustomerForm = (props) => {
@@ -13,18 +13,22 @@ const CustomerForm = (props) => {
 
     useEffect(()=>{
         dispatch(startGetProducts())
+        return () =>{
+            dispatch(setMakeCustomer(''))
+        }
     },[dispatch])
-
     
-    const [customer, products, customerError] = useSelector((state)=>{
-        return [state.customer?.data.find((ele)=>ele?._id === state.customer?.editId), state.product.data.map((ele)=>{
-            return {value:ele._id,label:ele.name}
-        }), state.customer?.errors]
+    const [enquiryToCustomer, customer, products, customerError] = useSelector((state)=>{
+        return [state.enquiry?.data.find((ele)=>ele._id === state.customer?.makeCustomer), 
+                state.customer?.data.find((ele)=>ele?._id === state.customer?.editId),
+                state.product.data.map((ele)=>{ return {value:ele._id,label:ele.name}}), 
+                state.customer?.errors,   
+            ]
     })    
     
     const findProducts = (ids) =>{
         const productNames = ids.map((ele)=>{
-            const data = products.find((e)=> {
+            const data = products.find((e)=>{
                 return ele === e.value
             })
             return data
@@ -32,10 +36,10 @@ const CustomerForm = (props) => {
         return productNames 
     }
 
-    const [name, setName] = useState(customer?.name ? customer?.name : '')
-    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '')
+    const [name, setName] = useState(customer?.name ? customer?.name : '' || enquiryToCustomer?.name)
+    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '' || enquiryToCustomer?.mobile)
     const [address, setAddress] = useState(customer?.address ? customer?.address : '')
-    const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : [])
+    const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : (enquiryToCustomer?.productIds.length > 0 ? findProducts(enquiryToCustomer?.productIds) : []))
     const [formErrors, setFormErrors] = useState({})
     const errors = {}   
 
@@ -87,8 +91,10 @@ const CustomerForm = (props) => {
         }
     }
 
+    const styleObj = {background:"green",color:"#fff"}
+
   return (
-    <div className="card p-4">
+    <div className="card p-4" style={enquiryToCustomer && styleObj}>
         {customerError && (
         <div className="alert alert-danger d-flex justify-content-between align-items-center">
             <p>{ customerError }</p>

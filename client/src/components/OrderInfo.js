@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom/cjs/react-router-dom.min'
 import { startGetOrders } from '../actions/orderActions'
 
 const OrderInfo = (props) =>{
+    const dispatch = useDispatch()
 
     const id = props.match.params.id
-
-    const dispatch = useDispatch()
 
     useEffect(()=>{
         dispatch(startGetOrders())
@@ -16,8 +15,6 @@ const OrderInfo = (props) =>{
     const order = useSelector((state)=>{
         return state.order.data.find((ele)=>ele._id === id)
     })
-
-    console.log("order",order)
 
     return (
         <div className="">

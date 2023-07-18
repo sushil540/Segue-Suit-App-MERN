@@ -1,9 +1,10 @@
-import { SET_CUSTOMER, SET_ERRORS, EDIT_CUSTMERS, SET_CUSTOMER_EDITID, ADD_CUSTOMER , REMOVE_CUSTOMER} from "../actions/customerActions"
+import { SET_CUSTOMER, SET_ERRORS, EDIT_CUSTMERS, SET_CUSTOMER_EDITID, ADD_CUSTOMER , REMOVE_CUSTOMER, SET_MAKE_CUSTOMER} from "../actions/customerActions"
 
 const initialCustomerState = {
     data:[],
     errors:'',
-    editId:''
+    editId:'',
+    makeCustomer:''
 }
 
 export const customerReducer = (state = initialCustomerState, action) =>{
@@ -30,9 +31,11 @@ export const customerReducer = (state = initialCustomerState, action) =>{
             })}
         }
         case REMOVE_CUSTOMER : {
-            console.log("action.payload",action.payload)
             return {...state, data:state.data.filter((ele)=>ele._id !== action.payload._id)}
         }   
+        case SET_MAKE_CUSTOMER : {
+            return {...state, makeCustomer:action.payload}
+        }
         default:{
             return {...state}
         }
