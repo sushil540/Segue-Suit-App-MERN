@@ -24,7 +24,11 @@ const StaffList = (props) =>{
             Name:ele.username,
             Email:ele.email,
             Mobile:ele.mobile,
-            Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>Remove</button> 
+            Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>
+                <span className="material-symbols-outlined">
+                    delete
+                </span>
+            </button> 
         }
     })
 

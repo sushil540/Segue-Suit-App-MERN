@@ -32,6 +32,7 @@ router.get('/api/users',authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
 },authorizeUser, usersCtlr.getStaffs)
+router.delete('/api/users/:id', authenticateUser, usersCtlr.destroy)
 
 
 //customers
