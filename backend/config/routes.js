@@ -175,7 +175,7 @@ router.put('/api/enquiries/:id', authenticateUser, (req, res, next)=>{
 },authorizeUser, enquiriesCtlr.update)
 
 router.delete('/api/enquiries/:id', authenticateUser, (req, res, next)=>{
-    req.permittedRole = ['admin']
+    req.permittedRole = ['admin','staff']
     next()
 },authorizeUser, enquiriesCtlr.destroy)
 

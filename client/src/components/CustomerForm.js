@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import Label from './Label'
 import validator from 'validator'
-import { setErrors, setMakeCustomer } from '../actions/customerActions'
+import { setErrors, setId } from '../actions/customerActions'
 import { startGetProducts } from '../actions/productActions'
 
 const CustomerForm = (props) => {
@@ -14,16 +14,25 @@ const CustomerForm = (props) => {
     useEffect(()=>{
         dispatch(startGetProducts())
         return () =>{
-            dispatch(setMakeCustomer(''))
+            dispatch(setId(''))
         }
     },[dispatch])
     
+    // const [enquiryToCustomer, customer, products, customerError] = useSelector((state)=>{
+    //     return [state.enquiry?.data.find((ele)=>ele._id === state.customer?.makeCustomer), 
+    //             state.customer?.data.find((ele)=>ele?._id === state.customer?.editId),
+    //             state.product.data.map((ele)=>{ return {value:ele._id,label:ele.name}}), 
+    //             state.customer?.errors,   
+    //         ]
+    // })    
+
     const [enquiryToCustomer, customer, products, customerError] = useSelector((state)=>{
-        return [state.enquiry?.data.find((ele)=>ele._id === state.customer?.makeCustomer), 
-                state.customer?.data.find((ele)=>ele?._id === state.customer?.editId),
+        return [
+                state.enquiry?.data.find((ele)=>ele._id === state.customer?.id), 
+                state.customer?.data.find((ele)=>ele?._id === state.customer?.id),
                 state.product.data.map((ele)=>{ return {value:ele._id,label:ele.name}}), 
                 state.customer?.errors,   
-            ]
+               ]
     })    
     
     const findProducts = (ids) =>{
@@ -91,7 +100,7 @@ const CustomerForm = (props) => {
         }
     }
 
-    const styleObj = {background:"green",color:"#fff"}
+    const styleObj = {background:"#F4F2DE",color:"#000"}
 
   return (
     <div className="card p-4" style={enquiryToCustomer && styleObj}>
@@ -136,6 +145,7 @@ const CustomerForm = (props) => {
             <br/>
             <Label text="Products Select"/><br/>
             <Select
+                className="text-dark"
                 options={products}
                 isMulti
                 onChange={handleMultiSelectChange}

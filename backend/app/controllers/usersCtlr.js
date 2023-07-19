@@ -82,17 +82,7 @@ usersCtlr.account = (req, res)=>{
 usersCtlr.notify = async(req, res) =>{
     console.log({email:process.env.EMAIL,password:process.env.PASSWORD})
     try{
-        // const values = await Promise.all([Order.find(),Service.find()])
-        // const [orders, services] = values
-
-        // const findServiceName = (id)=>{
-        //     const service = services.find((ele)=>ele._id.valueOf() === id.valueOf())
-        //     if(service){
-        //         return service.name
-        //     }else{
-        //         return "anonymous"
-        //     }
-        // }
+       
 
         const value = await Order.aggregate([
             {
@@ -100,8 +90,7 @@ usersCtlr.notify = async(req, res) =>{
             },
             {
                 $group:{
-                   _id:
-                    {
+                    _id:{
                         order_id:"$_id",
                         title:"$title",
                     }

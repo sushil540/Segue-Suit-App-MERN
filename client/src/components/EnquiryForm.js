@@ -18,11 +18,12 @@ const EnquiryForm=(props)=>{
     const enquiry = useSelector((state)=>{
         return state.enquiry.data.find((ele)=>ele?._id === state.enquiry?.editId)
     })
-    console.log('enquiry',enquiry)
+    // console.log('enquiry',enquiry)
     const productList = useSelector((state)=>{
         return state.product.data
     })
-    console.log('productList',productList)
+
+    // console.log('productList',productList)
 
       const findProducts = (ids) =>{
         const productData = ids.map((ele)=>{
@@ -33,8 +34,6 @@ const EnquiryForm=(props)=>{
         })
         return productData
     }
-
-  
 
    const [name,setName] = useState(enquiry?.name ? enquiry?.name : '')
    const [mobile,setMobile] = useState(enquiry?.mobile ? enquiry?.mobile : '')
@@ -103,7 +102,7 @@ const EnquiryForm=(props)=>{
     }
 
     return(
-        <div>
+        <div className="card p-4">
             <form onSubmit={handleSubmit}>
             <Label text="Name"/> <br/>
             <input 
@@ -142,7 +141,7 @@ const EnquiryForm=(props)=>{
             <br/>
             <input 
                         type="submit"
-                        value={enquiry?.name ? "Edit Product" : "Add Product"}
+                        value={enquiry?.name ? "Edit Enquiry" : "Add Enquiry"}
                         className="btn btn-primary"
                     />
             </form>     

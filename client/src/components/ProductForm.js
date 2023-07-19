@@ -113,7 +113,7 @@ const ProductForm = (props) =>{
                     </textarea>
                     {formErrors?.description && <span className="text-danger">{formErrors?.description}</span>}
                     <br/>
-                    <Label text="Product weightage"/>
+                    <Label text="Product Weightage"/>
                     <br/>
                     <input
                         className="form-control"

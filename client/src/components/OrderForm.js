@@ -5,7 +5,7 @@ import validator from 'validator'
 import OrderLineItems from './OrderLineItems'
 import OrderItemsDisplay from './OrderItemsDisplay'
 import { startGetStaff } from '../actions/staffActions'
-import { startGetCustomers } from '../actions/customerActions'
+import { setId, startGetCustomers } from '../actions/customerActions'
 import { startGetServices } from '../actions/serviceAction'
 
 const OrderForm = (props) =>{
@@ -44,6 +44,11 @@ const OrderForm = (props) =>{
         setTotal(String(data))
         return data
     },[orderLineItems])
+
+    const handleSelection = (e) =>{ // we can't do because we have to add amount to it
+        setCustomerId(e.target.value)
+        dispatch(setId(e.target.value))
+    }
     
     const runFormValidation = () =>{
         if(validator.isEmpty(orderDate)){
@@ -196,7 +201,7 @@ const OrderForm = (props) =>{
                     <select
                         className="form-select"
                         value={customerId} 
-                        onChange={(e)=>setCustomerId(e.target.value)}>
+                        onChange={handleSelection}> {/* handleSelection */}
                         <option value="">Select Customer</option> 
                         {customers.map((ele)=>{
                             return (

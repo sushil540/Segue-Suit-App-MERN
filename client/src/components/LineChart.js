@@ -30,6 +30,7 @@ let months = ["1","2","3","4","5","6","7","8","9","10","11","12"]
 const yearOrders = orderDetails.filter((ele)=>{
   return ele.year == dates
 }) 
+
 console.log('yearOrders',yearOrders)
 
 let monthlyOrders
@@ -61,12 +62,17 @@ if(dates){
   })
 }
 
-
+console.log("monthlyOrders",monthlyOrders)
 
 
 const listOrders = monthlyOrders.map((ele)=>{
   return ele.orders
 })
+
+console.log("listOrders",listOrders)
+
+
+//[month, order:{orderCount: 0, year:2023, }]
 
     return( 
         <div className='container-fluid'>

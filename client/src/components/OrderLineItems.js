@@ -16,9 +16,10 @@ const OrderLineItems = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetProducts()) 
+        //dispatch(startGetCustomers())
     },[dispatch])
 
-    const products = useSelector((state)=>{
+    const products = useSelector((state)=>{ //customer customer.id
         return state.product.data
     })
 
