@@ -87,7 +87,7 @@ const Login = (props) =>{
                     />
                  <br/>
                  <br/>
-                 {msg && <div className='d-flex justify-content-end align-items-center gap-2'>
+                <div className='d-flex justify-content-end align-items-center gap-2'>
                      <span className='fw-bold'>Create an account?</span>
                      <input
                         className="btn btn-primary"
@@ -95,7 +95,7 @@ const Login = (props) =>{
                         value="Sign-Up"
                         onClick={handleShift}
                     />
-                     </div>}
+                     </div>
            </form>
         </div>
         </div>

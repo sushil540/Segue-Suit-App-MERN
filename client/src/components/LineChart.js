@@ -58,10 +58,15 @@ if(dates){
     }
   })
 }
-
+  
 const listOrders = monthlyOrders.map((ele)=>{
   return ele.orders
 })
+
+console.log("listOrders",listOrders)
+
+
+//[month, order:{orderCount: 0, year:2023, }]
 
     return( 
         <div className='container-fluid'>

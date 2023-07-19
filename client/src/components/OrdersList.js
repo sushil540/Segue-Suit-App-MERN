@@ -39,7 +39,7 @@ const OrdersList = (props) =>{
                 <span className="material-symbols-outlined">
                     edit_square
                 </span>
-            </button>,
+            </button>,  
             Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>
                 <span className="material-symbols-outlined">
                     delete

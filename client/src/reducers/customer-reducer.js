@@ -1,10 +1,12 @@
-import { SET_CUSTOMER, SET_ERRORS, EDIT_CUSTMERS, SET_CUSTOMER_EDITID, ADD_CUSTOMER , REMOVE_CUSTOMER, SET_MAKE_CUSTOMER} from "../actions/customerActions"
+import { SET_CUSTOMER, SET_ERRORS, EDIT_CUSTMERS, SET_ID, ADD_CUSTOMER , REMOVE_CUSTOMER } from "../actions/customerActions"
 
 const initialCustomerState = {
     data:[],
     errors:'',
-    editId:'',
-    makeCustomer:''
+    id:''
+    // editId:'',
+    // makeCustomer:'',
+    // customerId:''
 }
 
 export const customerReducer = (state = initialCustomerState, action) =>{
@@ -18,8 +20,11 @@ export const customerReducer = (state = initialCustomerState, action) =>{
         case SET_ERRORS : {
             return {...state, errors:action.payload}
         }
-        case SET_CUSTOMER_EDITID : {
-            return {...state, editId:action.payload}
+        // case SET_CUSTOMER_EDITID : {
+        //     return {...state, editId:action.payload}
+        // }
+        case SET_ID : {
+            return {...state, id:action.payload}
         }
         case EDIT_CUSTMERS : {
             return {...state, data:state.data.map((ele)=>{
@@ -33,9 +38,9 @@ export const customerReducer = (state = initialCustomerState, action) =>{
         case REMOVE_CUSTOMER : {
             return {...state, data:state.data.filter((ele)=>ele._id !== action.payload._id)}
         }   
-        case SET_MAKE_CUSTOMER : {
-            return {...state, makeCustomer:action.payload}
-        }
+        // case SET_MAKE_CUSTOMER : {
+        //     return {...state, makeCustomer:action.payload}
+        // }
         default:{
             return {...state}
         }
