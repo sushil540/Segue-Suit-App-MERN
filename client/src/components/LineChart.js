@@ -18,20 +18,17 @@ const [dates,setDates] = useState('')
   const input = e.target.value
   setDates(input)
 }
+
 console.log('dates',dates)
  const orderDetails = useSelector((state)=>{
     return state.order.monthData
  })
- console.log('orderDetails',orderDetails)
-
 
 let months = ["1","2","3","4","5","6","7","8","9","10","11","12"]
 
 const yearOrders = orderDetails.filter((ele)=>{
   return ele.year == dates
 }) 
-
-console.log('yearOrders',yearOrders)
 
 let monthlyOrders
 if(dates){
@@ -61,10 +58,7 @@ if(dates){
     }
   })
 }
-
-console.log("monthlyOrders",monthlyOrders)
-
-
+  
 const listOrders = monthlyOrders.map((ele)=>{
   return ele.orders
 })
@@ -76,7 +70,17 @@ console.log("listOrders",listOrders)
 
     return( 
         <div className='container-fluid'>
-        <input className="col-md-4 shadow mb-5 bg-body-tertiary rounded"type="number" min="2023" placeholder="Select a year" value={dates} onChange={handleChange} />
+       <select
+        className="col-md-4 shadow mb-5 bg-body-tertiary rounded"
+        value={dates}
+        onChange={handleChange}>
+              <option value="">Select Year</option>
+              {orderDetails.map((ele)=>{
+                return(
+                  <option key={ele.id} value = {ele.year}>{ele.year}</option>
+                )
+              })}
+       </select>
         <div className='col-md-8 mb-3 mt-3'>
              <Line
              data={{
