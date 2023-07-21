@@ -6,7 +6,7 @@ import ModelComponent from './ModelComponent'
 import EditEnquiry from './EditEnquiry'
 import { setModal, startGetLoggedInUser } from '../actions/userActions'
 import CustomTable from './CustomTable'
-import { setMakeCustomer } from '../actions/customerActions'
+import { setId } from '../actions/customerActions'
 
 const EnquiryList=(props)=>{
   
@@ -31,7 +31,7 @@ const EnquiryList=(props)=>{
   }
 
   const handleCreateCustomer = (equiryId) =>{
-      dispatch(setMakeCustomer(equiryId))
+      dispatch(setId(equiryId))
       props.history.push('/customers')
   }
 
@@ -39,14 +39,13 @@ const EnquiryList=(props)=>{
     return {
         Name:ele.name,
         Mobile:ele.mobile,
-        Address:ele.address,
         Products:ele.productIds.length,
         Status : ele.status,  
         Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
           <span className="material-symbols-outlined">
             edit_square
           </span>
-        </button>,
+        </button>,  
         Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>
           <span className="material-symbols-outlined">
               delete

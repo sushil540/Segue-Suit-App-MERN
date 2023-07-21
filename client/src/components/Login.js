@@ -63,7 +63,7 @@ const Login = (props) =>{
    
     return (    
         <div className='container'>
-            {msg && <div className="w-50 m-auto my-3 alert alert-danger" >
+            {msg && <div className="w-50 m-auto my-3 alert alert-danger">
                <span>{msg}</span> 
             </div>}
         <div className="card shadow-lg p-4 w-50 my-4 m-auto">
@@ -87,7 +87,7 @@ const Login = (props) =>{
                     />
                  <br/>
                  <br/>
-                 {msg && <div className='d-flex justify-content-end align-items-center gap-2'>
+                <div className='d-flex justify-content-end align-items-center gap-2'>
                      <span className='fw-bold'>Create an account?</span>
                      <input
                         className="btn btn-primary"
@@ -95,7 +95,7 @@ const Login = (props) =>{
                         value="Sign-Up"
                         onClick={handleShift}
                     />
-                     </div>}
+                     </div>
            </form>
         </div>
         </div>

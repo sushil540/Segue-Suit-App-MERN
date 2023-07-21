@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCustomerEditId, startGetCustomers, startRemoveCustomer } from '../actions/customerActions'
+//  setCustomerEditId,
+import { setId, startGetCustomers, startRemoveCustomer } from '../actions/customerActions'
 import CustomTable from './CustomTable'
 import { setModal } from '../actions/userActions'
 import ModelComponent from './ModelComponent'
@@ -19,7 +20,7 @@ const CustomerList = (props) =>{
     })
 
     const handleEdit = (id) =>{
-        dispatch(setCustomerEditId(id))
+        dispatch(setId(id))
         dispatch(setModal(!modal))
     }
    
@@ -28,7 +29,7 @@ const CustomerList = (props) =>{
     }
 
     const data = customers.map((ele)=>{
-        return {
+        return {    
             Name:ele.name,
             Mobile:ele.mobile,
             Address:ele.address,

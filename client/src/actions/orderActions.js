@@ -119,7 +119,7 @@ export const startEditOrder = (order) =>{
     return (dispatch, getState) =>{
         (async ()=>{
             try{
-                const orderId = getState().order.editId
+                const orderId = getState().order.id
                 const response = await axios.put(`/api/orders/${orderId}`,order,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(editOrder(response.data))
                 toast.success('Order Edited Successfully.',{

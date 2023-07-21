@@ -4,9 +4,10 @@ export const SET_CUSTOMER = "SET_CUSTOMER"
 export const ADD_CUSTOMER = "ADD_CUSTOMER"
 export const SET_ERRORS = "SET_ERRORS"
 export const EDIT_CUSTMERS = "EDIT_CUSTMERS"
-export const SET_CUSTOMER_EDITID = "SET_CUSTOMER_EDITID"
+export const SET_ID = "SET_ID"
+// export const SET_CUSTOMER_EDITID = "SET_CUSTOMER_EDITID"
 export const REMOVE_CUSTOMER = "REMOVE_CUSTOMER"
-export const SET_MAKE_CUSTOMER = "SET_MAKE_CUSTOMER"
+// export const SET_MAKE_CUSTOMER = "SET_MAKE_CUSTOMER"
 
 const setCustomer = (customer) =>{
     return {
@@ -60,9 +61,11 @@ export const startGetCustomers = () =>{
     }
 }
 
-export const setCustomerEditId = (id) =>{
+//setCustomerEditId
+export const setId = (id) =>{
     return {
-        type:SET_CUSTOMER_EDITID,
+        //SET_CUSTOMER_EDITID
+        type:SET_ID,
         payload:id
     }
 } 
@@ -76,7 +79,7 @@ export const startEditCustomer = (formData) =>{
     return (dispatch, getState) =>{
         (async ()=>{
             try{
-                const id = getState().customer.editId
+                const id = getState().customer.id
                 const response = await axios.put(`/api/customers/${id}`, formData, {headers:{"Authorization":localStorage.getItem('token')}})
                 if(!response.data.hasOwnProperty('errors')){
                     dispatch(editCustomers(response.data))
@@ -145,9 +148,16 @@ export const startCustomerSearch = (search) =>{
     }
 }
 
-export const setMakeCustomer = (id) =>{
-    return {
-        type:SET_MAKE_CUSTOMER,
-        payload:id
-    }
-}
+// export const setMakeCustomer = (id) =>{
+//     return {
+//         type:SET_MAKE_CUSTOMER,
+//         payload:id
+//     }
+// }
+
+// export const setCustomerId = (id) =>{
+//     return {
+//         type:SET_CUSTOMER_ID,
+//         payload:id
+//     }
+// }

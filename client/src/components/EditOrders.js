@@ -9,7 +9,7 @@ const EditOrders = (props) =>{
     const dispatch = useDispatch()
 
     const [order, modal] = useSelector((state)=>{
-        return [state.order.data.find((ele)=>ele._id === state.order.editId), state.user.modal]
+        return [state.order.data.find((ele)=>ele._id === state.order.id), state.user.modal]
     })
 
     const formSubmission = (formData) =>{

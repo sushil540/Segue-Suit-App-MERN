@@ -2,7 +2,6 @@ const User = require("../models/User")
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Order = require("../models/Order")
-const Service = require("../models/Service")
 const nodemailer = require('nodemailer')
 const { faker } = require("@faker-js/faker")
 require('dotenv').config()
@@ -11,7 +10,6 @@ const usersCtlr = {}
 
 usersCtlr.insertManyUsers = async(req, res) =>{
     try{
-        console.log("hi")
         const body = []
         for(let i=0;i<5;i++){
             const obj = {
@@ -21,7 +19,6 @@ usersCtlr.insertManyUsers = async(req, res) =>{
                 mobile:faker.phone.number('##########'),
             }
             body.push(obj)
-            console.log("obj",obj)
         }
         const users = await User.insertMany(body)
         res.json(users)
@@ -80,53 +77,26 @@ usersCtlr.account = (req, res)=>{
 }
 
 usersCtlr.notify = async(req, res) =>{
-    console.log({email:process.env.EMAIL,password:process.env.PASSWORD})
     try{
-        // const values = await Promise.all([Order.find(),Service.find()])
-        // const [orders, services] = values
-
-        // const findServiceName = (id)=>{
-        //     const service = services.find((ele)=>ele._id.valueOf() === id.valueOf())
-        //     if(service){
-        //         return service.name
-        //     }else{
-        //         return "anonymous"
-        //     }
-        // }
-
         const value = await Order.aggregate([
             {
                 $match:{status:{$ne:"completed"}}
             },
             {
                 $group:{
-                   _id:
-                    {
+                    _id:{
                         order_id:"$_id",
                         title:"$title",
                     }
                 }
             }   
         ])
-        //title  - project A
-        //service - intallation
 
-        console.log("value",value)
-
-        // const reports = []
-        // orders.forEach((ele)=>{
-        //     const report = {}
-        //     if(!ele.status.includes('completed')){
-        //         report.title = ele.title,
-        //         report.service = findServiceName(ele.serviceId)
-        //         reports.push(report)
-        //     }
-        // })
+        console.log("value",{orders:value, total_Orders:value.length} )
 
         //send sms daily at 6 am
-        // console.log("notify",reports)
 
-       const transporter = nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
             port:587,
             host: "smtp-mail.outlook.com",
             auth: {
@@ -139,8 +109,8 @@ usersCtlr.notify = async(req, res) =>{
         const mailOptions = {
             from: process.env.EMAIL,
             to: process.env.EMAIL,
-            subject: 'Sending Email using Node.js NEW ',
-            text: 'That was easy!'
+            subject: 'Pending Order Details',
+            text: `total_Orders = ${value.length}`
           }
         
         transporter.sendMail(mailOptions, function(error, info){
@@ -150,7 +120,6 @@ usersCtlr.notify = async(req, res) =>{
                 console.log('Email sent: ' + info.response)
             }
         })
-
         res.json(reports)
     }catch(e){
         res.json(e)
