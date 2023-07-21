@@ -33,8 +33,6 @@ const Stepper = (props) =>{
         },
       ]
 
-
-
     console.log("statusTitle",statusTitle)
 
     const onChange = (value) => {
