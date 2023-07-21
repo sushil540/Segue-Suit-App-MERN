@@ -11,7 +11,7 @@ const usersCtlr = {}
 usersCtlr.insertManyUsers = async(req, res) =>{
     try{
         const body = []
-        for(let i=0;i<5;i++){
+        for(let i=0;i<5;i++){   
             const obj = {
                 username:faker.person.fullName(),
                 email:faker.internet.email(),
