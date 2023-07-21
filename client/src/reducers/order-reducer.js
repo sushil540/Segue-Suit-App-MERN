@@ -3,7 +3,7 @@ import { ADD_ORDERS, GET_ORDERSDATE, SET_ORDERS, REMOVE_ORDER, SET_ORDER_EDIT_ID
 const initialOrderState = {
     data:[],
     monthData:[],
-    editId:'',
+    id:'',
 }
 
 export const orderReducer = (state = initialOrderState, action) =>{
@@ -21,7 +21,7 @@ export const orderReducer = (state = initialOrderState, action) =>{
             return {...state, data:state.data.filter((ele)=>ele._id !== action.payload)}
         }
         case SET_ORDER_EDIT_ID : {
-            return {...state, editId:action.payload}
+            return {...state, id:action.payload}
         }
         case EDIT_ORDER : {
             return {...state, data:state.data.map((ele)=>{

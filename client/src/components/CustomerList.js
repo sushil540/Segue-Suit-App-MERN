@@ -20,7 +20,6 @@ const CustomerList = (props) =>{
     })
 
     const handleEdit = (id) =>{
-        // dispatch(setCustomerEditId(id))
         dispatch(setId(id))
         dispatch(setModal(!modal))
     }

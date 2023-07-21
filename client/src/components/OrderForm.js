@@ -45,7 +45,7 @@ const OrderForm = (props) =>{
         return data
     },[orderLineItems])
 
-    const handleSelection = (e) =>{ // we can't do because we have to add amount to it
+    const handleSelection = (e) =>{ 
         setCustomerId(e.target.value)
         dispatch(setId(e.target.value))
     }

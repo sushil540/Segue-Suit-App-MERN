@@ -39,7 +39,6 @@ const EnquiryList=(props)=>{
     return {
         Name:ele.name,
         Mobile:ele.mobile,
-        Address:ele.address,
         Products:ele.productIds.length,
         Status : ele.status,  
         Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
