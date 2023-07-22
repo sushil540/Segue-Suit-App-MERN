@@ -97,23 +97,11 @@ usersCtlr.notify = async(req, res) =>{
                 }
             }   
         ])
-        //title  - project A
-        //service - intallation
+       
 
         console.log("value",value)
 
-        // const reports = []
-        // orders.forEach((ele)=>{
-        //     const report = {}
-        //     if(!ele.status.includes('completed')){
-        //         report.title = ele.title,
-        //         report.service = findServiceName(ele.serviceId)
-        //         reports.push(report)
-        //     }
-        // })
-
-        //send sms daily at 6 am
-        // console.log("notify",reports)
+     
 
        const transporter = nodemailer.createTransport({
             port:587,
