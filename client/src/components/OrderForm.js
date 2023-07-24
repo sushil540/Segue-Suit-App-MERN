@@ -7,6 +7,7 @@ import OrderItemsDisplay from './OrderItemsDisplay'
 import { startGetStaff } from '../actions/staffActions'
 import { setId, startGetCustomers } from '../actions/customerActions'
 import { startGetServices } from '../actions/serviceAction'
+import { Plus } from 'lucide-react'
 
 const OrderForm = (props) =>{
     const { formSubmission, data } = props
@@ -142,9 +143,7 @@ const OrderForm = (props) =>{
                             type="button"
                             className="btn btn-light" 
                             onClick={handleToggle}>
-                                <span className="material-symbols-outlined">
-                                    add
-                                </span>
+                                <Plus strokeWidth={2.25} />
                             </button>
                     </span>
                 }

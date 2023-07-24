@@ -15,7 +15,7 @@ const ModelComponent = ({component:Component}) =>{
   
     return(
         <div>
-            <Modal isOpen={modal} toggle={toggle}> 
+            <Modal isOpen={modal} toggle={toggle}>  
                 <ModalHeader toggle={toggle} className="bg-primary-subtle"></ModalHeader>
                 <ModalBody>
                     <Component/>

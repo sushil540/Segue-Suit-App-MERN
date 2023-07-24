@@ -25,7 +25,7 @@ const ProductSearch = (props) =>{
         <div>
             <SearchComponent 
                 search={search}
-                text= "Search by brand and weightage"
+                text= "Search by Brand and Weightage"
                 handleSearch={handleSearch}/>
         </div>
     )

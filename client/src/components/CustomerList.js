@@ -6,6 +6,7 @@ import CustomTable from './CustomTable'
 import { setModal } from '../actions/userActions'
 import ModelComponent from './ModelComponent'
 import EditCustomer from './EditCustomer'
+import { Pencil, Trash } from 'lucide-react'
 
 const CustomerList = (props) =>{
 
@@ -35,14 +36,10 @@ const CustomerList = (props) =>{
             Address:ele.address,
             Products:ele.productIds.length,
             Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
-                <span className="material-symbols-outlined">
-                    edit_square
-                </span>
+                <Pencil strokeWidth={2.25} />
         </button>,
             Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>
-                <span className="material-symbols-outlined">
-                    delete
-                </span>
+                <Trash strokeWidth={2.25} />
             </button>
         }})
 

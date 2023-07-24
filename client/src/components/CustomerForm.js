@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { X } from 'lucide-react'
 import Select from 'react-select'
 import Label from './Label'
 import validator from 'validator'
@@ -17,14 +18,6 @@ const CustomerForm = (props) => {
             dispatch(setId(''))
         }
     },[dispatch])
-    
-    // const [enquiryToCustomer, customer, products, customerError] = useSelector((state)=>{
-    //     return [state.enquiry?.data.find((ele)=>ele._id === state.customer?.makeCustomer), 
-    //             state.customer?.data.find((ele)=>ele?._id === state.customer?.editId),
-    //             state.product.data.map((ele)=>{ return {value:ele._id,label:ele.name}}), 
-    //             state.customer?.errors,   
-    //         ]
-    // })    
 
     const [enquiryToCustomer, customer, products, customerError] = useSelector((state)=>{
         return [
@@ -45,13 +38,13 @@ const CustomerForm = (props) => {
         return productNames 
     }
 
-    const [name, setName] = useState(customer?.name ? customer?.name : '' || enquiryToCustomer?.name)
-    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '' || enquiryToCustomer?.mobile)
+    const [name, setName] = useState(customer?.name ? customer?.name : '' ?? enquiryToCustomer?.name)
+    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '' ?? enquiryToCustomer?.mobile)
     const [address, setAddress] = useState(customer?.address ? customer?.address : '')
     const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : (enquiryToCustomer?.productIds.length > 0 ? findProducts(enquiryToCustomer?.productIds) : []))
     const [formErrors, setFormErrors] = useState({})
     const errors = {}   
-
+    
     const handleValidator = () =>{
         if(validator.isEmpty(name)){
             errors.name = "Customer name is required"
@@ -109,7 +102,7 @@ const CustomerForm = (props) => {
             <p>{ customerError }</p>
             <button
                 className="btn btn-transparent border-0"
-                onClick={handleClose}>&#10006;</button>
+                onClick={handleClose}><X size={32} /></button>
         </div>
         )}
         <form onSubmit={handleSubmit}>

@@ -22,7 +22,7 @@ const EnquiryForm=(props)=>{
         return state.product.data
     })
 
-      const findProducts = (ids) =>{
+    const findProducts = (ids) =>{
         const productData = ids.map((ele)=>{
             const data = productList.find((e)=>{
                 return ele === e._id
@@ -39,11 +39,11 @@ const EnquiryForm=(props)=>{
    const [formErrors, setFormErrors] = useState({})
    const errors={}
 
-   const products = useSelector((state)=>{
-    return state.product.data.map((ele)=>{
-        return {value:ele._id,label:ele.name}
-      })
-   })
+    const products = useSelector((state)=>{
+        return state.product.data.map((ele)=>{
+            return {value:ele._id,label:ele.name}
+        })
+    })
 
    const handleMultiSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions)
