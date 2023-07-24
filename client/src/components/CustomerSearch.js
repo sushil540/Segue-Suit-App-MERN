@@ -25,7 +25,7 @@ const CustomerSearch = (props) =>{
         <div>
             <SearchComponent 
                 search={search}
-                text="Search by name and mobile" 
+                text="Search by Name and Mobile" 
                 handleSearch={handleSearch}/>
         </div>
     )

@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import TableRow from './TableRow'
 import TableBody from './TableBody'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const CustomTable = (props) =>{
     const { data } = props
+    
     const [prevCount, setPrevCount] = useState(0)
     const [count, setCount] = useState(5)
 
@@ -37,17 +39,13 @@ const CustomTable = (props) =>{
                     disabled={prevCount <= 0} 
                     onClick={preCount}
                     className="btn btn-light">
-                    <span className="material-symbols-outlined">
-                        arrow_back_ios
-                    </span>
+                  <ChevronLeft size={32} />
                 </button>
                 <button 
                     disabled={data.length <= count} 
                     onClick={handleCount}
                     className="btn btn-light">
-                    <span className="material-symbols-outlined">
-                        arrow_forward_ios
-                    </span>
+                   <ChevronRight size={32} />
                 </button>
              </div>}
         </div>

@@ -42,21 +42,6 @@ ordersCtlr.destroy = async (req, res) =>{
     }
 }
 
-ordersCtlr.modifyOrdersLineItems = async(req, res)=>{
-    try{
-        const orderId = req.params.id
-        const newOrderItems = req.body
-        let ordersLineOrders 
-        if(text === "addOrderLineItems"){
-            ordersLineOrders = await Order.findByIdAndUpdate(orderId,{$push:{orderLineItems:newOrderItems}},{new:true, runValidators:true})
-        }else if(text === "removeOrderLineItems"){
-            ordersLineOrders = await Order.findByIdAndUpdate(orderId,{$pull:{orderLineItems:newOrderItems}},{new:true, runValidators:true})
-        }
-    }catch(e){
-        res.json(e) 
-    }
-}
-
 ordersCtlr.search = async (req,res) =>{
     try{
         const { search } = req.query

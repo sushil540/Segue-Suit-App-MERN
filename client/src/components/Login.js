@@ -3,11 +3,13 @@ import {useDispatch, useSelector} from 'react-redux'
 import Label from './Label'
 import validator from 'validator'
 import { setErrors, startLoginUser } from '../actions/userActions'
+import { Eye, EyeOff } from 'lucide-react'
 
 const Login = (props) =>{
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [formErrors,setFormErrors] = useState({})
+    const [isProtected, setIsProtected] = useState(false)
     const errors = {}
 
     const dispatch = useDispatch()
@@ -52,6 +54,10 @@ const Login = (props) =>{
         }   
     }
 
+    const handleIsProtected = () =>{
+        setIsProtected(!isProtected)
+    }
+
     const handleShift = () =>{      
         props.history.push('/register')
         
@@ -60,28 +66,38 @@ const Login = (props) =>{
         },4000)
     }
     
-   
     return (    
-        <div className='container'>
+        <div className="container">
             {msg && <div className="w-50 m-auto my-3 alert alert-danger">
                <span>{msg}</span> 
             </div>}
         <div className="card shadow-lg p-4 w-50 my-4 m-auto">
            <h1 className="text-center">Please Login to access DashBoard!!!</h1>
            
-           <form onSubmit={handleSubmit}>
-                 <Label text="Email"/> <br/>
-                 <input className="form-control" type="text" value={email} placeholder="enter your email" onChange={(e)=>setEmail(e.target.value)}/>
+           <form onSubmit={handleSubmit} className="d-flex flex-column ps-5 my-4">
+                 <Label text="Email"/> 
+                 <input 
+                    className="form-control w-75"  
+                    type="text" value={email} 
+                    placeholder="Enter your email" 
+                    onChange={(e)=>setEmail(e.target.value)}/>
                  {formErrors?.email && <span className="text-danger">{formErrors?.email}</span>}
                  <br/>
 
-                 <Label text="Password"/> <br/>
-                 <input className="form-control" type = "password" value = {password} placeholder = "enter your password" onChange={(e)=>setPassword(e.target.value)}/>
+                 <Label text="Password"/>
+                 <span className="d-flex align-items-center gap-2">
+                    <input 
+                        className="form-control w-75" 
+                        type = {isProtected ? "text" : "password"}  
+                        value = {password}
+                        placeholder = "Enter your password" 
+                        onChange={(e)=>setPassword(e.target.value)}/> 
+                    {isProtected  ? <Eye size={20} color={"#aaa"} onClick={handleIsProtected} /> : <EyeOff size={20} color={"#aaa"} onClick={handleIsProtected} />}
+                </span>
                  {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
                  <br/>
-                 <br/>
                  <input
-                        className="btn btn-primary"
+                        className="btn btn-primary col-2"
                         type="submit"
                         value="Login"
                     />

@@ -62,12 +62,6 @@ router.get('/api/customers/search',authenticateUser, (req, res, next)=>{
     next()
 },authorizeUser, customersCtlr.search)
 
-router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=>{
-    req.permittedRole = ['admin','staff']
-    next()
-},authorizeUser, customersCtlr.modifyCustomerProducts)
-
-
 //products
 router.get('/api/products/bulk', productsCtlr.insertBulkProducts)
 
@@ -148,11 +142,6 @@ router.delete('/api/orders/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
 },authorizeUser, ordersCtlr.destroy)
-
-router.put('/api/orders/:orderId/orderLineItems', authenticateUser, (req, res, next)=>{
-    req.permittedRole = ['admin','staff']
-    next()
-},authorizeUser, ordersCtlr.modifyOrdersLineItems)
 
 
 //enquiries
