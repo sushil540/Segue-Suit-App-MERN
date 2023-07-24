@@ -10,7 +10,7 @@ const authenticateUser = (req, res, next)=>{
                     id:userToken.id,
                     role:userToken.role
                 }
-            next()
+               next()
         }catch(e){
             res.status(401).json(e) 
         }

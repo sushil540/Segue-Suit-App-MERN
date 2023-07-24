@@ -2,7 +2,6 @@ const User = require("../models/User")
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Order = require("../models/Order")
-const Service = require("../models/Service")
 const nodemailer = require('nodemailer')
 const { faker } = require("@faker-js/faker")
 require('dotenv').config()
@@ -11,9 +10,8 @@ const usersCtlr = {}
 
 usersCtlr.insertManyUsers = async(req, res) =>{
     try{
-        console.log("hi")
         const body = []
-        for(let i=0;i<5;i++){
+        for(let i=0;i<5;i++){   
             const obj = {
                 username:faker.person.fullName(),
                 email:faker.internet.email(),
@@ -21,7 +19,6 @@ usersCtlr.insertManyUsers = async(req, res) =>{
                 mobile:faker.phone.number('##########'),
             }
             body.push(obj)
-            console.log("obj",obj)
         }
         const users = await User.insertMany(body)
         res.json(users)
@@ -80,10 +77,7 @@ usersCtlr.account = (req, res)=>{
 }
 
 usersCtlr.notify = async(req, res) =>{
-    console.log({email:process.env.EMAIL,password:process.env.PASSWORD})
     try{
-       
-
         const value = await Order.aggregate([
             {
                 $match:{status:{$ne:"completed"}}
@@ -97,13 +91,11 @@ usersCtlr.notify = async(req, res) =>{
                 }
             }   
         ])
-       
+        console.log("value",{orders:value, total_Orders:value.length} )
 
-        console.log("value",value)
+        //send sms daily at 6 am
 
-     
-
-       const transporter = nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
             port:587,
             host: "smtp-mail.outlook.com",
             auth: {
@@ -116,8 +108,8 @@ usersCtlr.notify = async(req, res) =>{
         const mailOptions = {
             from: process.env.EMAIL,
             to: process.env.EMAIL,
-            subject: 'Sending Email using Node.js NEW ',
-            text: 'That was easy!'
+            subject: 'Pending Order Details',
+            text: `total_Orders = ${value.length}`
           }
         
         transporter.sendMail(mailOptions, function(error, info){
@@ -127,7 +119,6 @@ usersCtlr.notify = async(req, res) =>{
                 console.log('Email sent: ' + info.response)
             }
         })
-
         res.json(reports)
     }catch(e){
         res.json(e)

@@ -23,7 +23,7 @@ const ProductsList = (props) =>{
 
     const handleEdit = (id) =>{
         dispatch(setEditId(id))
-        dispatch(setModal(!modal))
+        dispatch(setModal(!modal) )
     }
 
     const data = products.map((ele)=>{
@@ -32,7 +32,7 @@ const ProductsList = (props) =>{
             Brand:ele.brand,
             Model:ele.model,
             Description:ele.description,
-            Weightage:ele.weightage, //1 1.2
+            Weightage:ele.weightage,
             Edit:<button onClick={()=>{handleEdit(ele._id)}} className="btn btn-secondary">
                 <span className="material-symbols-outlined">
                     edit_square

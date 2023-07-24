@@ -27,7 +27,7 @@ console.log('dates',dates)
 let months = ["1","2","3","4","5","6","7","8","9","10","11","12"]
 
 const yearOrders = orderDetails.filter((ele)=>{
-  return ele.year == dates
+  return ele.year === Number(dates) 
 }) 
 
 let monthlyOrders
@@ -36,7 +36,7 @@ if(dates){
     return {
       month : ele,
       orders : yearOrders.reduce((pv,cv)=>{
-          if(cv.month == ele){
+        if(cv.month === Number(ele)){
             return cv.orderCount
           }else{
             return pv
@@ -49,7 +49,7 @@ if(dates){
     return {
       month : ele,
       orders : orderDetails.reduce((pv,cv)=>{
-          if(cv.month == ele){
+          if(cv.month === Number(ele)){
             return cv.orderCount
           }else{
             return pv
@@ -63,9 +63,6 @@ const listOrders = monthlyOrders.map((ele)=>{
   return ele.orders
 })
 
-console.log("listOrders",listOrders)
-
-
 //[month, order:{orderCount: 0, year:2023, }]
 
     return( 
@@ -75,9 +72,9 @@ console.log("listOrders",listOrders)
         value={dates}
         onChange={handleChange}>
               <option value="">Select Year</option>
-              {orderDetails.map((ele)=>{
+              {orderDetails.map((ele,i)=>{
                 return(
-                  <option key={ele.id} value = {ele.year}>{ele.year}</option>
+                  <option key={i} value = {ele.year}>{ele.year}</option>
                 )
               })}
        </select>

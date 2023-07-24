@@ -13,7 +13,13 @@ const Dashboard = (props) =>{
     const dispatch = useDispatch()
     
         const [user, customers, products, enquiries, order, staff] = useSelector((state)=>{
-            return [state.user.data, state.customer.data, state.product.data, state.enquiry.data, state.order.data, state.staff.data]
+            return [state.user.data,
+                    state.customer.data, 
+                    state.product.data, 
+                    state.enquiry.data, 
+                    state.order.data, 
+                    state.staff.data
+                   ]
         })
     
     useEffect(()=>{

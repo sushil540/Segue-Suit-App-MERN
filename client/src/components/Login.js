@@ -63,7 +63,7 @@ const Login = (props) =>{
    
     return (    
         <div className='container'>
-            {msg && <div className="w-50 m-auto my-3 alert alert-danger" >
+            {msg && <div className="w-50 m-auto my-3 alert alert-danger">
                <span>{msg}</span> 
             </div>}
         <div className="card shadow-lg p-4 w-50 my-4 m-auto">

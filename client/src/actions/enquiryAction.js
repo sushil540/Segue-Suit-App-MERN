@@ -98,10 +98,20 @@ export const setEnquiriesEdit= (enquiry) =>{
     return (dispatch, getState) =>{
         (async () =>{
             try{    
-                const editId = getState().enquiry.editId
+                const editId = getState().enquiry?.editId
                 const response = await axios.put(`/api/enquiries/${editId}`,enquiry,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(updateEnquiries(response.data))
-                toast.success("Successfully Edited")
+                toast.success('Enquiry Edited Successfully.',{
+                    style: {
+                      border: '1px solid #1D5B79',
+                      padding: '16px',
+                      color: '#4D455D',
+                    },
+                    iconTheme: {
+                      primary: '#1D5B79',
+                      secondary: '#FFFAEE',
+                    },
+                  })
             }catch(e){
                 alert(e)
             }

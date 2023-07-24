@@ -55,7 +55,6 @@ const Container = (props) =>{
                 </div>
             </div>     
 
-            {/* <Route path="/" component={} exact={true}/>     HOME       */}
             <Route path="/" component={Login} exact={true}/>
             <Route path="/register" component={Register} exact={true}/>
             <PrivateRoute path="/products" component={ProductContainer} exact={true}/>

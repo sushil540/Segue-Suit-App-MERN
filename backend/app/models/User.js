@@ -56,6 +56,5 @@ userSchema.pre('save', async function(){
 userSchema.plugin(uniqueValidator)
 const User = mongoose.model("User", userSchema)
 
-
 module.exports = User
 

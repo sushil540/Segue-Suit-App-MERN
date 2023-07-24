@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import validator from 'validator'
+import PropTypes from 'prop-types'
 import Label from './Label'
 import { useSelector } from 'react-redux'
 
@@ -133,5 +134,9 @@ const ProductForm = (props) =>{
             </div>
     )
 }
+ProductForm.propTypes = {
+    formSubmission:PropTypes.func.isRequired
+}
+
 
 export default ProductForm

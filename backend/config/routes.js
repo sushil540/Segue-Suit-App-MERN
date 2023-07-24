@@ -12,16 +12,15 @@ const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 const authorizeUser  = require('../app/middlewares/authorizeUser')
 
-// cron.schedule('0 * * * * *', async() => {
-//     try{
-//         const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
-//     }catch(e){
-//         console.log("error")
-//     }
-// })
+cron.schedule('0 0 6 * * *', async() => {
+    try{
+        const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
+    }catch(e){
+        console.log("error",e)
+    }
+})
 
 //users
-
 router.get('/api/bulk', usersCtlr.insertManyUsers)
 
 router.post('/api/users/register', usersCtlr.register)
@@ -63,10 +62,10 @@ router.get('/api/customers/search',authenticateUser, (req, res, next)=>{
     next()
 },authorizeUser, customersCtlr.search)
 
-router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=>{
-    req.permittedRole = ['admin','staff']
-    next()
-},authorizeUser, customersCtlr.modifyCustomerProducts)
+// router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=>{
+//     req.permittedRole = ['admin','staff']
+//     next()
+// },authorizeUser, customersCtlr.modifyCustomerProducts)
 
 
 //products
@@ -111,12 +110,12 @@ router.get('/api/services', authenticateUser, (req, res, next)=>{
 router.put('/api/services/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()
-},authorizeUser, servicesCtlr.update)
+},authorizeUser, servicesCtlr.update)  
 
 router.delete('/api/services/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
-},authorizeUser, servicesCtlr.destroy)
+}, authorizeUser, servicesCtlr.destroy)
 
 
 //orders
