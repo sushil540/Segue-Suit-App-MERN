@@ -24,8 +24,6 @@ const Dashboard = (props) =>{
         user?.role === "admin" && dispatch(startGetStaff())
     },[dispatch])
 
-    console.log("staff",staff.length)
-
     const handleClickOrders = () =>{
         props.history.push('/orders')
     }
@@ -95,7 +93,7 @@ const Dashboard = (props) =>{
                 </div>    
             </div>
             <LineChart/>
-           {user?.role === "admin" && <div className="col-md-3">
+           {/* {user?.role === "admin" && <div className="col-md-3">
                     <div className="card text-bg-primary mb-3"
                      style={{maxWidth:"18rem",cursor:"pointer"}}
                      onClick={handleClickStaff}>
@@ -105,7 +103,7 @@ const Dashboard = (props) =>{
                         <h4>{staff.length}</h4>
                     </div>
                     </div>
-                </div>}
+                </div>} */}
         </div>
     )
     

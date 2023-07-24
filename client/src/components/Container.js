@@ -39,31 +39,50 @@ const Container = (props) =>{
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
-                            <span className="d-flex gap-2 align-items-center">
-                                <Link className="nav-link fw-bold" to="/dashboard">
+                            <span className="d-flex gap-2">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/dashboard">
                                         <Gauge size={20} /> Dashboard 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/products">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/products">
                                     <AirVent size={20} /> Product 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/customers">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/customers">
                                     <User size={20} /> Customer 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/enquiries">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/enquiries">
                                     <FileSignature size={20} strokeWidth={2.25} /> Enquiry 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/orders">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/orders">
                                     <PanelTopOpen size={20}/> Order</Link>
-                                {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs"> 
-                                                                <Users2 size={20} /> Staff
-                                                            </Link>}
-                                <Link className="nav-link fw-bold" to="/" onClick={handleLogout}><LogOut size={20} /> Logout</Link>
+                                {user?.role === "admin" && (
+                                    <Link 
+                                        className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                        to="/staffs"> 
+                                        <Users2 size={20} /> Staff
+                                    </Link>
+                                )}
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/" 
+                                    onClick={handleLogout}>
+                                        <LogOut size={20} /> Logout
+                                </Link>
                             </span>
                         </>
                     ) : (
                         <>
-                            <Link className="nav-link fw-bold" to="/register">Register</Link>
-                            <Link className="nav-link fw-bold" to="/">Login</Link>
+                            <Link className="nav-link fw-bold d-flex align-items-center gap-1" to="/register">Register</Link>
+                            <Link className="nav-link fw-bold d-flex align-items-center gap-1" to="/">Login</Link>
                         </>
                     )}                    
                 </div>

@@ -34,7 +34,6 @@ const OrderForm = (props) =>{
     })
 
     useEffect(()=>{
-        console.log('user?.role',user?.role)
         user?.role === "admin" && dispatch(startGetStaff()) 
         dispatch(startGetServices())
         dispatch(startGetCustomers())
@@ -66,6 +65,10 @@ const OrderForm = (props) =>{
 
         if(validator.isEmpty(customerId)){
             errors.customerId = "Customer is required"
+        }
+
+        if(validator.isEmpty(staffId)){
+            errors.staffId = "Staff must be selected"
         }
 
         if(validator.isEmpty(total)){
@@ -181,16 +184,21 @@ const OrderForm = (props) =>{
                     {formErrors?.serviceId && <span className="text-danger">{formErrors?.serviceId}</span>}
                     {services.map((ele)=>{
                         return (
-                            <span key={ele._id} className="d-flex gap-2">
+                            <span 
+                                key={ele._id} 
+                                className="d-flex align-items-center gap-2">
                                 <input 
-                                    className="form-check-input"
+                                    className="form-check-input m-2"
                                     type="radio"
+                                    id={ele.name}
                                     name="services"
                                     value={ele._id}
                                     checked={ele._id === serviceId}
                                     onChange={(e)=>setServiceId(e.target.value)}
                                 /> 
-                                <Label text={ele.name} /><br/>
+                                <Label 
+                                    htmlFor={ele.name} 
+                                    text={ele.name} /><br/>
                             </span>
                         )
                     })}
@@ -200,13 +208,13 @@ const OrderForm = (props) =>{
                     <select
                         className="form-select"
                         value={customerId} 
-                        onChange={handleSelection}> {/* handleSelection */}
+                        onChange={handleSelection}>
                         <option value="">Select Customer</option> 
                         {customers.map((ele)=>{
                             return (
                                 <option 
-                                key={ele._id}
-                                value={ele._id}>{ele.name}
+                                    key={ele._id}
+                                    value={ele._id}>{ele.name}
                                 </option> 
                             )
                         })}
@@ -225,23 +233,29 @@ const OrderForm = (props) =>{
                         <Label text="FullyPaid (Optional)"/><br/>
                         <input
                             type="radio"
+                            id="Yes"
                             name="isFullyPaid"
                             value="true"
                             checked={isFullyPaid === "true"} 
                             className="form-check-input"
                             onChange={(e)=>setIsFullyPaid(e.target.value)}
                         />
-                        <Label text="Yes"/>
+                        <Label  
+                            htmlFor="Yes" 
+                            text="Yes"/>
                         <br/>
                         <input
                             type="radio"
+                            id="No"
                             name="isFullyPaid"
                             value="false" 
                             checked={isFullyPaid === "false"}
                             className="form-check-input"
                             onChange={(e)=>setIsFullyPaid(e.target.value)}
                         />
-                        <Label text="No"/>
+                        <Label 
+                            htmlFor="No"  
+                            text="No"/>
                     </div>
                     <br/>
                     {user?.role === "admin" && <div>
@@ -261,12 +275,14 @@ const OrderForm = (props) =>{
                                 )
                             })}
                         </select>
+                        {formErrors?.staffId && <span className="text-danger">{formErrors?.staffId}</span>}
                     </div>}
                     <br/>
                     <Label text="Total Amount"/><br/>   
                     <input
                         className="form-control"
                         type="text"
+                        disabled={true}
                         value={calc}
                         onChange={(e)=>setTotal(e.target.value)}
                     />
