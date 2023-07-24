@@ -92,7 +92,7 @@ const Login = (props) =>{
                         value = {password}
                         placeholder = "Enter your password" 
                         onChange={(e)=>setPassword(e.target.value)}/> 
-                    {isProtected  ? <Eye size={20} color={"#aaa"} onClick={handleIsProtected} /> : <EyeOff size={20} color={"#aaa"} onClick={handleIsProtected} />}
+                    {isProtected  ? <Eye size={20} color={"#444"} onClick={handleIsProtected} /> : <EyeOff size={20} color={"#999"} onClick={handleIsProtected} />}
                 </span>
                  {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
                  <br/>
