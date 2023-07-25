@@ -10,7 +10,7 @@ const OrderItemsDisplay = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetProducts())
-    },[])
+    },[dispatch])
     
     const products = useSelector((state)=>{
         return state.product.data
