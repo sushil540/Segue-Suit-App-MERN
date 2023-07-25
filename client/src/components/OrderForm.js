@@ -12,7 +12,7 @@ import { Plus } from 'lucide-react'
 const OrderForm = (props) =>{
     const { formSubmission, data } = props
 
-    const [orderDate, setOrderDate] = useState(data?.orderDate ? data?.orderDate.split('T')[0] : "")
+    const [orderDate, setOrderDate] = useState(data?.orderDate ? data?.orderDate?.split('T')[0] : "")
     const [title, setTitle] = useState(data?.title ? data?.title : "")
     const [serviceId, setServiceId] = useState(data?.serviceId ? data?.serviceId : "")    
     const [customerId, setCustomerId] = useState(data?.customerId ? data?.customerId : "" )
