@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOrderEditId, startGetOrders, startRemoveOrder } from '../actions/orderActions'
 import CustomTable from './CustomTable'
@@ -32,7 +31,7 @@ const OrdersList = (props) =>{
 
     const data = orders.map((ele)=>{
         return {
-            Title:<Link to={`/orders/${ele._id}`} className="text-decoration-none text-subtle-primary ">{ele.title}</Link>,
+            Title:ele.title,
             OrderDate:ele.orderDate.split('T')[0],
             IsFullyPaid:ele.isFullyPaid ? "✅" : "❌",
             Total:ele.total,
