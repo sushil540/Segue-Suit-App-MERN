@@ -7,7 +7,6 @@ import ModelComponent from './ModelComponent'
 import EditOrders from './EditOrders'
 import { Pencil, Trash } from 'lucide-react'
 
-
 const OrdersList = (props) =>{
 
     const dispatch = useDispatch()
@@ -26,7 +25,8 @@ const OrdersList = (props) =>{
     }
     
     const handleRemove = (id) =>{
-        dispatch(startRemoveOrder(id))
+        const result = window.confirm("Are you sure!") 
+        if(result) dispatch(startRemoveOrder(id))
     }
 
     const data = orders.map((ele)=>{
