@@ -3,7 +3,6 @@ import { startGetProducts } from '../actions/productActions'
 import { startGetCustomers } from '../actions/customerActions'
 import { startGetEnquiries } from '../actions/enquiryAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import LineChart from './LineChart'
 import { startGetOrders } from '../actions/orderActions'
 
@@ -97,4 +96,4 @@ const Dashboard = (props) =>{
     
 }
 
-export default withRouter(Dashboard)
+export default Dashboard
