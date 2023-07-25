@@ -15,7 +15,6 @@ import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 import StaffContainer from './StaffContainer'
 import ProtectedRoute from './helpers/ProtectedRoute'
-import OrderInfo from './OrderInfo'
 import { AirVent, FileSignature, Gauge, LogOut, PanelTopOpen, User, Users2 } from 'lucide-react'
 
 const Container = (props) =>{
@@ -35,35 +34,54 @@ const Container = (props) =>{
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary p-3 mb-2 bg-info text-dark shadow-sm">
-                <Link className="navbar-brand nav-link fw-bolder">Segue Suit</Link>
+                <Link className="navbar-brand nav-link fw-bolder border-end border-2 px-2">Segue Suit</Link>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
-                            <span className="d-flex gap-2 align-items-center">
-                                <Link className="nav-link fw-bold" to="/dashboard">
+                            <span className="d-flex gap-2">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/dashboard">
                                         <Gauge size={20} /> Dashboard 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/products">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/products">
                                     <AirVent size={20} /> Product 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/customers">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/customers">
                                     <User size={20} /> Customer 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/enquiries">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/enquiries">
                                     <FileSignature size={20} strokeWidth={2.25} /> Enquiry 
                                 </Link>
-                                <Link className="nav-link fw-bold" to="/orders">
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/orders">
                                     <PanelTopOpen size={20}/> Order</Link>
-                                {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs"> 
-                                                                <Users2 size={20} /> Staff
-                                                            </Link>}
-                                <Link className="nav-link fw-bold" to="/" onClick={handleLogout}><LogOut size={20} /> Logout</Link>
+                                {user?.role === "admin" && (
+                                    <Link 
+                                        className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                        to="/staffs"> 
+                                        <Users2 size={20} /> Staff
+                                    </Link>
+                                )}
+                                <Link 
+                                    className="nav-link fw-bold d-flex align-items-center gap-1" 
+                                    to="/" 
+                                    onClick={handleLogout}>
+                                        <LogOut size={20} /> Logout
+                                </Link>
                             </span>
                         </>
                     ) : (
                         <>
-                            <Link className="nav-link fw-bold" to="/register">Register</Link>
-                            <Link className="nav-link fw-bold" to="/">Login</Link>
+                            <Link className="nav-link fw-bold d-flex align-items-center gap-1" to="/register">Register</Link>
+                            <Link className="nav-link fw-bold d-flex align-items-center gap-1" to="/">Login</Link>
                         </>
                     )}                    
                 </div>
@@ -76,7 +94,6 @@ const Container = (props) =>{
             <PrivateRoute path="/dashboard" component={Dashboard} exact={true}/>
             <PrivateRoute path="/customers" component={CustomerContainer} exact={true}/>
             <PrivateRoute path="/enquiries" component={EnquiryContainer} exact={true}/>
-            <PrivateRoute path="/orders/:id" component={OrderInfo} exact={true}/>
             <ProtectedRoute path='/staffs' permitted={user?.role} component={StaffContainer} exact={true} />
         </div>
     )

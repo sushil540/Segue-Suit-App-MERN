@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-//  setCustomerEditId,
 import { setId, startGetCustomers, startRemoveCustomer } from '../actions/customerActions'
 import CustomTable from './CustomTable'
 import { setModal } from '../actions/userActions'
@@ -33,7 +32,7 @@ const CustomerList = (props) =>{
         return {    
             Name:ele.name,
             Mobile:ele.mobile,
-            Address:ele.address,
+            Address:ele.address ? ele.address : "N/A",
             Products:ele.productIds.length,
             Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
                 <Pencil strokeWidth={2.25} />

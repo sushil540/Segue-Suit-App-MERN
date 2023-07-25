@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { X } from 'lucide-react'
 import { startGetProducts } from '../actions/productActions'
 
 const OrderItemsDisplay = (props) =>{
@@ -9,7 +10,7 @@ const OrderItemsDisplay = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetProducts())
-    },[])
+    },[dispatch])
     
     const products = useSelector((state)=>{
         return state.product.data
@@ -30,7 +31,11 @@ const OrderItemsDisplay = (props) =>{
                             className="card p-2 d-flex justify-content-between align-items-end" 
                             style={{width:"8rem"}}>
                         <h4 className="text-center">{findProduct(ele?.productId)}</h4>
-                        <button className="btn btn-transparent border-0 m-2" onClick={()=>removeProduct(ele.productId)}>&#10006;</button>
+                        <button 
+                            className="btn btn-transparent border-0 m-2" 
+                            onClick={()=>removeProduct(ele.productId)}>
+                                <X />
+                            </button>
                 </div>
                 }))}
             </div>
