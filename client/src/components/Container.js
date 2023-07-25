@@ -15,7 +15,6 @@ import { toast } from 'react-hot-toast'
 import EnquiryContainer from './EnquiryContainer'
 import StaffContainer from './StaffContainer'
 import ProtectedRoute from './helpers/ProtectedRoute'
-import OrderInfo from './OrderInfo'
 import { AirVent, FileSignature, Gauge, LogOut, PanelTopOpen, User, Users2 } from 'lucide-react'
 
 const Container = (props) =>{
