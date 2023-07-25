@@ -35,7 +35,7 @@ const Container = (props) =>{
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary p-3 mb-2 bg-info text-dark shadow-sm">
-                <Link className="navbar-brand nav-link fw-bolder">Segue Suit</Link>
+                <Link className="navbar-brand nav-link fw-bolder border-end border-2 px-2">Segue Suit</Link>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>

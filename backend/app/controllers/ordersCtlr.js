@@ -86,6 +86,28 @@ ordersCtlr.detailsByDate = async (req,res)=>{
     }
 }
 
+// ordersCtlr.details = async (req, res) =>{
+//     try{
+//         const { text } = req.query
+//         const record = await Order.aggregate([{
+//             $project:
+//                 {
+//                     doc:"$$ROOT",
+//                     _id: 0,
+//                     year:{$year:"$orderDate"},
+//                     month:{$month:"$orderDate"},
+//                     day:{$dayOfMonth:"$orderDate"}
+//                 }
+//             },
+//            { 
+//             $match:{"month": 8,"year":2023,"day":0} 
+//         }])
+//         res.json(record)
+//     }catch(e){
+//         res.json(e)
+//     }
+// }
+
 
 module.exports = ordersCtlr 
 
