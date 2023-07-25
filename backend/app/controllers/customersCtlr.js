@@ -74,25 +74,5 @@ customersCtlr.search = async(req, res) =>{
     }
 }
 
-customersCtlr.modifyCustomerProducts = async(req, res) =>{
-    try{
-        const { text } = req.query
-        const custId = req.params.custId  
-        const body = req.body
-        let customer
-        if(text === "add"){ 
-            customer = await Customer.findByIdAndUpdate(custId,{$push:{"productIds":body.productIds}},{new:true,runValidators:true})
-        }else if(text === "remove"){
-            customer = await Customer.findByIdAndUpdate(custId,{$pull:{"productIds":body.productIds}},{new:true,runValidators:true})
-        }
-        if(customer){
-            res.json(customer)
-        }else{
-            res.json({})
-        }
-    }catch(e){
-        res.json(e)
-    }
-}
 
 module.exports = customersCtlr

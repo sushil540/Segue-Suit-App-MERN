@@ -16,6 +16,7 @@ import EnquiryContainer from './EnquiryContainer'
 import StaffContainer from './StaffContainer'
 import ProtectedRoute from './helpers/ProtectedRoute'
 import OrderInfo from './OrderInfo'
+import { AirVent, FileSignature, Gauge, LogOut, PanelTopOpen, User, Users2 } from 'lucide-react'
 
 const Container = (props) =>{
 
@@ -34,24 +35,37 @@ const Container = (props) =>{
     return (
         <div className="mb-2">     
             <div className="navbar navbar-expand-lg bg-body-tertiary p-3 mb-2 bg-info text-dark shadow-sm">
-                <Link className="navbar-brand nav-link">Segue Suit</Link>
+                <Link className="navbar-brand nav-link fw-bolder">Segue Suit</Link>
                 <div className="navbar-nav">
                     {Object.keys(user).length > 0 ? (
                         <>
-                            <Link className="nav-link fw-bold" to="/dashboard">Dashboard</Link>
-                            <Link className="nav-link fw-bold" to="/products">Product</Link>
-                            <Link className="nav-link fw-bold" to="/customers">Customer</Link>
-                            <Link className="nav-link fw-bold" to="/enquiries">Enquiry</Link>
-                            <Link className="nav-link fw-bold" to="/orders">Order</Link>
-                            {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs">Staff</Link>}
-                            <Link className="nav-link fw-bold" to="/" onClick={handleLogout}>Logout</Link>
+                            <span className="d-flex gap-2 align-items-center">
+                                <Link className="nav-link fw-bold" to="/dashboard">
+                                        <Gauge size={20} /> Dashboard 
+                                </Link>
+                                <Link className="nav-link fw-bold" to="/products">
+                                    <AirVent size={20} /> Product 
+                                </Link>
+                                <Link className="nav-link fw-bold" to="/customers">
+                                    <User size={20} /> Customer 
+                                </Link>
+                                <Link className="nav-link fw-bold" to="/enquiries">
+                                    <FileSignature size={20} strokeWidth={2.25} /> Enquiry 
+                                </Link>
+                                <Link className="nav-link fw-bold" to="/orders">
+                                    <PanelTopOpen size={20}/> Order</Link>
+                                {user?.role === "admin" && <Link className="nav-link fw-bold" to="/staffs"> 
+                                                                <Users2 size={20} /> Staff
+                                                            </Link>}
+                                <Link className="nav-link fw-bold" to="/" onClick={handleLogout}><LogOut size={20} /> Logout</Link>
+                            </span>
                         </>
                     ) : (
                         <>
                             <Link className="nav-link fw-bold" to="/register">Register</Link>
                             <Link className="nav-link fw-bold" to="/">Login</Link>
                         </>
-                    ) }                    
+                    )}                    
                 </div>
             </div>     
 

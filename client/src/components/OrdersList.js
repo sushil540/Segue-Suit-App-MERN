@@ -6,6 +6,7 @@ import CustomTable from './CustomTable'
 import { setModal } from '../actions/userActions'
 import ModelComponent from './ModelComponent'
 import EditOrders from './EditOrders'
+import { Pencil, Trash } from 'lucide-react'
 
 
 const OrdersList = (props) =>{
@@ -35,16 +36,17 @@ const OrdersList = (props) =>{
             OrderDate:ele.orderDate.split('T')[0],
             IsFullyPaid:ele.isFullyPaid ? "✅" : "❌",
             Total:ele.total,
-            Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
-                <span className="material-symbols-outlined">
-                    edit_square
-                </span>
-            </button>,  
-            Remove:<button className="btn btn-danger" disabled={user?.role !== "admin"} onClick={()=>handleRemove(ele._id)}>
-                <span className="material-symbols-outlined">
-                    delete
-                </span>
-            </button>
+            Edit:<button 
+                    className="btn btn-secondary" 
+                    onClick={()=>handleEdit(ele._id)}>
+                        <Pencil strokeWidth={2.25} />
+                </button>,  
+            Remove:<button 
+                        className="btn btn-danger" 
+                        disabled={user?.role !== "admin"} 
+                        onClick={()=>handleRemove(ele._id)}>
+                            <Trash strokeWidth={2.25} />
+                </button>
         }
     })
 

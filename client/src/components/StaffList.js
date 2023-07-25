@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { startGetStaff, startRemoveStaff } from '../actions/staffActions'
 import CustomTable from './CustomTable'
+import { Trash } from 'lucide-react'
 
 const StaffList = (props) =>{
 
@@ -25,9 +26,7 @@ const StaffList = (props) =>{
             Email:ele.email,
             Mobile:ele.mobile,
             Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>
-                <span className="material-symbols-outlined">
-                    delete
-                </span>
+                <Trash strokeWidth={2.25} />
             </button> 
         }
     })

@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react'
 import { withRouter } from'react-router-dom' 
+import { Pencil, Trash, UserPlus2 } from 'lucide-react'
 import { useDispatch, useSelector } from "react-redux"
 import { setEnquiryEditId, startGetEnquiries, startRemoveEnquiry } from '../actions/enquiryAction'
 import ModelComponent from './ModelComponent'
@@ -42,19 +43,13 @@ const EnquiryList=(props)=>{
         Products:ele.productIds.length,
         Status : ele.status,  
         Edit:<button className="btn btn-secondary" onClick={()=>handleEdit(ele._id)}>
-          <span className="material-symbols-outlined">
-            edit_square
-          </span>
+          <Pencil strokeWidth={2.25} />
         </button>,  
         Remove:<button className="btn btn-danger" onClick={()=>handleRemove(ele._id)}>
-          <span className="material-symbols-outlined">
-              delete
-          </span>
+          <Trash strokeWidth={2.25} />
         </button>,
-        Make_As_Customer: <button className="btn btn-outline-success w-50" onClick={()=>handleCreateCustomer(ele._id)}>
-          <span className="material-symbols-rounded">
-            person_add
-          </span>
+        Make_As_Customer: <button className="btn btn-outline-success px-4" onClick={()=>handleCreateCustomer(ele._id)}>
+          <UserPlus2 size={30} />
         </button>
     }})
 

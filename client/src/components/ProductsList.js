@@ -5,6 +5,7 @@ import { setEditId, startGetProducts, startRemoveProduct } from '../actions/prod
 import ModelComponent from './ModelComponent'
 import { setModal } from '../actions/userActions'
 import CustomTable from './CustomTable'
+import { Pencil, Trash } from 'lucide-react'
 
 const ProductsList = (props) =>{
     const dispatch = useDispatch()
@@ -34,14 +35,10 @@ const ProductsList = (props) =>{
             Description:ele.description,
             Weightage:ele.weightage,
             Edit:<button onClick={()=>{handleEdit(ele._id)}} className="btn btn-secondary">
-                <span className="material-symbols-outlined">
-                    edit_square
-                </span>
+                <Pencil strokeWidth={2.25} />
             </button>,
             Remove:<button onClick={()=>{handleRemove(ele._id)}} disabled={user?.role !== "admin"} className="btn btn-danger">
-                <span className="material-symbols-outlined">
-                    delete
-                </span>
+                <Trash strokeWidth={2.25} />
             </button>
         }
     })
