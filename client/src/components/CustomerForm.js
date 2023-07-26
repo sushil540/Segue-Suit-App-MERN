@@ -38,8 +38,8 @@ const CustomerForm = (props) => {
         return productNames 
     }
 
-    const [name, setName] = useState(customer?.name ? customer?.name : '' ?? enquiryToCustomer?.name)
-    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : '' ?? enquiryToCustomer?.mobile)
+    const [name, setName] = useState(customer?.name ? customer?.name : enquiryToCustomer?.name || '')
+    const [mobile, setMobile] = useState(customer?.mobile ? customer?.mobile : enquiryToCustomer?.mobile || '')
     const [address, setAddress] = useState(customer?.address ? customer?.address : '')
     const [selectedOptions, setSelectedOptions] = useState(customer?.productIds.length > 0 ? findProducts(customer?.productIds) : (enquiryToCustomer?.productIds.length > 0 ? findProducts(enquiryToCustomer?.productIds) : []))
     const [formErrors, setFormErrors] = useState({})

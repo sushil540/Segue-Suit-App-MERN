@@ -152,6 +152,11 @@ router.delete('/api/orders/:id', authenticateUser, (req, res, next)=>{
     next()
 },authorizeUser, ordersCtlr.destroy)
 
+// router.get('/api/orders/details', authenticateUser, (req, res, next)=>{
+//     req.permittedRole = ['admin']
+//     next()
+// },authorizeUser, ordersCtlr.details)
+
 
 //enquiries
 router.get('/api/enquiries/bulk', enquiriesCtlr.insertManyEnquiry)

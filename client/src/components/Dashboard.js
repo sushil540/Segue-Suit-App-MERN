@@ -3,23 +3,22 @@ import { startGetProducts } from '../actions/productActions'
 import { startGetCustomers } from '../actions/customerActions'
 import { startGetEnquiries } from '../actions/enquiryAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import LineChart from './LineChart'
 import { startGetOrders } from '../actions/orderActions'
-import { startGetStaff } from '../actions/staffActions'
 
 const Dashboard = (props) =>{
 
     const dispatch = useDispatch()
     
-        const [user, customers, products, enquiries, order, staff] = useSelector((state)=>{
-            return [state.user.data,
+
+        const [customers, products, enquiries, order] = useSelector((state)=>{
+            return [
                     state.customer.data, 
                     state.product.data, 
                     state.enquiry.data, 
-                    state.order.data, 
-                    state.staff.data
-                   ]
+                    state.order.data
+                ]
+
         })
     
     useEffect(()=>{
@@ -27,10 +26,7 @@ const Dashboard = (props) =>{
         dispatch(startGetCustomers())
         dispatch(startGetEnquiries())
         dispatch(startGetOrders())
-        user?.role === "admin" && dispatch(startGetStaff())
     },[dispatch])
-
-    console.log("staff",staff.length)
 
     const handleClickOrders = () =>{
         props.history.push('/orders')
@@ -46,10 +42,6 @@ const Dashboard = (props) =>{
     
     const handleClickProducts = () =>{
         props.history.push('/products')
-    }
-
-    const handleClickStaff = () =>{
-        props.history.push('/staffs')
     }
 
     return (
@@ -101,20 +93,9 @@ const Dashboard = (props) =>{
                 </div>    
             </div>
             <LineChart/>
-           {user?.role === "admin" && <div className="col-md-3">
-                    <div className="card text-bg-primary mb-3"
-                     style={{maxWidth:"18rem",cursor:"pointer"}}
-                     onClick={handleClickStaff}>
-                    <h2 className="card-header">Staffs</h2>
-                    <div className="card-body">
-                        <h5 className="card-title">Total Staffs</h5>
-                        <h4>{staff.length}</h4>
-                    </div>
-                    </div>
-                </div>}
         </div>
     )
     
 }
 
-export default withRouter(Dashboard)
+export default Dashboard
