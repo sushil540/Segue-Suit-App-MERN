@@ -58,26 +58,26 @@ ordersCtlr.detailsByDate = async (req,res)=>{
         const result = await Order.aggregate([
             {
               $group: {
-                _id: {
-                  year: { $year: "$orderDate" },
-                  month: { $month: "$orderDate" }
-                },
-                orderCount: { $sum: 1 }
-              }
+                    _id: {
+                        year: { $year: "$orderDate" },
+                        month: { $month: "$orderDate" },
+                    },
+                    orderCount: { $sum: 1 }
+                }
             },
             {
-              $sort: {
-                "_id.year": 1,
-                "_id.month": 1
-              }
+                $sort: {
+                    "_id.year": 1,
+                    "_id.month": 1
+                }
             },
             {
-              $project: {
-                _id: 0,
-                year: "$_id.year",
-                month: "$_id.month",
-                orderCount: 1
-              }
+                $project: {
+                    _id: 0,
+                    year: "$_id.year",
+                    month: "$_id.month",
+                    orderCount: 1
+                }
             }
           ])
         res.json(result)
@@ -85,28 +85,6 @@ ordersCtlr.detailsByDate = async (req,res)=>{
         res.json(e)
     }
 }
-
-// ordersCtlr.details = async (req, res) =>{
-//     try{
-//         const { text } = req.query
-//         const record = await Order.aggregate([{
-//             $project:
-//                 {
-//                     doc:"$$ROOT",
-//                     _id: 0,
-//                     year:{$year:"$orderDate"},
-//                     month:{$month:"$orderDate"},
-//                     day:{$dayOfMonth:"$orderDate"}
-//                 }
-//             },
-//            { 
-//             $match:{"month": 8,"year":2023,"day":0} 
-//         }])
-//         res.json(record)
-//     }catch(e){
-//         res.json(e)
-//     }
-// }
 
 
 module.exports = ordersCtlr 

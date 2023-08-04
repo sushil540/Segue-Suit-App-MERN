@@ -5,6 +5,7 @@ import CustomTable from './CustomTable'
 import { setModal } from '../actions/userActions'
 import ModelComponent from './ModelComponent'
 import EditOrders from './EditOrders'
+import { Link } from 'react-router-dom'
 import { Pencil, Trash } from 'lucide-react'
 
 const OrdersList = (props) =>{
@@ -25,13 +26,12 @@ const OrdersList = (props) =>{
     }
     
     const handleRemove = (id) =>{
-        const result = window.confirm("Are you sure!") 
-        if(result) dispatch(startRemoveOrder(id))
+        dispatch(startRemoveOrder(id))
     }
 
     const data = orders.map((ele)=>{
         return {
-            Title:ele.title,
+            Title:<Link to={`/orders/${ele._id}`} className="text-decoration-none">{`${ele.title.slice(0,1).toUpperCase()}${ele.title.slice(1)}`}</Link>,
             OrderDate:ele.orderDate.split('T')[0],
             IsFullyPaid:ele.isFullyPaid ? "✅" : "❌",
             Total:ele.total,
