@@ -94,6 +94,7 @@ export const startRemoveOrder = (id) =>{
            try{
                 const response = await axios.delete(`/api/orders/${id}`,{headers:{"Authorization":localStorage.getItem('token')}})
                 dispatch(removeOrder(response.data._id))
+                toast.success("Order Removed Successfully")
             }catch(e){
                 alert(e)
            } 
@@ -135,6 +136,18 @@ export const startEditOrder = (order) =>{
                   })
             }catch(e){
                 alert(e)
+            }
+        })()
+    }
+}
+
+export const startUpdateStatus = (actionText, statusText) =>{
+    return (dispatch) =>{
+        (async ()=>{
+            try{
+                const response = await axios.put("/api/orders/status/")
+            }catch(e){
+                console.log(e)
             }
         })()
     }

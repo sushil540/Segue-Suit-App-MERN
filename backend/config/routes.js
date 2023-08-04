@@ -12,7 +12,7 @@ const enquiriesCtlr = require('../app/controllers/enquiriesCtlr')
 const authenticateUser = require('../app/middlewares/authenticateUser')
 const authorizeUser  = require('../app/middlewares/authorizeUser')
 
-cron.schedule('0 0 6 * * *', async() => {
+cron.schedule('0 * * * *', async() => {
     try{
         const response = await axios.get('http://127.0.0.1:4320/api/users/notify')
     }catch(e){
@@ -63,14 +63,6 @@ router.get('/api/customers/search',authenticateUser, (req, res, next)=>{
 },authorizeUser, customersCtlr.search)
 
 
-// router.put('/api/customers/:custId/products',authenticateUser, (req, res, next)=>{
-//     req.permittedRole = ['admin','staff']
-//     next()
-// },authorizeUser, customersCtlr.modifyCustomerProducts)
-
-
-
-
 //products
 router.get('/api/products/bulk', productsCtlr.insertBulkProducts)
 
@@ -98,6 +90,7 @@ router.get('/api/products/search', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin','staff']
     next()
 }, authorizeUser, productsCtlr.search)
+
 
 //services
 router.post('/api/services', authenticateUser,(req, res, next)=>{
@@ -151,11 +144,6 @@ router.delete('/api/orders/:id', authenticateUser, (req, res, next)=>{
     req.permittedRole = ['admin']
     next()
 },authorizeUser, ordersCtlr.destroy)
-
-// router.get('/api/orders/details', authenticateUser, (req, res, next)=>{
-//     req.permittedRole = ['admin']
-//     next()
-// },authorizeUser, ordersCtlr.details)
 
 
 //enquiries

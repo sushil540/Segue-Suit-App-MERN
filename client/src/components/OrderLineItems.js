@@ -5,7 +5,7 @@ import Label from './Label'
 import { startGetProducts } from '../actions/productActions'
 
 const OrderLineItems = (props) =>{
-    const { submitProductForm , handleToggle} = props
+    const { submitProductForm , handleToggle, orderLineItems} = props
     const [productId, setProductId] = useState('')
     const [amount, setAmount] = useState('')
     const [remarks, setRemarks] = useState('')
@@ -16,13 +16,12 @@ const OrderLineItems = (props) =>{
 
     useEffect(()=>{
         dispatch(startGetProducts()) 
-        //dispatch(startGetCustomers())
     },[dispatch])
 
-    const products = useSelector((state)=>{ //customer customer.id
+    const products = useSelector((state)=>{
         return state.product.data
     })
-
+    
     const addProductValidation = () =>{
         if(validator.isEmpty(productId)){
             errors.productId = "Product is required"

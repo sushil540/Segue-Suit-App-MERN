@@ -91,7 +91,8 @@ usersCtlr.notify = async(req, res) =>{
                 }
             }   
         ])
-        console.log("value",{orders:value, total_Orders:value.length} )
+
+
 
         //send sms daily at 6 am
 
