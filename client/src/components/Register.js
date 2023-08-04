@@ -15,12 +15,13 @@ const Register = (props) =>{
 
     const dispatch = useDispatch()
 
+    
     const registerErrors = useSelector((state)=>{
         return state.user.error
     })
-
+    
     const handleValidation = () =>{
-
+        
         if(validator.isEmpty(username)){
             errors.username = "Username is required"
         }
@@ -66,7 +67,6 @@ const Register = (props) =>{
     }
     
     const closeNotification = ()=>{
-        console.log("called")
         setTimeout(()=>{
             dispatch(setErrors(''))
         },3000)
@@ -107,6 +107,7 @@ const Register = (props) =>{
                         placeholder="Enter your password*"
                         type="password"
                         value={password}
+                        
                         onChange={(e)=>setPassword(e.target.value)}
                     />
                     {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}

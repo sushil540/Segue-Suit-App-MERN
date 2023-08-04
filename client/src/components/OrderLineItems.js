@@ -46,6 +46,7 @@ const OrderLineItems = (props) =>{
             setProductId('')
             setAmount('')   
             setRemarks('')
+            
             submitProductForm({productId,amount,remarks})
             handleToggle()
         }

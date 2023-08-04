@@ -6,8 +6,8 @@ import { setErrors, startLoginUser } from '../actions/userActions'
 import { Eye, EyeOff } from 'lucide-react'
 
 const Login = (props) =>{
-    const [email,setEmail] = useState('nishu4321@gmail.com')
-    const [password,setPassword] = useState('nishu123')
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
     const [formErrors,setFormErrors] = useState({})
     const [isProtected, setIsProtected] = useState(false)
     const errors = {}
@@ -96,7 +96,7 @@ const Login = (props) =>{
                  {formErrors?.password && <span className="text-danger">{formErrors?.password}</span>}
                  <br/>
                  <input
-                        className="btn btn-primary col-2"
+                        className="btn btn-primary"
                         type="submit"
                         value="Login"
                     />
