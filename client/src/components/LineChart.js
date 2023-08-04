@@ -6,7 +6,7 @@ import { startGetOrderDates, startGetOrders } from '../actions/orderActions'
 ChartJS.register( CategoryScale, LinearScale, PointElement, LineElement,Title,Tooltip,Legend)
 
 const LineChart=(props)=>{
-    const [dates,setDates] = useState('')
+    const [dates, setDates] = useState('')
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -30,6 +30,7 @@ const LineChart=(props)=>{
     }) 
 
     let monthlyOrders
+
     if(dates){
       monthlyOrders = months.map((ele)=>{
         return {
@@ -61,17 +62,23 @@ const LineChart=(props)=>{
     const listOrders = monthlyOrders.map((ele)=>{
       return ele.orders
     })
+
+    
+    const years = []
+    orderDetails.forEach((ele)=>{
+      if(!years.includes(ele.year)) years.push(ele.year)
+    })
     
     return( 
         <div className='container-fluid'>
           <select
-            className="col-md-4 shadow mb-5 bg-body-tertiary rounded"
+            className="col-md-4 shadow mb-5 bg-body-tertiary rounded form-select w-25"
             value={dates}
             onChange={handleChange}>
                   <option value="">Select Year</option>
-                  {orderDetails.map((ele,i)=>{
-                    return(
-                      <option key={i} value = {ele.year}>{ele.year}</option>
+                  {years.map((ele,i)=>{
+                    return (
+                      <option key={i} value={ele}>{ele}</option>
                     )
                   })}
           </select>
@@ -84,7 +91,7 @@ const LineChart=(props)=>{
                             label: 'Orders',
                             data:listOrders ,
                             borderColor: 'green',
-                            backgroundColor: 'green',
+                            backgroundColor: 'green'
                           },
                         ],
                       }}

@@ -67,8 +67,10 @@ const OrderForm = (props) =>{
             errors.customerId = "Customer is required"
         }
 
-        if(validator.isEmpty(staffId)){
-            errors.staffId = "Staff must be selected"
+        if(user.role === "admin"){
+            if(validator.isEmpty(staffId)){
+                errors.staffId = "Staff must be selected"
+            }
         }
 
         if(validator.isEmpty(total)){
@@ -112,18 +114,18 @@ const OrderForm = (props) =>{
                 Note
             }
             
-                formSubmission(formData)
+            formSubmission(formData)
 
-                setOrderDate('')
-                setTitle('')
-                setServiceId('')
-                setCustomerId('')
-                setTotal('')
-                setPaymentMode('')
-                setIsFullyPaid('')
-                setNote('')
-                setStaffId('')
-                setOrderLineItems([])
+            setOrderDate('')
+            setTitle('')
+            setServiceId('')
+            setCustomerId('')
+            setTotal('')
+            setPaymentMode('')
+            setIsFullyPaid('')
+            setNote('')
+            setStaffId('')
+            setOrderLineItems([])
         }
     }
 
@@ -225,6 +227,7 @@ const OrderForm = (props) =>{
                     <input
                         className="form-control"
                         type="text"
+                        placeholder="Payment mode"
                         value={paymentMode}
                         onChange={(e)=>setPaymentMode(e.target.value)}
                     />
@@ -263,7 +266,7 @@ const OrderForm = (props) =>{
                         <br/>   
                         <select
                             className="form-select"
-                            value={staffId} 
+                            value={staffId}     
                             onChange={(e)=>setStaffId(e.target.value)}>
                             <option value="">Select Staff</option> 
                             {staffs.length > 0 && staffs.map((ele)=>{
@@ -292,6 +295,7 @@ const OrderForm = (props) =>{
                     <input
                         className="form-control"
                         type="text"
+                        placeholder="Type something..."
                         value={Note}
                         onChange={(e)=>setNote(e.target.value)}
                     />

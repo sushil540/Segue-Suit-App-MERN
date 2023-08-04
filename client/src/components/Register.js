@@ -41,8 +41,11 @@ const Register = (props) =>{
             errors.confirmPassword = "Password must match"
         }
         
+        console.log("hi",validator.isLength(mobile,{min:10, max:10}))
         if(validator.isEmpty(mobile)){
             errors.mobile = "Mobile is required"
+        }else if(!validator.isLength(mobile,{min:10, max:10})){
+            errors.mobile = "Mobile number must be min 10 and max 10 digits"
         }else if(!validator.isNumeric(mobile)){
             errors.mobile = "Invalid mobile number"
         }
